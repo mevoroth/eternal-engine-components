@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="mesh">
+    <Filter Include="Mesh">
       <UniqueIdentifier>{b7f25088-3831-4bf4-a059-a708f440668c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="transform">
+    <Filter Include="Transform">
       <UniqueIdentifier>{c7bbfa44-6b1c-4886-9d6d-9e13b61ca403}</UniqueIdentifier>
     </Filter>
-    <Filter Include="types">
+    <Filter Include="Types">
       <UniqueIdentifier>{14c724cb-26f1-4013-87c1-6ec8eef790d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Mesh.hpp">
-      <Filter>mesh</Filter>
+    <ClInclude Include="include\Transform\Transform.hpp">
+      <Filter>Transform</Filter>
     </ClInclude>
-    <ClInclude Include="include\Transform.hpp">
-      <Filter>transform</Filter>
+    <ClInclude Include="include\Mesh\Mesh.hpp">
+      <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="include\Types.hpp">
-      <Filter>types</Filter>
+    <ClInclude Include="include\Types\DXMathTypes.hpp">
+      <Filter>Types</Filter>
     </ClInclude>
-    <ClInclude Include="include\DXMathTypes.hpp">
-      <Filter>types</Filter>
+    <ClInclude Include="include\Types\Types.hpp">
+      <Filter>Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\transform\Transform.cpp">
-      <Filter>transform</Filter>
+    <ClCompile Include="src\Transform\Transform.cpp">
+      <Filter>Transform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

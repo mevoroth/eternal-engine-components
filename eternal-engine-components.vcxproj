@@ -10,6 +10,15 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Mesh\Mesh.hpp" />
+    <ClInclude Include="include\Transform\Transform.hpp" />
+    <ClInclude Include="include\Types\DXMathTypes.hpp" />
+    <ClInclude Include="include\Types\Types.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Transform\Transform.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8A5A5437-7E81-42BC-9DA7-1693D20B73BA}</ProjectGuid>
     <RootNamespace>eternalenginecomponents</RootNamespace>
@@ -39,14 +48,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\eternal-engine-graphics\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\eternal-engine-graphics\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>USE_DXMATH_TYPES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,15 +75,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="include\DXMathTypes.hpp" />
-    <ClInclude Include="include\Mesh.hpp" />
-    <ClInclude Include="include\Transform.hpp" />
-    <ClInclude Include="include\Types.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\transform\Transform.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -3,6 +3,7 @@
 
 #include <cstdint>
 
+#include "Transform.hpp"
 #include "Graphics/Vertex.hpp"
 
 namespace Eternal
