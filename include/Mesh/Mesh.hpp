@@ -2,8 +2,9 @@
 #define _MESH_HPP_
 
 #include <cstdint>
+#include <vector>
 
-#include "Transform.hpp"
+#include "Transform/Transform.hpp"
 #include "Graphics/Vertex.hpp"
 
 namespace Eternal
@@ -14,15 +15,17 @@ namespace Eternal
 		{
 		private:
 			Transform _transform;
-			Graphics::Vertex* _vertices;
-			uint16_t* _indices;
+			std::vector<Graphics::Vertex> _vertices;
+			std::vector<uint16_t> _indices;
+			std::vector<Mesh> _subMeshes;
 		public:
-			void PushVertex(Graphics::Vertex* v);
+			void PushVertex(const Graphics::Vertex& v);
 			void PushTriangle(uint16_t v1, uint16_t v2, uint16_t v3);
+			void PushMesh(const Mesh& mesh);
 
-			Graphics::Vertex* GetVertices() const;
+			const Graphics::Vertex* GetVertices() const;
 			int GetVerticesCount() const;
-			uint16_t* GetIndices() const;
+			const uint16_t* GetIndices() const;
 			int GetIndicesCount() const;
 		};
 	}

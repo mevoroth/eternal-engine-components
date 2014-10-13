@@ -1,6 +1,7 @@
 #ifndef _TRANSFORM_HPP_
 #define _TRANSFORM_HPP_
 
+#include "ComponentsSettings.hpp"
 #include "Types/Types.hpp"
 
 namespace Eternal

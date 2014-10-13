@@ -24,10 +24,14 @@
     <ClInclude Include="include\Types\Types.hpp">
       <Filter>Types</Filter>
     </ClInclude>
+    <ClInclude Include="include\ComponentsSettings.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
       <Filter>Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Mesh.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
