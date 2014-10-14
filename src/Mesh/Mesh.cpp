@@ -36,3 +36,8 @@ int Mesh::GetIndicesCount() const
 {
 	return _indices.size();
 }
+
+Transform& Mesh::GetTransform()
+{
+	return _transform;
+}

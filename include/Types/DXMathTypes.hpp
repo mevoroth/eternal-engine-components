@@ -10,6 +10,7 @@ namespace Eternal
 	namespace Types
 	{
 		typedef XMMATRIX Matrix4x4;
+		typedef XMFLOAT2 Vector2;
 		typedef XMFLOAT3 Vector3;
 		typedef XMVECTOR Vector4;
 	}

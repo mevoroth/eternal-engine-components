@@ -28,6 +28,7 @@
   <ItemGroup>
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
+    <ClCompile Include="src\Types\DXMathTypes.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8A5A5437-7E81-42BC-9DA7-1693D20B73BA}</ProjectGuid>

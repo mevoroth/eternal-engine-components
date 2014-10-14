@@ -27,6 +27,8 @@ namespace Eternal
 			int GetVerticesCount() const;
 			const uint16_t* GetIndices() const;
 			int GetIndicesCount() const;
+
+			Transform& GetTransform();
 		};
 	}
 }
