@@ -27,8 +27,11 @@ namespace Eternal
 			int GetVerticesCount() const;
 			const uint16_t* GetIndices() const;
 			int GetIndicesCount() const;
+			const Mesh* GetSubMeshes() const;
+			int GetSubMeshesCount() const;
 
 			Transform& GetTransform();
+			const Transform& GetTransform() const;
 		};
 	}
 }

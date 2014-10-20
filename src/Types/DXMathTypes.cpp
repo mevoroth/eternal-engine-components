@@ -16,3 +16,8 @@ Vector2 Eternal::Types::NewVector2(float x, float y)
 {
 	return XMFLOAT2(x, y);
 }
+
+Matrix4x4 Eternal::Types::NewIdentity()
+{
+	return XMMatrixIdentity();
+}

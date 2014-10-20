@@ -37,7 +37,21 @@ int Mesh::GetIndicesCount() const
 	return _indices.size();
 }
 
+const Mesh* Mesh::GetSubMeshes() const
+{
+	return _subMeshes.data();
+}
+int Mesh::GetSubMeshesCount() const
+{
+	return _subMeshes.size();
+}
+
 Transform& Mesh::GetTransform()
+{
+	return _transform;
+}
+
+const Transform& Mesh::GetTransform() const
 {
 	return _transform;
 }
