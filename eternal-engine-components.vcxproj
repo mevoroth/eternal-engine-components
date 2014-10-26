@@ -20,12 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ComponentsSettings.hpp" />
+    <ClInclude Include="include\Input\Input.hpp" />
+    <ClInclude Include="include\Input\Win\WinInput.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
     <ClInclude Include="include\Types\DXMathTypes.hpp" />
     <ClInclude Include="include\Types\Types.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Input\Win\WinInput.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp" />

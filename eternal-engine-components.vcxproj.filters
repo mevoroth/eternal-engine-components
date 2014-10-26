@@ -10,6 +10,12 @@
     <Filter Include="Types">
       <UniqueIdentifier>{14c724cb-26f1-4013-87c1-6ec8eef790d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{dc94f45c-ed0f-401e-97ad-727c23d1dec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Win">
+      <UniqueIdentifier>{3abb3234-783d-4a65-9b0f-02ec36948701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Transform\Transform.hpp">
@@ -25,6 +31,12 @@
       <Filter>Types</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentsSettings.hpp" />
+    <ClInclude Include="include\Input\Input.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input\Win\WinInput.hpp">
+      <Filter>Input\Win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -35,6 +47,12 @@
     </ClCompile>
     <ClCompile Include="src\Types\DXMathTypes.cpp">
       <Filter>Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Win\WinInput.cpp">
+      <Filter>Input\Win</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
