@@ -1,5 +1,5 @@
 #include "Input/Win/WinInput.hpp"
-
+#include <string>
 using namespace Eternal::Input;
 
 WinInput::WinInput()
