@@ -16,6 +16,7 @@ namespace Eternal
 			Vector4 Rotation;
 			Vector4 Scaling;
 		public:
+			Transform();
 			void Translate(const Vector3& d);
 			/**
 			 * Quaternions
