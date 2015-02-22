@@ -20,6 +20,9 @@ namespace Eternal
 		public:
 			WinInput();
 			void Update();
+
+		private:
+			void _Pad();
 		};
 	}
 }

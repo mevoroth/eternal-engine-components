@@ -13,6 +13,11 @@ WinInput::WinInput()
 
 void WinInput::Update()
 {
+	_Pad();
+}
+
+void WinInput::_Pad()
+{
 	// Update Pad
 	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
 	{
