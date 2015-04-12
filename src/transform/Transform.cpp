@@ -25,6 +25,10 @@ void Transform::Scale(const Vector3& s)
 {
 	Scaling = XMVectorMultiply(Scaling, XMLoadFloat3(&s));
 }
+Transform Transform::GetAbsolute(const Transform& Relative) const
+{
+	return *this; // TODO: WRONG
+}
 Matrix4x4 Transform::GetModelMatrix() const
 {
 	return XMMatrixScalingFromVector(Scaling)

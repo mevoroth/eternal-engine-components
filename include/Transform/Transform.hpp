@@ -28,6 +28,7 @@ namespace Eternal
 			 */
 			void Rotate(const Vector3& r);
 			void Scale(const Vector3& s);
+			Transform GetAbsolute(const Transform& Relative) const;
 			Matrix4x4 GetModelMatrix() const;
 		};
 	}
