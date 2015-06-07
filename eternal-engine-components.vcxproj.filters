@@ -16,6 +16,9 @@
     <Filter Include="Input\Win">
       <UniqueIdentifier>{3abb3234-783d-4a65-9b0f-02ec36948701}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{2ea938d8-d5a2-4c73-a987-c078d2634c96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Transform\Transform.hpp">
@@ -37,13 +40,19 @@
     <ClInclude Include="include\Input\Win\WinInput.hpp">
       <Filter>Input\Win</Filter>
     </ClInclude>
+    <ClInclude Include="include\Camera\Camera.hpp">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera\PerspectiveCamera.hpp">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera\OrthographicCamera.hpp">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
       <Filter>Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh\Mesh.cpp">
-      <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Types\DXMathTypes.cpp">
       <Filter>Types</Filter>
@@ -53,6 +62,15 @@
     </ClCompile>
     <ClCompile Include="src\Input\Win\WinInput.cpp">
       <Filter>Input\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\PerspectiveCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\OrthographicCamera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
