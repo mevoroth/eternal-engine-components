@@ -19,6 +19,9 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{2ea938d8-d5a2-4c73-a987-c078d2634c96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{2338f4e4-584d-413d-af0a-f17fad37876a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Transform\Transform.hpp">
@@ -48,6 +51,9 @@
     </ClInclude>
     <ClInclude Include="include\Camera\OrthographicCamera.hpp">
       <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light\Light.hpp">
+      <Filter>Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,7 @@
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\Win\WinInput.hpp" />
+    <ClInclude Include="include\Light\Light.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
     <ClInclude Include="include\Types\DXMathTypes.hpp" />
