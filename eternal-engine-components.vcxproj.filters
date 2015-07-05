@@ -27,9 +27,6 @@
     <ClInclude Include="include\Transform\Transform.hpp">
       <Filter>Transform</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh\Mesh.hpp">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="include\Types\DXMathTypes.hpp">
       <Filter>Types</Filter>
     </ClInclude>
@@ -55,6 +52,12 @@
     <ClInclude Include="include\Light\Light.hpp">
       <Filter>Light</Filter>
     </ClInclude>
+    <ClInclude Include="include\Mesh\Mesh.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mesh\GenericMesh.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="src\Camera\OrthographicCamera.cpp">
       <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\Light.cpp">
+      <Filter>Light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

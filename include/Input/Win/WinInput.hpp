@@ -15,7 +15,7 @@ namespace Eternal
 		{
 		private:
 			// Xbox360 Pad
-			DWORD _changed[XUSER_MAX_COUNT];
+			DWORD _Changed[XUSER_MAX_COUNT];
 
 		public:
 			WinInput();

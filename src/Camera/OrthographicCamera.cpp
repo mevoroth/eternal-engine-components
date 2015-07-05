@@ -6,6 +6,7 @@ OrthographicCamera::OrthographicCamera(float Near, float Far, float Size)
 	: Camera(Near, Far)
 	, _Size(Size)
 {
+	_UpdateMatrix();
 }
 
 void OrthographicCamera::SetSize(float Size)

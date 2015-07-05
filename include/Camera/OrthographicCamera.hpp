@@ -13,6 +13,8 @@ namespace Eternal
 			OrthographicCamera(float Near, float Far, float Size);
 
 			void SetSize(float Size);
+
+		protected:
 			virtual void _UpdateMatrix() override;
 
 		private:

@@ -7,8 +7,9 @@ using namespace Eternal::Components;
 
 PerspectiveCamera::PerspectiveCamera(float Near, float Far, float FOV)
 	: Camera(Near, Far)
-	, _FOV(FOV)
+	, _FOV(XMConvertToRadians(FOV))
 {
+	_UpdateMatrix();
 }
 
 void PerspectiveCamera::SetFOV(float FOV)
@@ -17,7 +18,7 @@ void PerspectiveCamera::SetFOV(float FOV)
 	_UpdateMatrix();
 }
 
-void Eternal::Components::PerspectiveCamera::_UpdateMatrix()
+void PerspectiveCamera::_UpdateMatrix()
 {
 	XMStoreFloat4x4(&_Proj,
 		XMMatrixPerspectiveFovLH(_FOV, Device::WIDTH / Device::HEIGHT, _Near, _Far));

@@ -6,7 +6,6 @@ Camera::Camera(float Near, float Far)
 	: _Near(Near)
 	, _Far(Far)
 {
-	_UpdateMatrix();
 }
 
 void Camera::GetProjectionMatrix(Matrix4x4* ProjectionMatrix) const

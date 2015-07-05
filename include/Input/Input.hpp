@@ -3,6 +3,11 @@
 
 #include <cstdint>
 
+
+#define INPUT_CURRENT_STATE		0x1
+//0x1 << 1
+#define INPUT_PREVIOUS_STATE	0x2
+
 namespace Eternal
 {
 	namespace Input
@@ -287,10 +292,8 @@ namespace Eternal
 			};
 
 		protected:
-			const uint8_t CUR = 0x1;
-			const uint8_t PREV = 0x2; //0x1 << 1;
-			uint8_t* _states;
-			float* _axis;
+			uint8_t* _States;
+			float* _Axis;
 		public:
 			Input();
 			virtual ~Input();

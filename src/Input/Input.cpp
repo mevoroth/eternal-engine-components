@@ -10,16 +10,16 @@ Input::Input()
 {
 	assert(!_inst);
 
-	_states = new uint8_t[KEYS_COUNT];
+	_States = new uint8_t[KEYS_COUNT];
 	for (int i = 0; i < KEYS_COUNT; ++i)
 	{
-		_states[i] = 0;
+		_States[i] = 0;
 	}
 
-	_axis = new float[AXIS_COUNT];
+	_Axis = new float[AXIS_COUNT];
 	for (int i = 0; i < AXIS_COUNT; ++i)
 	{
-		_axis[i] = 0.f;
+		_Axis[i] = 0.f;
 	}
 
 	_inst = this;
@@ -27,8 +27,8 @@ Input::Input()
 
 Input::~Input()
 {
-	delete[] _states;
-	delete[] _axis;
+	delete[] _States;
+	delete[] _Axis;
 }
 
 Input* Input::Get()
@@ -39,25 +39,25 @@ Input* Input::Get()
 
 bool Input::IsDown(const Key& key)
 {
-	return _states[key] == PREV;
+	return _States[key] == INPUT_PREVIOUS_STATE;
 }
 
 bool Input::IsUp(const Key& key)
 {
-	return _states[key] == CUR;
+	return _States[key] == INPUT_CURRENT_STATE;
 }
 
 bool Input::IsPressed(const Key& key)
 {
-	return (_states[key] & CUR);
+	return (_States[key] & INPUT_CURRENT_STATE) != 0;
 }
 
 bool Input::IsReleased(const Key& key)
 {
-	return (_states[key] & CUR);
+	return (_States[key] & INPUT_CURRENT_STATE) != 0;
 }
 
 float Input::GetAxis(const Axis& axis)
 {
-	return _axis[axis];
+	return _Axis[axis];
 }

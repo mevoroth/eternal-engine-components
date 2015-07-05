@@ -1,13 +1,17 @@
 #include "Input/Win/WinInput.hpp"
+
 #include <string>
+
+#include "Macros/Macros.hpp"
+
 using namespace Eternal::Input;
 
 WinInput::WinInput()
 	: Input()
 {
-	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
+	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
 	{
-		_changed[i] = -1;
+		_Changed[User] = -1;
 	}
 }
 
@@ -19,64 +23,62 @@ void WinInput::Update()
 void WinInput::_Pad()
 {
 	// Update Pad
-	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
+	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
 	{
-		XINPUT_STATE state;
-		ZeroMemory(&state, sizeof(XINPUT_STATE));
-		if (XInputGetState(i, &state) == ERROR_SUCCESS)
+		XINPUT_STATE State;
+		ZeroMemory(&State, sizeof(XINPUT_STATE));
+		if (XInputGetState(User, &State) == ERROR_SUCCESS)
 		{
-			for (int j = JOY0_UP + i * 24, c = i + 24; j < c; ++j)
+			for (int StateIndex = JOY0_UP + User * 24, StateCount = User + 24; StateIndex < StateCount; ++StateIndex)
 			{
-				_states[j] = _states[j] << 1;
+				_States[StateIndex] = _States[StateIndex] << 1;
 			}
-			if (state.dwPacketNumber != _changed[i])
+			if (State.dwPacketNumber != _Changed[User])
 			{
-				int pad = i * 6;
-				_axis[JOY0_LX + pad] = (float)state.Gamepad.sThumbLX / 32767.f;
-				_axis[JOY0_LY + pad] = (float)state.Gamepad.sThumbLY / 32767.f;
-				_axis[JOY0_RX + pad] = (float)state.Gamepad.sThumbRX / 32767.f;
-				_axis[JOY0_RY + pad] = (float)state.Gamepad.sThumbRY / 32767.f;
-				_axis[JOY0_ZM + pad] = (float)state.Gamepad.bLeftTrigger / 255.f;
-				_axis[JOY0_ZP + pad] = (float)state.Gamepad.bRightTrigger / 255.f;
+				int Pad = User * 6;
+				_Axis[JOY0_LX + Pad] = (float)State.Gamepad.sThumbLX / 32767.f;
+				_Axis[JOY0_LY + Pad] = (float)State.Gamepad.sThumbLY / 32767.f;
+				_Axis[JOY0_RX + Pad] = (float)State.Gamepad.sThumbRX / 32767.f;
+				_Axis[JOY0_RY + Pad] = (float)State.Gamepad.sThumbRY / 32767.f;
+				_Axis[JOY0_ZM + Pad] = (float)State.Gamepad.bLeftTrigger / 255.f;
+				_Axis[JOY0_ZP + Pad] = (float)State.Gamepad.bRightTrigger / 255.f;
 
-				pad = i * 24; // 20 buttons + D-Pad (4 buttons)
-				_states[JOY0_UP + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_states[JOY0_DOWN + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_states[JOY0_LEFT + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_states[JOY0_RIGHT + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON0 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON1 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_B) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON2 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON3 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON4 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON5 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON6 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON7 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_START) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON8 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB) ? 0x1 : 0x0;
-				_states[JOY0_BUTTON9 + pad] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB) ? 0x1 : 0x0;
+				Pad = User * 24; // 20 buttons + D-Pad (4 buttons)
+				_States[JOY0_UP + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
+				_States[JOY0_DOWN + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
+				_States[JOY0_LEFT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
+				_States[JOY0_RIGHT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON0 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_A) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON1 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_B) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON2 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_X) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON3 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_Y) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON4 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON5 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON6 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON7 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_START) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON8 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB) ? 0x1 : 0x0;
+				_States[JOY0_BUTTON9 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB) ? 0x1 : 0x0;
 
-				_changed[i] = state.dwPacketNumber;
+				_Changed[User] = State.dwPacketNumber;
 			}
 			else
 			{
-				for (int j = JOY0_UP + i * 24, c = i + 24; j < c; ++j)
+				for (int StateIndex = JOY0_UP + User * 24, StateCount = User + 24; StateIndex < StateCount; ++StateIndex)
 				{
-#ifdef ETERNAL_DEBUG
-					assert(!(_states[i] & 0x1));
-#endif
-					_states[j] |= (_states[j] & 0x2) >> 1; // _states[i] |= (_states[i] & (0x1 << 1)) >> 1;
+					ETERNAL_ASSERT(!(_States[User] & 0x1));
+					_States[StateIndex] |= (_States[StateIndex] & 0x2) >> 1; // _States[User] |= (_States[User] & (0x1 << 1)) >> 1;
 				}
 			}
 		}
 		else
 		{
-			if (_changed[i] != -1)
+			if (_Changed[User] != -1)
 			{
-				for (int j = JOY0_UP + i * 24, c = i + 24; j < c; ++j)
+				for (int StateIndex = JOY0_UP + User * 24, StateCount = User + 24; StateIndex < StateCount; ++StateIndex)
 				{
-					_states[j] = 0;
+					_States[StateIndex] = 0;
 				}
-				_changed[i] != -1;
+				_Changed[User] = -1;
 			}
 		}
 	}

@@ -13,6 +13,8 @@ namespace Eternal
 			PerspectiveCamera(float Near, float Far, float FOV);
 
 			void SetFOV(float FOV);
+
+		protected:
 			virtual void _UpdateMatrix() override;
 
 		private:

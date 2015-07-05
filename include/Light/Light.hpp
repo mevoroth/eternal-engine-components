@@ -11,6 +11,8 @@ namespace Eternal
 		using namespace Types;
 		class Light
 		{
+		public:
+			Light(const Vector3& Position, float Distance);
 		private:
 			Vector3 _Position;
 			// 0: infinite

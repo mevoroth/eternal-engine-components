@@ -19,10 +19,10 @@ namespace Eternal
 			void SetFar(float Far);
 
 		protected:
+			virtual void _UpdateMatrix() = 0;
+
 			//Matrix4x4 _Model;
 			Matrix4x4 _Proj;
-
-			virtual void _UpdateMatrix() = 0;
 
 			float _Near;
 			float _Far;

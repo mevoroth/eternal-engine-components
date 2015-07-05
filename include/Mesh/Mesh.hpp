@@ -1,78 +1,38 @@
 #ifndef _MESH_HPP_
 #define _MESH_HPP_
 
-#include <cstdint>
-#include <vector>
-
-#include "Transform/Transform.hpp"
-
-using namespace std;
-
 namespace Eternal
 {
+	namespace Graphics
+	{
+		class VertexBuffer;
+		class IndexBuffer;
+
+	}
 	namespace Components
 	{
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
+		using namespace Eternal::Graphics;
+		class Transform;
+
 		class Mesh
 		{
 		public:
-			Mesh();
+			virtual VertexBuffer* GetVertexBuffer() = 0;
+			virtual IndexBuffer* GetIndexBuffer() = 0;
 
-			void PushVertex(const VertexT& V);
-			void PushTriangle(uint32_t V1, uint32_t V2, uint32_t V3);
-			void PushMesh(const Mesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh);
+			virtual Transform& GetTransform() = 0;
+			virtual const Transform& GetTransform() const = 0;
 
-			Transform& GetTransform();
-			const Transform& GetTransform() const;
+			virtual Mesh& GetSubMesh(uint32_t Index) = 0;
+			virtual size_t GetSubMeshesCount() = 0;
 
-		private:
-			Transform _Transform;
+			virtual bool IsValidNode() const = 0;
+			virtual bool IsValid() const = 0;
 
-			VertexBufferT _VertexBuffer;
-			IndexBufferT _IndexBuffer;
-			vector<Mesh> _SubMeshes;
-			vector<VertexT> _Vertices;
-			vector<uint32_t> _Indices;
+		protected:
+			VertexBuffer* _VerticesBuffer = nullptr;
+			IndexBuffer* _IndicesBuffer = nullptr;
 		};
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		Mesh<VertexT, VertexBufferT, IndexBufferT>::Mesh()
-			: _VertexBuffer(_Vertices)
-			, _IndexBuffer(_Indices)
-		{
-		}
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void Mesh<VertexT, VertexBufferT, IndexBufferT>::PushVertex(const VertexT& V)
-		{
-			_Vertices.push_back(V);
-		}
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void Mesh<VertexT, VertexBufferT, IndexBufferT>::PushTriangle(uint32_t V1, uint32_t V2, uint32_t V3)
-		{
-			_Indices.push_back(V1);
-			_Indices.push_back(V2);
-			_Indices.push_back(V3);
-		}
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void Mesh<VertexT, VertexBufferT, IndexBufferT>::PushMesh(const Mesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh)
-		{
-			_SubMeshes.push_back(SubMesh);
-		}
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		Transform& Mesh<VertexT, VertexBufferT, IndexBufferT>::GetTransform()
-		{
-			return _Transform;
-		}
-
-		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		const Transform& Mesh<VertexT, VertexBufferT, IndexBufferT>::GetTransform() const
-		{
-			return _Transform;
-		}
 	}
 }
 
