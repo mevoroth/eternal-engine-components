@@ -60,3 +60,18 @@ Matrix4x4 Transform::GetModelMatrix() const
 	XMStoreFloat4x4(&ReturnMatrix, ModelMatrix);
 	return ReturnMatrix;
 }
+Vector3 Transform::GetRight() const
+{
+	Matrix4x4 ModelMatrix = GetModelMatrix();
+	return Vector3(ModelMatrix(0, 0), ModelMatrix(0, 1), ModelMatrix(0, 2));
+}
+Vector3 Transform::GetUp() const
+{
+	Matrix4x4 ModelMatrix = GetModelMatrix();
+	return Vector3(ModelMatrix(1, 0), ModelMatrix(1, 1), ModelMatrix(1, 2));
+}
+Vector3 Transform::GetForward() const
+{
+	Matrix4x4 ModelMatrix = GetModelMatrix();
+	return Vector3(ModelMatrix(2, 0), ModelMatrix(2, 1), ModelMatrix(2, 2));
+}

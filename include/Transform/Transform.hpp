@@ -29,7 +29,9 @@ namespace Eternal
 			void Scale(const Vector3& S);
 			Transform GetAbsolute(const Transform& Relative) const;
 			Matrix4x4 GetModelMatrix() const;
-
+			Vector3 GetForward() const;
+			Vector3 GetUp() const;
+			Vector3 GetRight() const;
 
 		private:
 			Vector3 Translation;

@@ -111,6 +111,41 @@ namespace Eternal
 			A = Vector2(A.x * B.x, A.y * B.y);
 			return A;
 		}
-
+		Vector4 operator*(const Vector4& A, float B)
+		{
+			return Vector4(
+				A.x * B,
+				A.y * B,
+				A.z * B,
+				A.w * B
+			);
+		}
+		Vector4 operator*(float A, const Vector4& B)
+		{
+			return B * A;
+		}
+		Vector3 operator*(const Vector3& A, float B)
+		{
+			return Vector3(
+				A.x * B,
+				A.y * B,
+				A.z * B
+			);
+		}
+		Vector3 operator*(float A, const Vector3& B)
+		{
+			return B * A;
+		}
+		Vector2 operator*(const Vector2& A, float B)
+		{
+			return Vector2(
+				A.x * B,
+				A.y * B
+			);
+		}
+		Vector2 operator*(float A, const Vector2& B)
+		{
+			return B * A;
+		}
 	}
 }
