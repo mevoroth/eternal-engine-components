@@ -18,9 +18,18 @@ namespace Eternal
 		class GenericMesh : public Mesh
 		{
 		public:
-			void PushVertex(const VertexT& V);
-			void PushTriangle(uint32_t V1, uint32_t V2, uint32_t V3);
-			void PushMesh(const GenericMesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh);
+			void PushVertex(_In_ const VertexT& V);
+			void PushTriangle(_In_ uint32_t V1, _In_ uint32_t V2, _In_ uint32_t V3);
+			void PushMesh(_In_ const GenericMesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh);
+			inline VertexT& GetVertex(_In_ uint32_t VertexIndex)
+			{
+				ETERNAL_ASSERT(VertexIndex < GetVerticesCount());
+				return _Vertices[VertexIndex];
+			}
+			inline uint32_t GetVerticesCount()
+			{
+				return _Vertices.size();
+			}
 
 			virtual VertexBuffer* GetVertexBuffer() override;
 			virtual IndexBuffer* GetIndexBuffer() override;
