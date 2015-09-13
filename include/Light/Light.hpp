@@ -13,6 +13,7 @@ namespace Eternal
 		{
 		public:
 			Light(const Vector3& Position, float Distance);
+			Vector3& GetPosition() { return _Position; }
 		private:
 			Vector3 _Position;
 			// 0: infinite

@@ -14,6 +14,7 @@ namespace Eternal
 		public:
 			Transform();
 			Transform(const Vector3& Translation, const Vector4& Rotation, const Vector3& Scaling);
+			const Vector3& GetTranslation() const { return Translation; }
 			void SetTranslation(const Vector3& D);
 			void SetRotation(const Vector4& R);
 			void SetScaling(const Vector3& S);
