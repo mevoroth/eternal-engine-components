@@ -13,12 +13,12 @@ namespace Eternal
 		{
 		public:
 			Transform();
-			Transform(const Vector3& Translation, const Vector4& Rotation, const Vector3& Scaling);
+			Transform(_In_ const Vector3& Translation, _In_ const Vector4& Rotation, _In_ const Vector3& Scaling);
 			const Vector3& GetTranslation() const { return Translation; }
-			void SetTranslation(const Vector3& D);
-			void SetRotation(const Vector4& R);
-			void SetScaling(const Vector3& S);
-			void Translate(const Vector3& D);
+			void SetTranslation(_In_ const Vector3& D);
+			void SetRotation(_In_ const Vector4& R);
+			void SetScaling(_In_ const Vector3& S);
+			void Translate(_In_ const Vector3& D);
 			/**
 			 * Quaternions
 			 */
@@ -26,9 +26,8 @@ namespace Eternal
 			/**
 			 * Euler angles
 			 */
-			void Rotate(const Vector3& R);
-			void Scale(const Vector3& S);
-			Transform GetAbsolute(const Transform& Relative) const;
+			void Rotate(_In_ const Vector3& R);
+			void Scale(_In_ const Vector3& S);
 			Matrix4x4 GetModelMatrix() const;
 			Vector3 GetForward() const;
 			Vector3 GetUp() const;

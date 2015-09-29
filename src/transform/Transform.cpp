@@ -11,23 +11,30 @@ Transform::Transform()
 	XMStoreFloat4(&Rotation, XMQuaternionIdentity());
 }
 
-void Transform::SetTranslation(const Vector3& D)
+Transform::Transform(_In_ const Vector3& Translation, _In_ const Vector4& Rotation, _In_ const Vector3& Scaling)
+	: Translation(Translation)
+	, Rotation(Rotation)
+	, Scaling(Scaling)
+{
+}
+
+void Transform::SetTranslation(_In_ const Vector3& D)
 {
 	Translation = D;
 }
-void Transform::SetRotation(const Vector4& R)
+void Transform::SetRotation(_In_ const Vector4& R)
 {
 	Rotation = R;
 }
-void Transform::SetScaling(const Vector3& S)
+void Transform::SetScaling(_In_ const Vector3& S)
 {
 	Scaling = S;
 }
-void Transform::Translate(const Vector3& D)
+void Transform::Translate(_In_ const Vector3& D)
 {
 	Translation += (Vector3)Vector3(D.x, D.y, D.z);
 }
-void Transform::Rotate(const Vector4& R)
+void Transform::Rotate(_In_ const Vector4& R)
 {
 	XMVECTOR NewRotation = XMQuaternionMultiply(
 		XMLoadFloat4(&Rotation),
@@ -35,7 +42,7 @@ void Transform::Rotate(const Vector4& R)
 	);
 	XMStoreFloat4(&Rotation, NewRotation);
 }
-void Transform::Rotate(const Vector3& R)
+void Transform::Rotate(_In_ const Vector3& R)
 {
 	XMVECTOR NewRotation = XMQuaternionMultiply(
 		XMLoadFloat4(&Rotation),
@@ -43,14 +50,11 @@ void Transform::Rotate(const Vector3& R)
 	);
 	XMStoreFloat4(&Rotation, NewRotation);
 }
-void Transform::Scale(const Vector3& S)
+void Transform::Scale(_In_ const Vector3& S)
 {
 	Scaling *= S;
 }
-Transform Transform::GetAbsolute(const Transform& Relative) const
-{
-	return *this; // TODO: WRONG
-}
+
 Matrix4x4 Transform::GetModelMatrix() const
 {
 	XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
