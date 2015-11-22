@@ -1,6 +1,6 @@
 #ifndef _MESH_HPP_
 #define _MESH_HPP_
-
+#include <string>
 namespace Eternal
 {
 	namespace Graphics
@@ -28,6 +28,12 @@ namespace Eternal
 
 			virtual bool IsValidNode() const = 0;
 			virtual bool IsValid() const = 0;
+
+			void SetTexture(const std::string& TextureName)
+			{
+				_Texture = TextureName;
+			}
+			std::string _Texture;
 
 		protected:
 			VertexBuffer* _VerticesBuffer = nullptr;
