@@ -4,9 +4,9 @@
 #include <cstdint>
 
 
-#define INPUT_CURRENT_STATE		0x1
+#define INPUT_CURRENT_STATE		(0x1)
 //0x1 << 1
-#define INPUT_PREVIOUS_STATE	0x2
+#define INPUT_PREVIOUS_STATE	(0x2)
 
 namespace Eternal
 {
@@ -15,7 +15,7 @@ namespace Eternal
 		class Input
 		{
 		private:
-			static Input* _inst;
+			static Input* _Inst;
 		public:
 			enum Key
 			{
@@ -116,6 +116,7 @@ namespace Eternal
 				SLASH,
 				COLON,
 				SEMICOLON,
+				COMMA,
 				LESS,
 				EQ,
 				GREATER,
@@ -136,8 +137,11 @@ namespace Eternal
 				ALTGR,
 				LEFTSHIFT,
 				RIGHTSHIFT,
+				LEFTWINDOWS,
+				RIGHTWINDOWS,
+				APPLICATION,
 				PRINT,
-				SYSREQ,
+				PRINTSCR,
 				BREAK,
 
 				MOUSE0,
@@ -252,7 +256,9 @@ namespace Eternal
 				JOY3_BUTTON18,
 				JOY3_BUTTON19,
 
-				KEYS_COUNT
+				KEYS_COUNT,
+				KEYBOARD_KEYS_COUNT = MOUSE0,
+				INVALID_KEY = ~0
 			};
 
 			enum Axis
@@ -300,26 +306,28 @@ namespace Eternal
 			static Input* Get();
 
 			virtual void Update() = 0;
+			virtual void NotifyKeyPressed(const Key& KeyName) = 0;
+			virtual void NotifyKeyReleased(const Key& KeyName) = 0;
 			/**
 			 * Key pressed
 			 */
-			bool IsPressed(const Key& key);
+			bool IsPressed(const Key& KeyName);
 			/**
 			 * Key released
 			 */
-			bool IsReleased(const Key& key);
+			bool IsReleased(const Key& KeyName);
 			/**
 			 * Key released frame
 			 */
-			bool IsUp(const Key& key);
+			bool IsUp(const Key& KeyName);
 			/**
 			 * Key pressed frame
 			 */
-			bool IsDown(const Key& key);
+			bool IsDown(const Key& KeyName);
 			/**
 			 * @return float between -1 and 1
 			 */
-			float GetAxis(const Axis& axis);
+			float GetAxis(const Axis& AxisName);
 		};
 	}
 }

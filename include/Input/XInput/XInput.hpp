@@ -1,5 +1,5 @@
-#ifndef _WIN_INPUT_HPP_
-#define _WIN_INPUT_HPP_
+#ifndef _X_INPUT_HPP_
+#define _X_INPUT_HPP_
 
 #include "Input/Input.hpp"
 #define VC_EXTRALEAN
@@ -11,15 +11,17 @@ namespace Eternal
 {
 	namespace Input
 	{
-		class WinInput : public Input
+		class XInput : public Input
 		{
 		private:
 			// Xbox360 Pad
 			DWORD _Changed[XUSER_MAX_COUNT];
 
 		public:
-			WinInput();
-			void Update();
+			XInput();
+			virtual void Update() override;
+			virtual void NotifyKeyPressed(const Key& KeyName) override {}
+			virtual void NotifyKeyReleased(const Key& KeyName) override {}
 
 		private:
 			void _Pad();

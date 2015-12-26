@@ -24,7 +24,8 @@
     <ClInclude Include="include\Camera\PerspectiveCamera.hpp" />
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
-    <ClInclude Include="include\Input\Win\WinInput.hpp" />
+    <ClInclude Include="include\Input\WinInput\WinInput.hpp" />
+    <ClInclude Include="include\Input\XInput\XInput.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
@@ -37,7 +38,8 @@
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
-    <ClCompile Include="src\Input\Win\WinInput.cpp" />
+    <ClCompile Include="src\Input\WinInput\WinInput.cpp" />
+    <ClCompile Include="src\Input\XInput\XInput.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp">

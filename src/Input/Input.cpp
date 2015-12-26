@@ -1,14 +1,16 @@
 #include "Input/Input.hpp"
 
+#include "Macros/Macros.hpp"
+
 #include <cassert>
 
 using namespace Eternal::Input;
 
-Input* Input::_inst = 0;
+Input* Input::_Inst = 0;
 
 Input::Input()
 {
-	assert(!_inst);
+	//ETERNAL_ASSERT(!_Inst);
 
 	_States = new uint8_t[KEYS_COUNT];
 	for (int i = 0; i < KEYS_COUNT; ++i)
@@ -22,7 +24,7 @@ Input::Input()
 		_Axis[i] = 0.f;
 	}
 
-	_inst = this;
+	_Inst = this;
 }
 
 Input::~Input()
@@ -33,8 +35,8 @@ Input::~Input()
 
 Input* Input::Get()
 {
-	assert(_inst);
-	return _inst;
+	ETERNAL_ASSERT(_Inst);
+	return _Inst;
 }
 
 bool Input::IsDown(const Key& key)

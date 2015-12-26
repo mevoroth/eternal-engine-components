@@ -1,4 +1,4 @@
-#include "Input/Win/WinInput.hpp"
+#include "Input/XInput/XInput.hpp"
 
 #include <string>
 
@@ -6,7 +6,7 @@
 
 using namespace Eternal::Input;
 
-WinInput::WinInput()
+XInput::XInput()
 	: Input()
 {
 	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
@@ -15,12 +15,12 @@ WinInput::WinInput()
 	}
 }
 
-void WinInput::Update()
+void XInput::Update()
 {
 	_Pad();
 }
 
-void WinInput::_Pad()
+void XInput::_Pad()
 {
 	// Update Pad
 	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
@@ -31,7 +31,7 @@ void WinInput::_Pad()
 		{
 			for (int StateIndex = JOY0_UP + User * 24, StateCount = User + 24; StateIndex < StateCount; ++StateIndex)
 			{
-				_States[StateIndex] = _States[StateIndex] << 1;
+				_States[StateIndex] = (_States[StateIndex] << 1) & (INPUT_CURRENT_STATE | INPUT_PREVIOUS_STATE);
 			}
 			if (State.dwPacketNumber != _Changed[User])
 			{
