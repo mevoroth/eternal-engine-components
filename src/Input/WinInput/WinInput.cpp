@@ -5,7 +5,6 @@ using namespace Eternal::Input;
 WinInput::WinInput()
 	: Input()
 {
-
 }
 
 void WinInput::Update()
@@ -26,14 +25,19 @@ void WinInput::Update()
 	_KeyRecords.clear();
 }
 
-void WinInput::NotifyKeyPressed(const Key& KeyName)
+void Eternal::Input::WinInput::NotifyKeyPressed(_In_ const Key& KeyName)
 {
 	// Probably need mutex
 	_KeyRecords.push_back(KeyRecord(KeyName, DOWN));
 }
 
-void WinInput::NotifyKeyReleased(const Key& KeyName)
+void Eternal::Input::WinInput::NotifyKeyReleased(_In_ const Key& KeyName)
 {
 	// Probably need mutex
 	_KeyRecords.push_back(KeyRecord(KeyName, UP));
+}
+
+void Eternal::Input::WinInput::NotifyAxis(_In_ const Axis& AxisName, _In_ float AxisValue)
+{
+	_Axis[AxisName] = AxisValue;
 }

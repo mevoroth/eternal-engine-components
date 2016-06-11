@@ -4,6 +4,7 @@
 #include "Input/Input.hpp"
 #define VC_EXTRALEAN
 #define WIN32_LEAN_AND_MEAN
+#define WIN32_EXTRA_LEAN
 #include <Windows.h>
 #include <Xinput.h>
 
@@ -20,11 +21,14 @@ namespace Eternal
 		public:
 			XInput();
 			virtual void Update() override;
-			virtual void NotifyKeyPressed(const Key& KeyName) override {}
-			virtual void NotifyKeyReleased(const Key& KeyName) override {}
+			virtual void NotifyKeyPressed(_In_ const Key& KeyName) override {}
+			virtual void NotifyKeyReleased(_In_ const Key& KeyName) override {}
+			virtual void NotifyAxis(_In_ const Axis& AxisName, _In_ float AxisValue) override {};
 
 		private:
 			void _Pad();
+
+
 		};
 	}
 }

@@ -20,8 +20,9 @@ namespace Eternal
 
 			WinInput();
 			virtual void Update() override;
-			virtual void NotifyKeyPressed(const Key& KeyName) override;
-			virtual void NotifyKeyReleased(const Key& KeyName) override;
+			virtual void NotifyKeyPressed(_In_ const Key& KeyName) override;
+			virtual void NotifyKeyReleased(_In_ const Key& KeyName) override;
+			virtual void NotifyAxis(_In_ const Axis& AxisName, _In_ float AxisValue) override;
 
 		private:
 			struct KeyRecord

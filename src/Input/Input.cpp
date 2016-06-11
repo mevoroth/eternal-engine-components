@@ -39,27 +39,27 @@ Input* Input::Get()
 	return _Inst;
 }
 
-bool Input::IsDown(const Key& key)
+bool Eternal::Input::Input::IsDown(_In_ const Key& KeyName)
 {
-	return _States[key] == INPUT_PREVIOUS_STATE;
+	return _States[KeyName] == INPUT_PREVIOUS_STATE;
 }
 
-bool Input::IsUp(const Key& key)
+bool Eternal::Input::Input::IsUp(_In_ const Key& KeyName)
 {
-	return _States[key] == INPUT_CURRENT_STATE;
+	return _States[KeyName] == INPUT_CURRENT_STATE;
 }
 
-bool Input::IsPressed(const Key& key)
+bool Eternal::Input::Input::IsPressed(_In_ const Key& KeyName)
 {
-	return (_States[key] & INPUT_CURRENT_STATE) != 0;
+	return (_States[KeyName] & INPUT_CURRENT_STATE) != 0;
 }
 
-bool Input::IsReleased(const Key& key)
+bool Eternal::Input::Input::IsReleased(_In_ const Key& KeyName)
 {
-	return (_States[key] & INPUT_CURRENT_STATE) != 0;
+	return (_States[KeyName] & INPUT_CURRENT_STATE) != 0;
 }
 
-float Input::GetAxis(const Axis& axis)
+float Eternal::Input::Input::GetAxis(_In_ const Axis& AxisName)
 {
-	return _Axis[axis];
+	return _Axis[AxisName];
 }
