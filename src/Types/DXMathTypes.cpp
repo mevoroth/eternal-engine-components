@@ -147,5 +147,14 @@ namespace Eternal
 		{
 			return B * A;
 		}
+		Vector4 operator*(const Matrix4x4& A, const Vector4& B)
+		{
+			Vector4 ReturnVector;
+			XMStoreFloat4(&ReturnVector, XMVector4Transform(
+				XMLoadFloat4(&B),
+				XMLoadFloat4x4(&A)
+			));
+			return ReturnVector;
+		}
 	}
 }

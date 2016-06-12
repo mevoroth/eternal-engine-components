@@ -22,6 +22,7 @@ namespace Eternal
 		extern Vector4 operator*(const Vector4& A, const Vector4& B);
 		extern Vector3 operator*(const Vector3& A, const Vector3& B);
 		extern Vector2 operator*(const Vector2& A, const Vector2& B);
+		extern Vector4 operator*(const Matrix4x4& A, const Vector4& B);
 		extern Vector4& operator+=(Vector4& A, const Vector4& B);
 		extern Vector3& operator+=(Vector3& A, const Vector3& B);
 		extern Vector2& operator+=(Vector2& A, const Vector2& B);

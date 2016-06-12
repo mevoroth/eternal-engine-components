@@ -17,6 +17,19 @@ Camera::Camera(float Near, float Far)
 			0.f, 0.f, 0.f, 1.f
 		)
 	);
+
+	XMFLOAT4 EyePos(0.f, 0.f, 1.f, 1.f);
+	XMFLOAT4 EyeDir(0.f, 0.f, 1.f, 0.f);
+	XMFLOAT4 UpDir(0.f, 1.f, 0.f, 0.f);
+
+	XMStoreFloat4x4(
+		&_View,
+		XMMatrixLookToLH(
+			XMLoadFloat4(&EyePos),
+			XMLoadFloat4(&EyeDir),
+			XMLoadFloat4(&UpDir)
+		)
+	);
 }
 
 void Camera::GetViewMatrix(Matrix4x4& ViewMatrix) const
