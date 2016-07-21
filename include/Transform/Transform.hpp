@@ -15,23 +15,23 @@ namespace Eternal
 			Transform();
 			Transform(_In_ const Vector3& Translation, _In_ const Vector4& Rotation, _In_ const Vector3& Scaling);
 			const Vector3& GetTranslation() const { return Translation; }
-			void SetTranslation(_In_ const Vector3& D);
+			void SetTranslation(_In_ const Vector3& T);
 			void SetRotation(_In_ const Vector4& R);
 			void SetScaling(_In_ const Vector3& S);
 			void Translate(_In_ const Vector3& D);
 			/**
 			 * Quaternions
 			 */
-			void Rotate(const Vector4& Q);
+			void Rotate(_In_ const Vector4& Q);
 			/**
 			 * Euler angles
 			 */
 			void Rotate(_In_ const Vector3& R);
 			void Scale(_In_ const Vector3& S);
 			Matrix4x4 GetModelMatrix() const;
-			Vector3 GetForward() const;
-			Vector3 GetUp() const;
-			Vector3 GetRight() const;
+			//Vector3 GetForward() const;
+			//Vector3 GetUp() const;
+			//Vector3 GetRight() const;
 
 		private:
 			Vector3 Translation;

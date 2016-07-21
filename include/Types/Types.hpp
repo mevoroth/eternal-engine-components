@@ -38,6 +38,16 @@ namespace Eternal
 		extern Vector3 operator*(float A, const Vector3& B);
 		extern Vector2 operator*(const Vector2& A, float B);
 		extern Vector2 operator*(float A, const Vector2& B);
+
+		extern bool operator==(const Vector4& A, const Vector4& B);
+
+		// MATH STUFF: MOVE THIS
+		extern Matrix4x4 NewOrthoLH(float Top, float Bottom, float Left, float Right, float Near, float Far);
+		extern Matrix4x4 NewLookToLH(const Vector3& Position, const Vector3& Direction, const Vector3& Up);
+		extern float SquareLength(const Vector3& V);
+		extern float Length(const Vector3& V);
+		extern Vector3 Normalize(const Vector3& V);
+		extern Vector3 Cross(const Vector3& A, const Vector3& B);
 	}
 }
 
