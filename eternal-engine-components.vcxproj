@@ -24,6 +24,7 @@
     <ClInclude Include="include\Camera\PerspectiveCamera.hpp" />
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
+    <ClInclude Include="include\Input\InputFactory.hpp" />
     <ClInclude Include="include\Input\WinInput\WinInput.hpp" />
     <ClInclude Include="include\Input\XInput\XInput.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Input\InputFactory.cpp" />
     <ClCompile Include="src\Input\WinInput\WinInput.cpp" />
     <ClCompile Include="src\Input\XInput\XInput.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />

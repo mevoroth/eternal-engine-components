@@ -64,6 +64,9 @@
     <ClInclude Include="include\Input\WinInput\WinInput.hpp">
       <Filter>Input\WinInput</Filter>
     </ClInclude>
+    <ClInclude Include="include\Input\InputFactory.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="src\Input\WinInput\WinInput.cpp">
       <Filter>Input\WinInput</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\InputFactory.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
