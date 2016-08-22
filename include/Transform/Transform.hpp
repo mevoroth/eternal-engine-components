@@ -15,6 +15,8 @@ namespace Eternal
 			Transform();
 			Transform(_In_ const Vector3& Translation, _In_ const Vector4& Rotation, _In_ const Vector3& Scaling);
 			const Vector3& GetTranslation() const { return Translation; }
+			const Vector4& GetRotation() const { return Rotation; }
+			const Vector3& GetScaling() const { return Scaling; }
 			void SetTranslation(_In_ const Vector3& T);
 			void SetRotation(_In_ const Vector4& R);
 			void SetScaling(_In_ const Vector3& S);

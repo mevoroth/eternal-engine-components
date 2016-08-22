@@ -31,13 +31,15 @@ namespace Eternal
 				return _Vertices.size();
 			}
 
+			virtual void InitializeBuffers() override;
+			virtual void DestroyBuffers() override;
 			virtual VertexBuffer* GetVertexBuffer() override;
 			virtual IndexBuffer* GetIndexBuffer() override;
 
 			virtual Transform& GetTransform() override;
 			virtual const Transform& GetTransform() const override;
 
-			virtual Mesh& GetSubMesh(uint32_t Index) override;
+			virtual Mesh& GetSubMesh(_In_ uint32_t Index) override;
 			virtual size_t GetSubMeshesCount() override;
 
 			virtual bool IsValidNode() const override;
@@ -52,13 +54,13 @@ namespace Eternal
 		};
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushVertex(const VertexT& V)
+		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushVertex(_In_ const VertexT& V)
 		{
 			_Vertices.push_back(V);
 		}
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushTriangle(uint32_t V1, uint32_t V2, uint32_t V3)
+		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushTriangle(_In_ uint32_t V1, _In_ uint32_t V2, _In_ uint32_t V3)
 		{
 			_Indices.push_back(V1);
 			_Indices.push_back(V2);
@@ -66,7 +68,7 @@ namespace Eternal
 		}
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushMesh(const GenericMesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh)
+		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::PushMesh(_In_ const GenericMesh<VertexT, VertexBufferT, IndexBufferT>& SubMesh)
 		{
 			_SubMeshes.push_back(SubMesh);
 		}
@@ -84,27 +86,44 @@ namespace Eternal
 		}
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
+		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::InitializeBuffers()
+		{
+			ETERNAL_ASSERT(_Vertices.size());
+			ETERNAL_ASSERT(_Indices.size());
+			ETERNAL_ASSERT(!(_Indices.size() % 3));
+			ETERNAL_ASSERT(!_VerticesBuffer);
+			ETERNAL_ASSERT(!_IndicesBuffer);
+			_VerticesBuffer = new VertexBufferT(_Vertices);
+			_IndicesBuffer = new IndexBufferT(_Indices);
+		}
+
+		template<class VertexT, class VertexBufferT, class IndexBufferT>
+		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::DestroyBuffers()
+		{
+			ETERNAL_ASSERT(_VerticesBuffer);
+			ETERNAL_ASSERT(_IndicesBuffer);
+			delete _VerticesBuffer;
+			_VerticesBuffer = nullptr;
+			delete _IndicesBuffer;
+			_IndicesBuffer = nullptr;
+		}
+
+		template<class VertexT, class VertexBufferT, class IndexBufferT>
 		VertexBuffer* GenericMesh<VertexT, VertexBufferT, IndexBufferT>::GetVertexBuffer()
 		{
-			if (!_VerticesBuffer)
-			{
-				_VerticesBuffer = new VertexBufferT(_Vertices);
-			}
+			ETERNAL_ASSERT(_VerticesBuffer);
 			return _VerticesBuffer;
 		}
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
 		IndexBuffer* GenericMesh<VertexT, VertexBufferT, IndexBufferT>::GetIndexBuffer()
 		{
-			if (!_IndicesBuffer)
-			{
-				_IndicesBuffer = new IndexBufferT(_Indices);
-			}
+			ETERNAL_ASSERT(_IndicesBuffer);
 			return _IndicesBuffer;
 		}
 
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
-		Mesh& GenericMesh<VertexT, VertexBufferT, IndexBufferT>::GetSubMesh(uint32_t Index)
+		Mesh& GenericMesh<VertexT, VertexBufferT, IndexBufferT>::GetSubMesh(_In_ uint32_t Index)
 		{
 			ETERNAL_ASSERT(Index < _SubMeshes.size());
 			return _SubMeshes[Index];

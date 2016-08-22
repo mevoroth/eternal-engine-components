@@ -25,9 +25,11 @@
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\InputFactory.hpp" />
+    <ClInclude Include="include\Input\MultiInput\MultiInput.hpp" />
     <ClInclude Include="include\Input\WinInput\WinInput.hpp" />
     <ClInclude Include="include\Input\XInput\XInput.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
+    <ClInclude Include="include\Mesh\Bone.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
@@ -40,9 +42,12 @@
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\InputFactory.cpp" />
+    <ClCompile Include="src\Input\MultiInput\MultiInput.cpp" />
     <ClCompile Include="src\Input\WinInput\WinInput.cpp" />
     <ClCompile Include="src\Input\XInput\XInput.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
+    <ClCompile Include="src\Mesh\Bone.cpp" />
+    <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -122,6 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES;ETERNAL_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
+      <ForcedIncludeFiles>sal.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

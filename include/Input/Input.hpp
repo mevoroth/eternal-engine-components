@@ -304,6 +304,7 @@ namespace Eternal
 			Input();
 			virtual ~Input();
 			static Input* Get();
+			static void Initialize(_In_ Input* InputObj);
 
 			virtual void Update() = 0;
 			virtual void NotifyKeyPressed(_In_ const Key& KeyName) = 0;
@@ -312,23 +313,23 @@ namespace Eternal
 			/**
 			 * Key pressed
 			 */
-			bool IsPressed(_In_ const Key& KeyName);
+			virtual bool IsPressed(_In_ const Key& KeyName);
 			/**
 			 * Key released
 			 */
-			bool IsReleased(_In_ const Key& KeyName);
+			virtual bool IsReleased(_In_ const Key& KeyName);
 			/**
 			 * Key released frame
 			 */
-			bool IsUp(_In_ const Key& KeyName);
+			virtual bool IsUp(_In_ const Key& KeyName);
 			/**
 			 * Key pressed frame
 			 */
-			bool IsDown(_In_ const Key& KeyName);
+			virtual bool IsDown(_In_ const Key& KeyName);
 			/**
 			 * @return float between -1 and 1
 			 */
-			float GetAxis(_In_ const Axis& AxisName);
+			virtual float GetAxis(_In_ const Axis& AxisName);
 		};
 	}
 }

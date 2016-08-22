@@ -10,10 +10,12 @@ namespace Eternal
 		enum InputType
 		{
 			WIN,
-			XINPUT
+			XINPUT,
+			MULTI
 		};
 
-		Input* CreateInput(const InputType& InputTypeObj);
+		Input* CreateInput(_In_ const InputType& InputTypeObj);
+		Input* CreateMultiInput(_In_ Input** Inputs, _In_ int InputsCount);
 	}
 }
 

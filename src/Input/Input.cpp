@@ -6,7 +6,7 @@
 
 using namespace Eternal::Input;
 
-Input* Input::_Inst = 0;
+Input* Input::_Inst = nullptr;
 
 Input::Input()
 {
@@ -24,7 +24,7 @@ Input::Input()
 		_Axis[i] = 0.f;
 	}
 
-	_Inst = this;
+	//_Inst = this;
 }
 
 Input::~Input()
@@ -37,6 +37,13 @@ Input* Input::Get()
 {
 	ETERNAL_ASSERT(_Inst);
 	return _Inst;
+}
+
+void Input::Initialize(_In_ Input* InputObj)
+{
+	ETERNAL_ASSERT(!_Inst);
+	ETERNAL_ASSERT(InputObj);
+	_Inst = InputObj;
 }
 
 bool Eternal::Input::Input::IsDown(_In_ const Key& KeyName)

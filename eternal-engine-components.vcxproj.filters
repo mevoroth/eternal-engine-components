@@ -25,6 +25,9 @@
     <Filter Include="Input\WinInput">
       <UniqueIdentifier>{e8c83b0e-1cd1-44df-8d3c-28d43983f0cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input\MultiInput">
+      <UniqueIdentifier>{1808f132-543b-4b2b-8ae5-93b7837b6b88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Transform\Transform.hpp">
@@ -67,6 +70,12 @@
     <ClInclude Include="include\Input\InputFactory.hpp">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="include\Input\MultiInput\MultiInput.hpp">
+      <Filter>Input\MultiInput</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mesh\Bone.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -98,6 +107,15 @@
     </ClCompile>
     <ClCompile Include="src\Input\InputFactory.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\MultiInput\MultiInput.cpp">
+      <Filter>Input\MultiInput</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Bone.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Mesh.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
