@@ -94,6 +94,9 @@
     <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">

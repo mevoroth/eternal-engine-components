@@ -23,6 +23,7 @@
     <ClInclude Include="include\Camera\OrthographicCamera.hpp" />
     <ClInclude Include="include\Camera\PerspectiveCamera.hpp" />
     <ClInclude Include="include\ComponentsSettings.hpp" />
+    <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
     <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp" />
