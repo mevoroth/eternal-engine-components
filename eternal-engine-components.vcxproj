@@ -23,6 +23,10 @@
     <ClInclude Include="include\Camera\OrthographicCamera.hpp" />
     <ClInclude Include="include\Camera\PerspectiveCamera.hpp" />
     <ClInclude Include="include\ComponentsSettings.hpp" />
+    <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
+    <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp" />
+    <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\InputFactory.hpp" />
     <ClInclude Include="include\Input\MultiInput\MultiInput.hpp" />
@@ -32,6 +36,7 @@
     <ClInclude Include="include\Mesh\Bone.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
+    <ClInclude Include="include\Mesh\MeshFactory.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
     <ClInclude Include="include\Types\DXMathTypes.hpp" />
     <ClInclude Include="include\Types\Types.hpp" />
@@ -40,6 +45,9 @@
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
+    <ClCompile Include="src\GraphicData\Material.cpp" />
+    <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\InputFactory.cpp" />
     <ClCompile Include="src\Input\MultiInput\MultiInput.cpp" />
@@ -48,11 +56,15 @@
     <ClCompile Include="src\Light\Light.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\Mesh\MeshFactory.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\GraphicData\Material.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8A5A5437-7E81-42BC-9DA7-1693D20B73BA}</ProjectGuid>
@@ -128,6 +140,7 @@
       <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES;ETERNAL_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ForcedIncludeFiles>sal.h</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2016.1.1\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

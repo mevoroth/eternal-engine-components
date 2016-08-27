@@ -28,6 +28,9 @@
     <Filter Include="Input\MultiInput">
       <UniqueIdentifier>{1808f132-543b-4b2b-8ae5-93b7837b6b88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GraphicData">
+      <UniqueIdentifier>{1d41f496-4906-40f2-9c07-7ab7b4698e60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Transform\Transform.hpp">
@@ -76,6 +79,21 @@
     <ClInclude Include="include\Mesh\Bone.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\GraphicObjects.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\MaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mesh\MeshFactory.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -117,5 +135,22 @@
     <ClCompile Include="src\Mesh\Mesh.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="src\GraphicData\GraphicObjects.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\Material.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\MeshFactory.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\GraphicData\Material.hpp">
+      <Filter>GraphicData</Filter>
+    </None>
   </ItemGroup>
 </Project>
