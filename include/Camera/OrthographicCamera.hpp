@@ -10,9 +10,9 @@ namespace Eternal
 		class OrthographicCamera : public Camera
 		{
 		public:
-			OrthographicCamera(float Near, float Far, float Size);
+			OrthographicCamera(_In_ float Near, _In_ float Far, _In_ float Size);
 
-			void SetSize(float Size);
+			void SetSize(_In_ float Size);
 
 		protected:
 			virtual void _UpdateMatrix() override;

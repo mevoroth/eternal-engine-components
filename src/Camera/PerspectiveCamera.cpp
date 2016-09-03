@@ -5,14 +5,14 @@
 using namespace Eternal::Graphics;
 using namespace Eternal::Components;
 
-PerspectiveCamera::PerspectiveCamera(float Near, float Far, float FOV)
+PerspectiveCamera::PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float FOV)
 	: Camera(Near, Far)
 	, _FOV(XMConvertToRadians(FOV))
 {
 	_UpdateMatrix();
 }
 
-void PerspectiveCamera::SetFOV(float FOV)
+void PerspectiveCamera::SetFOV(_In_ float FOV)
 {
 	_FOV = XMConvertToRadians(FOV);
 	_UpdateMatrix();

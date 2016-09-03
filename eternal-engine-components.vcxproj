@@ -27,7 +27,10 @@
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
     <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp" />
+    <ClInclude Include="include\GraphicData\SamplerMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\TopologyMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\ViewportMaterialProperty.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\InputFactory.hpp" />
     <ClInclude Include="include\Input\MultiInput\MultiInput.hpp" />
@@ -46,9 +49,13 @@
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\GraphicData\CameraMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
     <ClCompile Include="src\GraphicData\Material.cpp" />
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp" />
+    <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp" />
+    <ClCompile Include="src\GraphicData\TopologyMaterialProperty.cpp" />
+    <ClCompile Include="src\GraphicData\ViewportMaterialProperty.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\InputFactory.cpp" />
     <ClCompile Include="src\Input\MultiInput\MultiInput.cpp" />

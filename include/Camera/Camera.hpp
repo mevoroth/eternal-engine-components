@@ -13,11 +13,12 @@ namespace Eternal
 		class Camera
 		{
 		public:
-			Camera(float Near, float Far);
-			void GetViewMatrix(Matrix4x4& ViewMatrix) const;
-			void GetProjectionMatrix(Matrix4x4& ProjectionMatrix) const;
-			void SetNear(float Near);
-			void SetFar(float Far);
+			Camera(_In_ float Near, _In_ float Far);
+			void GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const;
+			void GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const;
+			void GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const;
+			void SetNear(_In_ float Near);
+			void SetFar(_In_ float Far);
 
 		protected:
 			virtual void _UpdateMatrix() = 0;

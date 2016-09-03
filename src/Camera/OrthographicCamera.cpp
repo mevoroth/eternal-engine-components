@@ -2,14 +2,14 @@
 
 using namespace Eternal::Components;
 
-OrthographicCamera::OrthographicCamera(float Near, float Far, float Size)
+OrthographicCamera::OrthographicCamera(_In_ float Near, _In_ float Far, _In_ float Size)
 	: Camera(Near, Far)
 	, _Size(Size)
 {
 	_UpdateMatrix();
 }
 
-void OrthographicCamera::SetSize(float Size)
+void OrthographicCamera::SetSize(_In_ float Size)
 {
 	_Size = Size;
 	_UpdateMatrix();

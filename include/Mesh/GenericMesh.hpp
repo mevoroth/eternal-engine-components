@@ -88,6 +88,8 @@ namespace Eternal
 		template<class VertexT, class VertexBufferT, class IndexBufferT>
 		void GenericMesh<VertexT, VertexBufferT, IndexBufferT>::InitializeBuffers()
 		{
+			if (_VerticesBuffer&&_IndicesBuffer)
+				return;
 			ETERNAL_ASSERT(_Vertices.size());
 			ETERNAL_ASSERT(_Indices.size());
 			ETERNAL_ASSERT(!(_Indices.size() % 3));

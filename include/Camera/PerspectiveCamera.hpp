@@ -10,9 +10,9 @@ namespace Eternal
 		class PerspectiveCamera : public Camera
 		{
 		public:
-			PerspectiveCamera(float Near, float Far, float FOV);
+			PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float FOV);
 
-			void SetFOV(float FOV);
+			void SetFOV(_In_ float FOV);
 
 		protected:
 			virtual void _UpdateMatrix() override;

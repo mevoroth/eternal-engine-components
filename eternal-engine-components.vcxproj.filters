@@ -97,6 +97,15 @@
     <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\TopologyMaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\ViewportMaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\SamplerMaterialProperty.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -148,6 +157,18 @@
       <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\CameraMaterialProperty.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\TopologyMaterialProperty.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\ViewportMaterialProperty.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

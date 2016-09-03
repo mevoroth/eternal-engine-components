@@ -4,7 +4,7 @@
 
 using namespace Eternal::Components;
 
-Camera::Camera(float Near, float Far)
+Camera::Camera(_In_ float Near, _In_ float Far)
 	: _Near(Near)
 	, _Far(Far)
 {
@@ -32,23 +32,28 @@ Camera::Camera(float Near, float Far)
 	);
 }
 
-void Camera::GetViewMatrix(Matrix4x4& ViewMatrix) const
+void Camera::GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const
 {
 	memcpy(&ViewMatrix, &_View, sizeof(Matrix4x4));
 }
 
-void Camera::GetProjectionMatrix(Matrix4x4& ProjectionMatrix) const
+void Camera::GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const
 {
 	XMMATRIX ProjMatrix = XMMatrixTranspose(XMLoadFloat4x4(&_Proj));
 	XMStoreFloat4x4(&ProjectionMatrix, ProjMatrix);
 }
 
-void Camera::SetNear(float Near)
+void Camera::GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const
+{
+
+}
+
+void Camera::SetNear(_In_ float Near)
 {
 	_Near = Near;
 	_UpdateMatrix();
 }
-void Camera::SetFar(float Far)
+void Camera::SetFar(_In_ float Far)
 {
 	_Far = Far;
 	_UpdateMatrix();
