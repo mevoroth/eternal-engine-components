@@ -5,7 +5,7 @@
 
 using namespace Eternal::GraphicData;
 
-RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, _In_ int RenderTargetsCount, _In_ const Format* Formats)
+RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, _In_ int RenderTargetsCount, _In_ const Format* Formats, _In_ bool CreateDepth /*= false*/)
 {
 	ETERNAL_ASSERT(RenderTargetsCount > 0);
 
@@ -16,10 +16,22 @@ RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, 
 	{
 		_RenderTargets[RenderTargetIndex] = CreateRenderTarget(Width, Height, Formats[RenderTargetIndex]);
 	}
+
+	if (CreateDepth)
+	{
+		_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
+		ETERNAL_ASSERT(_DepthStencilRenderTarget);
+	}
 }
 
 RenderTargetCollection::~RenderTargetCollection()
 {
+	if (_DepthStencilRenderTarget)
+	{
+		delete _DepthStencilRenderTarget;
+		_DepthStencilRenderTarget = nullptr;
+	}
+
 	for (int RenderTargetIndex = 0; RenderTargetIndex < _RenderTargetsCount; ++RenderTargetIndex)
 	{
 		delete _RenderTargets[RenderTargetIndex];
@@ -37,5 +49,10 @@ RenderTarget** RenderTargetCollection::GetRenderTargets()
 int RenderTargetCollection::GetRenderTargetsCount() const
 {
 	return _RenderTargetsCount;
+}
+
+RenderTarget* RenderTargetCollection::GetDepthStencilRenderTarget()
+{
+	return _DepthStencilRenderTarget;
 }
 

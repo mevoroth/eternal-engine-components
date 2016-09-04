@@ -45,7 +45,9 @@ void Camera::GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const
 
 void Camera::GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const
 {
-
+	ViewProjectionMatrix = _View * _Proj;
+	XMMATRIX ViewProj = XMMatrixTranspose(XMLoadFloat4x4(&ViewProjectionMatrix));
+	XMStoreFloat4x4(&ViewProjectionMatrix, ViewProj);
 }
 
 void Camera::SetNear(_In_ float Near)

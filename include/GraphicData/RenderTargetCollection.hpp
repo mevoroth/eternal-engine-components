@@ -16,13 +16,16 @@ namespace Eternal
 		class RenderTargetCollection
 		{
 		public:
-			RenderTargetCollection(_In_ int Width, _In_ int Height, _In_ int RenderTargetsCount, _In_ const Format* Formats);
+			RenderTargetCollection(_In_ int Width, _In_ int Height, _In_ int RenderTargetsCount, _In_ const Format* Formats, _In_ bool CreateDepth = false);
 			virtual ~RenderTargetCollection();
 
 			RenderTarget** GetRenderTargets();
 			int GetRenderTargetsCount() const;
 
+			RenderTarget* GetDepthStencilRenderTarget();
+
 		private:
+			RenderTarget* _DepthStencilRenderTarget = nullptr;
 			RenderTarget** _RenderTargets = nullptr;
 			int _RenderTargetsCount = 0;
 		};
