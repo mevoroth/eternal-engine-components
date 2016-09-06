@@ -13,7 +13,7 @@ SamplerCollection::SamplerCollection()
 	Initialized = true;
 #endif
 
-	for (int SamplerIndex = 0; SamplerIndex < ETERNAL_ARRAYSIZE(_Samplers); ++SamplerIndex)
+	for (int SamplerIndex = 0; SamplerIndex < SAMPLER_COUNT; ++SamplerIndex)
 	{
 		_Samplers[SamplerIndex] = nullptr;
 	}
@@ -22,7 +22,7 @@ SamplerCollection::SamplerCollection()
 
 SamplerCollection::~SamplerCollection()
 {
-	for (int SamplerIndex = 0; SamplerIndex < ETERNAL_ARRAYSIZE(_Samplers); ++SamplerIndex)
+	for (int SamplerIndex = 0; SamplerIndex < SAMPLER_COUNT; ++SamplerIndex)
 	{
 		delete _Samplers[SamplerIndex];
 		_Samplers[SamplerIndex] = nullptr;
