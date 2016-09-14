@@ -115,6 +115,9 @@
     <ClInclude Include="include\GraphicData\BlendStateCollection.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\RenderingListCollection.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -187,6 +190,9 @@
       <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\BlendStateCollection.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\RenderingListsCollection.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

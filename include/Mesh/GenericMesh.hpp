@@ -28,7 +28,7 @@ namespace Eternal
 			}
 			inline uint32_t GetVerticesCount()
 			{
-				return _Vertices.size();
+				return (uint32_t)_Vertices.size();
 			}
 
 			virtual void InitializeBuffers() override;

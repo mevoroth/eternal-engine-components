@@ -34,20 +34,17 @@ Camera::Camera(_In_ float Near, _In_ float Far)
 
 void Camera::GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const
 {
-	memcpy(&ViewMatrix, &_View, sizeof(Matrix4x4));
+	ViewMatrix = _View;
 }
 
 void Camera::GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const
 {
-	XMMATRIX ProjMatrix = XMMatrixTranspose(XMLoadFloat4x4(&_Proj));
-	XMStoreFloat4x4(&ProjectionMatrix, ProjMatrix);
+	ProjectionMatrix = _Proj;
 }
 
 void Camera::GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const
 {
 	ViewProjectionMatrix = _View * _Proj;
-	XMMATRIX ViewProj = XMMatrixTranspose(XMLoadFloat4x4(&ViewProjectionMatrix));
-	XMStoreFloat4x4(&ViewProjectionMatrix, ViewProj);
 }
 
 void Camera::SetNear(_In_ float Near)

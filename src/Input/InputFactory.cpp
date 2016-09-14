@@ -26,6 +26,7 @@ namespace Eternal
 				ETERNAL_ASSERT(false);
 				break;
 			}
+			return nullptr;
 		}
 
 		Input* CreateMultiInput(_In_ Input** Inputs, _In_ int InputsCount)
