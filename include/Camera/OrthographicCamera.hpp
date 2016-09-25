@@ -15,7 +15,7 @@ namespace Eternal
 			void SetSize(_In_ float Size);
 
 		protected:
-			virtual void _UpdateMatrix() override;
+			virtual void _UpdateProjectionMatrix() override;
 
 		private:
 			float _Size;

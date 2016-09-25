@@ -118,6 +118,9 @@
     <ClInclude Include="include\GraphicData\RenderingListCollection.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\Mesh\BoundingBox.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="src\GraphicData\RenderingListsCollection.cpp">
       <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\BoundingBox.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

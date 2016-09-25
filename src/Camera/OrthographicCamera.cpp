@@ -6,15 +6,15 @@ OrthographicCamera::OrthographicCamera(_In_ float Near, _In_ float Far, _In_ flo
 	: Camera(Near, Far)
 	, _Size(Size)
 {
-	_UpdateMatrix();
+	_UpdateProjectionMatrix();
 }
 
 void OrthographicCamera::SetSize(_In_ float Size)
 {
 	_Size = Size;
-	_UpdateMatrix();
+	_UpdateProjectionMatrix();
 }
-void OrthographicCamera::_UpdateMatrix()
+void OrthographicCamera::_UpdateProjectionMatrix()
 {
 	XMStoreFloat4x4(
 		&_Proj,

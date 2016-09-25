@@ -13,6 +13,7 @@ namespace Eternal
 		using namespace Eternal::Graphics;
 		class Transform;
 		class Bone;
+		class BoundingBox;
 
 		class Mesh
 		{
@@ -40,10 +41,20 @@ namespace Eternal
 			void SetBone(_In_ Bone* BoneObj);
 			Bone* GetBone();
 
+			void SetBoundingBox(_In_ BoundingBox* BoundingBoxObj);
+			BoundingBox* GetBoundingBox();
+
+			void SetBBMesh(Mesh* MeshObj);
+			Mesh* GetBBMesh();
+
 		protected:
 			VertexBuffer* _VerticesBuffer = nullptr;
 			IndexBuffer* _IndicesBuffer = nullptr;
+			Mesh* _BBMesh = nullptr;
+			//VertexBuffer* _BoundingBoxVerticesBuffer = nullptr;
+			//IndexBuffer* _BoundingBoxIndicesBuffer = nullptr;
 			Bone* _Bone = nullptr;
+			BoundingBox* _BoundingBox = nullptr;
 		};
 	}
 }

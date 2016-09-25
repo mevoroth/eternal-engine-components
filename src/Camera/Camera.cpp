@@ -8,28 +8,7 @@ Camera::Camera(_In_ float Near, _In_ float Far)
 	: _Near(Near)
 	, _Far(Far)
 {
-	XMStoreFloat4x4(
-		&_View,
-		XMMATRIX(
-			1.f, 0.f, 0.f, 0.f,
-			0.f, 1.f, 0.f, 0.f,
-			0.f, 0.f, 1.f, 0.f,
-			0.f, 0.f, 0.f, 1.f
-		)
-	);
-
-	XMFLOAT4 EyePos(0.f, 0.f, 1.f, 1.f);
-	XMFLOAT4 EyeDir(0.f, 0.f, 1.f, 0.f);
-	XMFLOAT4 UpDir(0.f, 1.f, 0.f, 0.f);
-
-	XMStoreFloat4x4(
-		&_View,
-		XMMatrixLookToLH(
-			XMLoadFloat4(&EyePos),
-			XMLoadFloat4(&EyeDir),
-			XMLoadFloat4(&UpDir)
-		)
-	);
+	_UpdateViewMatrix();
 }
 
 void Camera::GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const
@@ -47,13 +26,67 @@ void Camera::GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) cons
 	ViewProjectionMatrix = _View * _Proj;
 }
 
+void Camera::GetViewProjectionMatrixTransposed(_Out_ Matrix4x4& ViewProjectionMatrix) const
+{
+	GetViewProjectionMatrix(ViewProjectionMatrix);
+	Transpose(ViewProjectionMatrix);
+}
+
 void Camera::SetNear(_In_ float Near)
 {
 	_Near = Near;
-	_UpdateMatrix();
+	_UpdateProjectionMatrix();
 }
+
 void Camera::SetFar(_In_ float Far)
 {
 	_Far = Far;
-	_UpdateMatrix();
+	_UpdateProjectionMatrix();
+}
+
+Vector3 Camera::GetForward() const
+{
+	return _Forward;
+}
+
+Vector3 Camera::GetRight() const
+{
+	return _Right;
+}
+
+Vector3 Camera::GetUp() const
+{
+	return _Up;
+}
+
+void Camera::SetPosition(_In_ const Vector3& Position)
+{
+	_Position = Position;
+	_UpdateViewMatrix();
+}
+
+void Camera::SetForward(_In_ const Vector3& Forward)
+{
+	_Forward = Forward;
+	_UpdateViewMatrix();
+}
+
+void Camera::SetUp(_In_ const Vector3& Up)
+{
+	_Up = Up;
+	_UpdateViewMatrix();
+}
+
+void Camera::UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up)
+{
+	_Position = Position;
+	_Forward = Forward;
+	_Up = Up;
+	_UpdateViewMatrix();
+}
+
+void Camera::_UpdateViewMatrix()
+{
+	_View = NewLookToLH(_Position, _Forward, _Up);
+	_Right = Normalize(Cross(_Up, _Forward));
 }

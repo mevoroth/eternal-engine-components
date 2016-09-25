@@ -61,7 +61,7 @@ Matrix4x4 Transform::GetModelMatrix() const
 		* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))
 		* XMMatrixScalingFromVector(XMLoadFloat3(&Scaling));
 	Matrix4x4 ReturnMatrix;
-	XMStoreFloat4x4(&ReturnMatrix, ModelMatrix);
+	XMStoreFloat4x4(&ReturnMatrix, /*XMMatrixTranspose*/(ModelMatrix));
 	return ReturnMatrix;
 }
 //Vector3 Transform::GetRight() const

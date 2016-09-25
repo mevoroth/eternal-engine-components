@@ -42,6 +42,7 @@
     <ClInclude Include="include\Input\XInput\XInput.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
     <ClInclude Include="include\Mesh\Bone.hpp" />
+    <ClInclude Include="include\Mesh\BoundingBox.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
     <ClInclude Include="include\Mesh\MeshFactory.hpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="src\Input\XInput\XInput.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
+    <ClCompile Include="src\Mesh\BoundingBox.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Mesh\MeshFactory.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />

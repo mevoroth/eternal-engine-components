@@ -5,21 +5,27 @@
 using namespace Eternal::Graphics;
 using namespace Eternal::Components;
 
-PerspectiveCamera::PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float FOV)
+PerspectiveCamera::PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float XFOV, _In_ float ScreenRatio)
 	: Camera(Near, Far)
-	, _FOV(XMConvertToRadians(FOV))
+	, _XFOV(XMConvertToRadians(XFOV))
+	, _ScreenRatio(ScreenRatio)
 {
-	_UpdateMatrix();
+	_UpdateProjectionMatrix();
 }
 
-void PerspectiveCamera::SetFOV(_In_ float FOV)
+void PerspectiveCamera::SetXFOV(_In_ float XFOV)
 {
-	_FOV = XMConvertToRadians(FOV);
-	_UpdateMatrix();
+	_XFOV = XMConvertToRadians(XFOV);
+	_UpdateProjectionMatrix();
 }
 
-void PerspectiveCamera::_UpdateMatrix()
+void PerspectiveCamera::SetScreenRatio(_In_ float Ratio)
 {
-	XMStoreFloat4x4(&_Proj,
-		XMMatrixPerspectiveFovLH(_FOV, Device::WIDTH / Device::HEIGHT, _Near, _Far));
+	_ScreenRatio = Ratio;
+	_UpdateProjectionMatrix();
+}
+
+void PerspectiveCamera::_UpdateProjectionMatrix()
+{
+	_Proj = NewPerpectiveLH(_XFOV, _ScreenRatio, _Near, _Far);
 }

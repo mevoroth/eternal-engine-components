@@ -10,15 +10,17 @@ namespace Eternal
 		class PerspectiveCamera : public Camera
 		{
 		public:
-			PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float FOV);
+			PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float XFOV, _In_ float ScreenRatio);
 
-			void SetFOV(_In_ float FOV);
+			void SetXFOV(_In_ float XFOV);
+			void SetScreenRatio(_In_ float Ratio);
 
 		protected:
-			virtual void _UpdateMatrix() override;
+			virtual void _UpdateProjectionMatrix() override;
 
 		private:
-			float _FOV;
+			float _XFOV = 0.78539816339f; // 90° / 2
+			float _ScreenRatio = 16.f / 9.f;
 		};
 	}
 }
