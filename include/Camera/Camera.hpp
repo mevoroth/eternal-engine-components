@@ -18,6 +18,8 @@ namespace Eternal
 			void GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const;
 			void GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const;
 			void GetViewProjectionMatrixTransposed(_Out_ Matrix4x4& ViewProjectionMatrix) const;
+			void GetViewProjectionMatrixInverse(_Out_ Matrix4x4& ViewProjectionInverse) const;
+			void GetViewProjectionMatrixInverseTransposed(_Out_ Matrix4x4& ViewProjectionInverse) const;
 			void SetNear(_In_ float Near);
 			void SetFar(_In_ float Far);
 

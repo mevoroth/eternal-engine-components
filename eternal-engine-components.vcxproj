@@ -25,6 +25,7 @@
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\GraphicData\BlendStateCollection.hpp" />
     <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\ContextCollection.hpp" />
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
     <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\RenderingListCollection.hpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp" />
+    <ClCompile Include="src\GraphicData\ContextCollection.cpp" />
     <ClCompile Include="src\GraphicData\TopologyMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\ViewportCollection.cpp" />
     <ClCompile Include="src\GraphicData\ViewportMaterialProperty.cpp" />

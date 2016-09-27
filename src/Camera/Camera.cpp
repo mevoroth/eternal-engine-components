@@ -32,6 +32,18 @@ void Camera::GetViewProjectionMatrixTransposed(_Out_ Matrix4x4& ViewProjectionMa
 	Transpose(ViewProjectionMatrix);
 }
 
+void Camera::GetViewProjectionMatrixInverse(_Out_ Matrix4x4& ViewProjectionInverse) const
+{
+	GetViewProjectionMatrix(ViewProjectionInverse);
+	Inverse(ViewProjectionInverse);
+}
+
+void Camera::GetViewProjectionMatrixInverseTransposed(_Out_ Matrix4x4& ViewProjectionInverse) const
+{
+	GetViewProjectionMatrixInverse(ViewProjectionInverse);
+	Transpose(ViewProjectionInverse);
+}
+
 void Camera::SetNear(_In_ float Near)
 {
 	_Near = Near;

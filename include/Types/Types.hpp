@@ -48,6 +48,7 @@ namespace Eternal
 
 		// MATH STUFF: MOVE THIS
 		extern void Transpose(_Inout_ Matrix4x4& A);
+		extern void Inverse(_Inout_ Matrix4x4& A);
 		extern Matrix4x4 NewOrthoLH(_In_ float Top, _In_ float Bottom, _In_ float Left, _In_ float Right, _In_ float Near, _In_ float Far);
 		extern Matrix4x4 NewPerpectiveLH(_In_ float XFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far);
 		extern Matrix4x4 NewLookToLH(_In_ const Vector3& Position, _In_ const Vector3& Direction, _In_ const Vector3& Up);

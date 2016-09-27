@@ -288,5 +288,9 @@ namespace Eternal
 		{
 			XMStoreFloat4x4(&A, XMMatrixTranspose(XMLoadFloat4x4(&A)));
 		}
+		void Inverse(_Inout_ Matrix4x4& A)
+		{
+			XMStoreFloat4x4(&A, XMMatrixInverse(nullptr, XMLoadFloat4x4(&A)));
+		}
 	}
 }

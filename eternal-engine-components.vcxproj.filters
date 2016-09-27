@@ -121,6 +121,9 @@
     <ClInclude Include="include\Mesh\BoundingBox.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\ContextCollection.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="src\Mesh\BoundingBox.cpp">
       <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\ContextCollection.cpp">
+      <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
