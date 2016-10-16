@@ -28,6 +28,7 @@ namespace Eternal
 			void SetUp(_In_ const Vector3& Up);
 			void UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
 
+			Vector3 GetPosition() const;
 			Vector3 GetForward() const;
 			Vector3 GetRight() const;
 			Vector3 GetUp() const;

@@ -2,6 +2,7 @@
 
 #include "Macros/Macros.hpp"
 #include "Graphics/Renderer.hpp"
+#include "Graphics/Context.hpp"
 #include "Parallel/AtomicS32Factory.hpp"
 #include "Parallel/AtomicS32.hpp"
 
@@ -50,8 +51,35 @@ void ContextCollection::Release(_In_ Context& ContextObj)
 	{
 		if (_Contexts[ContextIndex] == &ContextObj)
 		{
+			ETERNAL_ASSERT(_ContextReservation[ContextIndex]->Load() == 1);
 			_ContextReservation[ContextIndex]->Sub();
-			ETERNAL_ASSERT(_ContextReservation[ContextIndex]->Load() == 0);
 		}
 	}
+}
+
+void ContextCollection::Flush(_In_ Context& MainContext)
+{
+#ifdef ETERNAL_DEBUG
+	ETERNAL_ASSERT(!MainContext.IsDeferred());
+	for (int ContextIndex = 0; ContextIndex < _ContextCount; ++ContextIndex)
+	{
+		bool Reserve = _ContextReservation[ContextIndex]->CompareAndSwap(0, 1);
+		ETERNAL_ASSERT(Reserve);
+	}
+#endif
+
+	for (int ContextIndex = 0; ContextIndex < _ContextCount; ++ContextIndex)
+	{
+		_Contexts[ContextIndex]->PrepareFlush(MainContext);
+	}
+
+#ifdef ETERNAL_DEBUG
+	for (int ContextIndex = 0; ContextIndex < _ContextCount; ++ContextIndex)
+	{
+		_ContextReservation[ContextIndex]->Sub();
+		ETERNAL_ASSERT(_ContextReservation[ContextIndex]->Load() == 0);
+	}
+#endif
+
+	MainContext.Flush();
 }

@@ -34,6 +34,7 @@
     <ClInclude Include="include\GraphicData\SamplerMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\TopologyMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\VertexFormat.hpp" />
     <ClInclude Include="include\GraphicData\ViewportCollection.hpp" />
     <ClInclude Include="include\GraphicData\ViewportMaterialProperty.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
@@ -44,8 +45,8 @@
     <ClInclude Include="include\Light\Light.hpp" />
     <ClInclude Include="include\Mesh\Bone.hpp" />
     <ClInclude Include="include\Mesh\BoundingBox.hpp" />
-    <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
+    <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Mesh\MeshFactory.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
     <ClInclude Include="include\Types\DXMathTypes.hpp" />

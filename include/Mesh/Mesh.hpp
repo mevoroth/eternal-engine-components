@@ -1,17 +1,23 @@
 #ifndef _MESH_HPP_
 #define _MESH_HPP_
+
+#include "Macros/Macros.hpp"
 #include <string>
+#include <vector>
+#include "Transform/Transform.hpp"
+
 namespace Eternal
 {
 	namespace Graphics
 	{
 		class VertexBuffer;
 		class IndexBuffer;
+		class Texture;
 	}
 	namespace Components
 	{
+		using namespace std;
 		using namespace Eternal::Graphics;
-		class Transform;
 		class Bone;
 		class BoundingBox;
 
@@ -20,23 +26,52 @@ namespace Eternal
 		public:
 			virtual void InitializeBuffers() = 0;
 			virtual void DestroyBuffers() = 0;
-			virtual VertexBuffer* GetVertexBuffer() = 0;
-			virtual IndexBuffer* GetIndexBuffer() = 0;
+			VertexBuffer* GetVertexBuffer()
+			{
+				return _VerticesBuffer;
+			}
+			IndexBuffer* GetIndexBuffer()
+			{
+				return _IndicesBuffer;
+			}
 
-			virtual Transform& GetTransform() = 0;
-			virtual const Transform& GetTransform() const = 0;
+			Transform& GetTransform()
+			{
+				return _Transform;
+			}
+			const Transform& GetTransform() const
+			{
+				return _Transform;
+			}
 
-			virtual Mesh& GetSubMesh(_In_ uint32_t Index) = 0;
-			virtual size_t GetSubMeshesCount() = 0;
+			Mesh& GetSubMesh(_In_ uint32_t Index)
+			{
+				ETERNAL_ASSERT(Index < _SubMeshes.size());
+				return *_SubMeshes[Index];
+			}
+			size_t GetSubMeshesCount()
+			{
+				return _SubMeshes.size();
+			}
+
+			void PushMesh(_In_ Mesh* SubMesh)
+			{
+				_SubMeshes.push_back(SubMesh);
+			}
 
 			virtual bool IsValidNode() const = 0;
 			virtual bool IsValid() const = 0;
 
-			void SetTexture(const std::string& TextureName)
+			// DIRTY BELOW
+			void SetTexture(Texture* Diffuse, Texture* Specular, Texture* Normal)
 			{
-				_Texture = TextureName;
+				_Diffuse = Diffuse;
+				_Specular = Specular;
+				_Normal = Normal;
 			}
-			std::string _Texture;
+			Texture* _Diffuse;
+			Texture* _Specular;
+			Texture* _Normal;
 
 			void SetBone(_In_ Bone* BoneObj);
 			Bone* GetBone();
@@ -48,8 +83,14 @@ namespace Eternal
 			Mesh* GetBBMesh();
 
 		protected:
+			Transform _Transform;
+
 			VertexBuffer* _VerticesBuffer = nullptr;
 			IndexBuffer* _IndicesBuffer = nullptr;
+
+			vector<Mesh*> _SubMeshes;
+			
+			// DIRTY BELOW
 			Mesh* _BBMesh = nullptr;
 			//VertexBuffer* _BoundingBoxVerticesBuffer = nullptr;
 			//IndexBuffer* _BoundingBoxIndicesBuffer = nullptr;

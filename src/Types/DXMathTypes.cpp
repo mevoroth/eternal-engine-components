@@ -234,7 +234,7 @@ namespace Eternal
 		{
 			Vector3 NormalizedDirection	= Normalize(Direction);
 			Vector3 NormalizedUp		= Normalize(Up);
-			Vector3 NormalizedRight		= Normalize(Cross(Up, Direction));
+			Vector3 NormalizedRight		= Normalize(Cross(NormalizedUp, NormalizedDirection));
 
 			Matrix4x4 LookToMatrix(
 				NormalizedRight.x,		NormalizedRight.y,		NormalizedRight.z,		0.f,

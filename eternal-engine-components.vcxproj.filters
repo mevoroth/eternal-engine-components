@@ -61,9 +61,6 @@
     <ClInclude Include="include\Mesh\Mesh.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh\GenericMesh.hpp">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="include\Input\XInput\XInput.hpp">
       <Filter>Input\XInput</Filter>
     </ClInclude>
@@ -123,6 +120,12 @@
     </ClInclude>
     <ClInclude Include="include\GraphicData\ContextCollection.hpp">
       <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\VertexFormat.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mesh\GenericMesh.hpp">
+      <Filter>Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ namespace Eternal
 
 			Context& Get();
 			void Release(_In_ Context& ContextObj);
+			void Flush(_In_ Context& MainContext);
 
 		private:
 			Context** _Contexts;

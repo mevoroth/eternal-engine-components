@@ -22,6 +22,10 @@ RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, 
 		_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
 		ETERNAL_ASSERT(_DepthStencilRenderTarget);
 	}
+	else
+	{
+		_DepthStencilRenderTarget = nullptr;
+	}
 }
 
 RenderTargetCollection::~RenderTargetCollection()
