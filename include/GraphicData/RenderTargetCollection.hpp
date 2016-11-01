@@ -16,7 +16,14 @@ namespace Eternal
 		class RenderTargetCollection
 		{
 		public:
+			/**
+			 * Rendertargets + Depth
+			 */
 			RenderTargetCollection(_In_ int Width, _In_ int Height, _In_ int RenderTargetsCount, _In_ const Format* Formats, _In_ bool CreateDepth = false);
+			/**
+			 * Only Depth
+			 */
+			RenderTargetCollection(_In_ int Width, _In_ int Height);
 			virtual ~RenderTargetCollection();
 
 			RenderTarget** GetRenderTargets();

@@ -28,21 +28,34 @@ RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, 
 	}
 }
 
+RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height)
+	: _RenderTargetsCount(0)
+	, _RenderTargets(nullptr)
+{
+	_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
+	ETERNAL_ASSERT(_DepthStencilRenderTarget);
+}
+
 RenderTargetCollection::~RenderTargetCollection()
 {
+	ETERNAL_ASSERT(_DepthStencilRenderTarget || _RenderTargets); // Corruption
+
 	if (_DepthStencilRenderTarget)
 	{
 		delete _DepthStencilRenderTarget;
 		_DepthStencilRenderTarget = nullptr;
 	}
 
-	for (int RenderTargetIndex = 0; RenderTargetIndex < _RenderTargetsCount; ++RenderTargetIndex)
+	if (_RenderTargets)
 	{
-		delete _RenderTargets[RenderTargetIndex];
-		_RenderTargets[RenderTargetIndex] = nullptr;
+		for (int RenderTargetIndex = 0; RenderTargetIndex < _RenderTargetsCount; ++RenderTargetIndex)
+		{
+			delete _RenderTargets[RenderTargetIndex];
+			_RenderTargets[RenderTargetIndex] = nullptr;
+		}
+		delete[] _RenderTargets;
+		_RenderTargets = nullptr;
 	}
-	delete[] _RenderTargets;
-	_RenderTargets = nullptr;
 }
 
 RenderTarget** RenderTargetCollection::GetRenderTargets()
