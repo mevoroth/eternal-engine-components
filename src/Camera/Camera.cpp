@@ -56,22 +56,22 @@ void Camera::SetFar(_In_ float Far)
 	_UpdateProjectionMatrix();
 }
 
-Vector3 Camera::GetPosition() const
+const Vector3& Camera::GetPosition() const
 {
 	return _Position;
 }
 
-Vector3 Camera::GetForward() const
+const Vector3& Camera::GetForward() const
 {
 	return _Forward;
 }
 
-Vector3 Camera::GetRight() const
+const Vector3& Camera::GetRight() const
 {
 	return _Right;
 }
 
-Vector3 Camera::GetUp() const
+const Vector3& Camera::GetUp() const
 {
 	return _Up;
 }
