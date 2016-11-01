@@ -18,6 +18,15 @@ namespace Eternal
 			enum ViewportKey
 			{
 				FULLSCREEN = 0,
+				MAP_16,
+				MAP_32,
+				MAP_64,
+				MAP_128,
+				MAP_256,
+				MAP_512,
+				MAP_1024,
+				MAP_2048,
+				MAP_4096,
 				VIEWPORT_COUNT
 			};
 
