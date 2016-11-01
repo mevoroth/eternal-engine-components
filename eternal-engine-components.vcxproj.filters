@@ -127,6 +127,18 @@
     <ClInclude Include="include\Mesh\GenericMesh.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\GraphicTaskConfig.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\GraphicTaskConfigCollection.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light\SpotLight.hpp">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light\Shadow.hpp">
+      <Filter>Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -209,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="src\GraphicData\ContextCollection.cpp">
       <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\SpotLight.cpp">
+      <Filter>Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

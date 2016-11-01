@@ -27,6 +27,8 @@
     <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\ContextCollection.hpp" />
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
+    <ClInclude Include="include\GraphicData\GraphicTaskConfig.hpp" />
+    <ClInclude Include="include\GraphicData\GraphicTaskConfigCollection.hpp" />
     <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\RenderingListCollection.hpp" />
     <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp" />
@@ -43,6 +45,8 @@
     <ClInclude Include="include\Input\WinInput\WinInput.hpp" />
     <ClInclude Include="include\Input\XInput\XInput.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
+    <ClInclude Include="include\Light\Shadow.hpp" />
+    <ClInclude Include="include\Light\SpotLight.hpp" />
     <ClInclude Include="include\Mesh\Bone.hpp" />
     <ClInclude Include="include\Mesh\BoundingBox.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
@@ -59,6 +63,7 @@
     <ClCompile Include="src\GraphicData\BlendStateCollection.cpp" />
     <ClCompile Include="src\GraphicData\CameraMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
+    <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp" />
     <ClCompile Include="src\GraphicData\Material.cpp" />
     <ClCompile Include="src\GraphicData\RenderingListsCollection.cpp" />
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp" />
@@ -74,6 +79,7 @@
     <ClCompile Include="src\Input\WinInput\WinInput.cpp" />
     <ClCompile Include="src\Input\XInput\XInput.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
+    <ClCompile Include="src\Light\SpotLight.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
     <ClCompile Include="src\Mesh\BoundingBox.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
