@@ -146,6 +146,13 @@ namespace Eternal
 				A.y * B
 			);
 		}
+		Vector2 operator/(_In_ const Vector2& A, _In_ float B)
+		{
+			return Vector2(
+				A.x / B,
+				A.y / B
+			);
+		}
 		Vector2 operator*(_In_ float A, _In_ const Vector2& B)
 		{
 			return B * A;
@@ -197,6 +204,16 @@ namespace Eternal
 				&& (A.y > B.y || A.y == B.y)
 				&& (A.z > B.z || A.z == B.z);
 		}
+		bool operator<(_In_ const Vector2& A, _In_ const Vector2& B)
+		{
+			return A.x < B.x
+				&& A.y < B.y;
+		}
+		bool operator>=(_In_ const Vector2& A, _In_ const Vector2& B)
+		{
+			return A.x >= B.x
+				&& A.y >= B.y;
+		}
 
 		Matrix4x4 NewOrthoLH(_In_ float Top, _In_ float Bottom, _In_ float Left, _In_ float Right, _In_ float Near, _In_ float Far)
 		{
@@ -214,17 +231,25 @@ namespace Eternal
 			return ProjMatrix;
 		}
 
-		Matrix4x4 NewPerpectiveLH(_In_ float YFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far)
+		Matrix4x4 NewPerspectiveLH(_In_ float YFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far)
 		{
 			float Height		= tan(YFOV / 2.f);
 			float Width			= Height / ScreenRatio;
-			float DepthRange	= 1.f / (Far - Near);
+			float DepthRange	= Far / (Far - Near);
+
+			//Matrix4x4 ProjMatrix/*(
+			//	Width,	0.f,	0.f,					0.f,
+			//	0.f,	Height,	0.f,					0.f,
+			//	0.f,	0.f,	DepthRange,				1.f,
+			//	0.f,	0.f,	-Near * DepthRange,		0.f
+			//)*/;
+			//XMStoreFloat4x4(&ProjMatrix, XMMatrixPerspectiveFovLH(YFOV, ScreenRatio, Near, Far));
 
 			Matrix4x4 ProjMatrix(
 				Width,	0.f,	0.f,					0.f,
 				0.f,	Height,	0.f,					0.f,
-				0.f,	0.f,	DepthRange * Far,		1.f,
-				0.f,	0.f,	-(Near + DepthRange),	0.f
+				0.f,	0.f,	DepthRange,				1.f,
+				0.f,	0.f,	-(Near * DepthRange),	0.f
 			);
 
 			return ProjMatrix;
@@ -236,11 +261,18 @@ namespace Eternal
 			Vector3 NormalizedUp		= Normalize(Up);
 			Vector3 NormalizedRight		= Normalize(Cross(NormalizedUp, NormalizedDirection));
 
+			Vector3 NegativePosition(-Position.x, -Position.y, -Position.z);
+			Vector3 TransformedPosition(
+				Dot(NormalizedRight, NegativePosition),
+				Dot(NormalizedUp, NegativePosition),
+				Dot(NormalizedDirection, NegativePosition)
+			);
+
 			Matrix4x4 LookToMatrix(
-				NormalizedRight.x,		NormalizedRight.y,		NormalizedRight.z,		0.f,
-				NormalizedUp.x,			NormalizedUp.y,			NormalizedUp.z,			0.f,
-				NormalizedDirection.x,	NormalizedDirection.y,	NormalizedDirection.z,	0.f,
-				-Position.x,			-Position.y,			-Position.z,			1.f
+				NormalizedRight.x,		NormalizedUp.x,			NormalizedDirection.x,	0.f,
+				NormalizedRight.y,		NormalizedUp.y,			NormalizedDirection.y,	0.f,
+				NormalizedRight.z,		NormalizedUp.z,			NormalizedDirection.z,	0.f,
+				TransformedPosition.x,	TransformedPosition.y,	TransformedPosition.z,	1.0f
 			);
 
 			return LookToMatrix;
@@ -248,7 +280,7 @@ namespace Eternal
 
 		float SquareLength(_In_ const Vector3& V)
 		{
-			return V.x*V.x + V.y*V.y + V.z*V.z;
+			return Dot(V, V);
 		}
 		float Length(_In_ const Vector3& V)
 		{
@@ -266,7 +298,10 @@ namespace Eternal
 				V.z / VectorLength
 			);
 		}
-
+		float Dot(_In_ const Vector3& A, _In_ const Vector3& B)
+		{
+			return A.x*B.x + A.y*B.y + A.z*B.z;
+		}
 		Vector3 Cross(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
 			return Vector3(
@@ -291,6 +326,18 @@ namespace Eternal
 		void Inverse(_Inout_ Matrix4x4& A)
 		{
 			XMStoreFloat4x4(&A, XMMatrixInverse(nullptr, XMLoadFloat4x4(&A)));
+		}
+		float Lerp(_In_ float A, _In_ float B, _In_ float X)
+		{
+			return A + (B - A) * X;
+		}
+		Vector3 Lerp(_In_ const Vector3& A, _In_ const Vector3& B, _In_ float X)
+		{
+			return Vector3(
+				Lerp(A.x, B.x, X),
+				Lerp(A.y, B.y, X),
+				Lerp(A.z, B.z, X)
+			);
 		}
 	}
 }
