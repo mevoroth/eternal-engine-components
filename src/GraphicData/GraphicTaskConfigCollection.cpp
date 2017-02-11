@@ -28,7 +28,7 @@ GraphicTaskConfigCollection::GraphicTaskConfigCollection()
 
 		Config.BlendConfig		= BlendStateCollection::SOURCE;
 		Config.ViewportConfig	= ViewportCollection::MAP_2048;
-		Config.PS				= "Opaque";
+		Config.PS				= "OpaqueDepthOnly";
 		Config.PSFile			= "opaque.ps.hlsl";
 		{
 			Config.Defines.push_back("USE_DEPTH");
