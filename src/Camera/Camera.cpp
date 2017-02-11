@@ -1,6 +1,7 @@
 #include "Camera/Camera.hpp"
 
 #include <string>
+#include "Transform/Transform.hpp"
 
 using namespace Eternal::Components;
 
@@ -94,7 +95,7 @@ void Camera::SetUp(_In_ const Vector3& Up)
 	_UpdateViewMatrix();
 }
 
-void Camera::UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up)
+void Camera::_UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up)
 {
 	_Position = Position;
 	_Forward = Normalize(Forward);
@@ -106,4 +107,28 @@ void Camera::_UpdateViewMatrix()
 {
 	_View = NewLookToLH(_Position, _Forward, _Up);
 	_Right = Normalize(Cross(_Up, _Forward));
+}
+
+void Camera::UpdateView(const Transform& TransformObj)
+{
+	const Vector3& Position = TransformObj.GetTranslation();
+
+	Transform TempTransform = TransformObj;
+	TempTransform.SetTranslation(Vector3(0.f, 0.f, 0.f));
+	Vector3 TempForward3 = Vector3(0.f, 0.f, 0.f);
+	Vector3 TempUp3 = Vector3(0.f, 0.f, 0.f);
+
+	// Compute rotation
+	Vector4 Forward = TempTransform.GetModelMatrix() * Vector4(0.f, 0.f, 1.f, 1.f);
+	Vector4 Up = TempTransform.GetModelMatrix() * Vector4(0.f, 1.f, 0.f, 1.f);
+
+	TempForward3.x = Forward.x;
+	TempForward3.y = Forward.y;
+	TempForward3.z = Forward.z;
+
+	TempUp3.x = Up.x;
+	TempUp3.y = Up.y;
+	TempUp3.z = Up.z;
+
+	_UpdateViewMatrix(Position, TempForward3, TempUp3);
 }

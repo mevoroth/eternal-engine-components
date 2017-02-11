@@ -10,6 +10,8 @@ namespace Eternal
 	{
 		using namespace Types;
 
+		class Transform;
+
 		class Camera
 		{
 		public:
@@ -26,15 +28,17 @@ namespace Eternal
 			void SetForward(_In_ const Vector3& Forward);
 			void SetPosition(_In_ const Vector3& Position);
 			void SetUp(_In_ const Vector3& Up);
-			void UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
 
 			const Vector3& GetPosition() const;
 			const Vector3& GetForward() const;
 			const Vector3& GetRight() const;
 			const Vector3& GetUp() const;
 
+			void UpdateView(const Transform& TransformObj);
+
 		protected:
 			virtual void _UpdateProjectionMatrix() = 0;
+			void _UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
 			void _UpdateViewMatrix();
 
 			Matrix4x4 _View = NewIdentity();
