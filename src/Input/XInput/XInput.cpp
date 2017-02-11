@@ -45,9 +45,9 @@ void XInput::_Pad()
 
 				Pad = User * 24; // 20 buttons + D-Pad (4 buttons)
 				_States[JOY0_UP + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_States[JOY0_DOWN + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_States[JOY0_LEFT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
-				_States[JOY0_RIGHT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
+				_States[JOY0_DOWN + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) ? 0x1 : 0x0;
+				_States[JOY0_LEFT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) ? 0x1 : 0x0;
+				_States[JOY0_RIGHT + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) ? 0x1 : 0x0;
 				_States[JOY0_BUTTON0 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_A) ? 0x1 : 0x0;
 				_States[JOY0_BUTTON1 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_B) ? 0x1 : 0x0;
 				_States[JOY0_BUTTON2 + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_X) ? 0x1 : 0x0;
