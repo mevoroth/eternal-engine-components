@@ -27,5 +27,5 @@ void PerspectiveCamera::SetScreenRatio(_In_ float Ratio)
 
 void PerspectiveCamera::_UpdateProjectionMatrix()
 {
-	_Proj = NewPerpectiveLH(_YFOV, _ScreenRatio, _Near, _Far);
+	_Proj = NewPerspectiveLH(_YFOV, _ScreenRatio, _Near, _Far);
 }
