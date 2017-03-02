@@ -65,7 +65,7 @@
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
     <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp" />
     <ClCompile Include="src\GraphicData\Material.cpp" />
-    <ClCompile Include="src\GraphicData\RenderingListsCollection.cpp" />
+    <ClCompile Include="src\GraphicData\RenderingListCollection.cpp" />
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp" />

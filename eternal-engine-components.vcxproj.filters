@@ -213,9 +213,6 @@
     <ClCompile Include="src\GraphicData\BlendStateCollection.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\RenderingListsCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
     <ClCompile Include="src\Mesh\BoundingBox.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
@@ -227,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="src\Light\SpotLight.cpp">
       <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\RenderingListCollection.cpp">
+      <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
