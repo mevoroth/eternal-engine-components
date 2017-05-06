@@ -19,9 +19,9 @@ BlendStateCollection::BlendStateCollection()
 	{
 		_BlendStates[BlendStateIndex] = nullptr;
 	}
-	_BlendStates[SOURCE]	= CreateBlendState(BlendState::ONE, BlendState::ZERO, BlendState::OP_ADD, BlendState::ONE, BlendState::ZERO, BlendState::OP_ADD);
-	_BlendStates[ALPHA]		= CreateBlendState(BlendState::SRC_ALPHA, BlendState::INV_SRC_ALPHA, BlendState::OP_ADD, BlendState::INV_SRC_ALPHA, BlendState::INV_SRC_ALPHA, BlendState::OP_ADD);
-	_BlendStates[ADDITIVE]	= CreateBlendState(BlendState::SRC_ALPHA, BlendState::ONE, BlendState::OP_ADD, BlendState::SRC_ALPHA, BlendState::ONE, BlendState::OP_ADD);
+	//_BlendStates[SOURCE]	= CreateBlendState(BlendState::ONE, BlendState::ZERO, BlendState::OP_ADD, BlendState::ONE, BlendState::ZERO, BlendState::OP_ADD);
+	//_BlendStates[ALPHA]		= CreateBlendState(BlendState::SRC_ALPHA, BlendState::INV_SRC_ALPHA, BlendState::OP_ADD, BlendState::INV_SRC_ALPHA, BlendState::INV_SRC_ALPHA, BlendState::OP_ADD);
+	//_BlendStates[ADDITIVE]	= CreateBlendState(BlendState::SRC_ALPHA, BlendState::ONE, BlendState::OP_ADD, BlendState::SRC_ALPHA, BlendState::ONE, BlendState::OP_ADD);
 }
 
 BlendStateCollection::~BlendStateCollection()

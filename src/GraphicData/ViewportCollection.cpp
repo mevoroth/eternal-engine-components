@@ -17,16 +17,16 @@ ViewportCollection::ViewportCollection()
 	{
 		_Viewports[ViewportIndex] = nullptr;
 	}
-	_Viewports[FULLSCREEN]	= CreateViewport(0, 0, 1600, 900);
-	_Viewports[MAP_16]		= CreateViewport(0, 0, 16, 16);
-	_Viewports[MAP_32]		= CreateViewport(0, 0, 32, 32);
-	_Viewports[MAP_64]		= CreateViewport(0, 0, 64, 64);
-	_Viewports[MAP_128]		= CreateViewport(0, 0, 128, 128);
-	_Viewports[MAP_256]		= CreateViewport(0, 0, 256, 256);
-	_Viewports[MAP_512]		= CreateViewport(0, 0, 512, 512);
-	_Viewports[MAP_1024]	= CreateViewport(0, 0, 1024, 1024);
-	_Viewports[MAP_2048]	= CreateViewport(0, 0, 2048, 2048);
-	_Viewports[MAP_4096]	= CreateViewport(0, 0, 4096, 4096);
+	//_Viewports[FULLSCREEN]	= CreateViewport(0, 0, 1600, 900);
+	//_Viewports[MAP_16]		= CreateViewport(0, 0, 16, 16);
+	//_Viewports[MAP_32]		= CreateViewport(0, 0, 32, 32);
+	//_Viewports[MAP_64]		= CreateViewport(0, 0, 64, 64);
+	//_Viewports[MAP_128]		= CreateViewport(0, 0, 128, 128);
+	//_Viewports[MAP_256]		= CreateViewport(0, 0, 256, 256);
+	//_Viewports[MAP_512]		= CreateViewport(0, 0, 512, 512);
+	//_Viewports[MAP_1024]	= CreateViewport(0, 0, 1024, 1024);
+	//_Viewports[MAP_2048]	= CreateViewport(0, 0, 2048, 2048);
+	//_Viewports[MAP_4096]	= CreateViewport(0, 0, 4096, 4096);
 }
 
 ViewportCollection::~ViewportCollection()

@@ -12,27 +12,27 @@ RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height, 
 	_RenderTargetsCount = RenderTargetsCount;
 	_RenderTargets = new RenderTarget*[RenderTargetsCount];
 
-	for (int RenderTargetIndex = 0; RenderTargetIndex < RenderTargetsCount; ++RenderTargetIndex)
-	{
-		_RenderTargets[RenderTargetIndex] = CreateRenderTarget(Width, Height, Formats[RenderTargetIndex]);
-	}
+	//for (int RenderTargetIndex = 0; RenderTargetIndex < RenderTargetsCount; ++RenderTargetIndex)
+	//{
+	//	_RenderTargets[RenderTargetIndex] = CreateRenderTarget(Width, Height, Formats[RenderTargetIndex]);
+	//}
 
-	if (CreateDepth)
-	{
-		_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
-		ETERNAL_ASSERT(_DepthStencilRenderTarget);
-	}
-	else
-	{
-		_DepthStencilRenderTarget = nullptr;
-	}
+	//if (CreateDepth)
+	//{
+	//	_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
+	//	ETERNAL_ASSERT(_DepthStencilRenderTarget);
+	//}
+	//else
+	//{
+	//	_DepthStencilRenderTarget = nullptr;
+	//}
 }
 
 RenderTargetCollection::RenderTargetCollection(_In_ int Width, _In_ int Height)
 	: _RenderTargetsCount(0)
 	, _RenderTargets(nullptr)
 {
-	_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
+	//_DepthStencilRenderTarget = CreateDepthStencilRenderTarget(Width, Height);
 	ETERNAL_ASSERT(_DepthStencilRenderTarget);
 }
 

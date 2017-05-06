@@ -25,8 +25,10 @@
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\GraphicData\BlendStateCollection.hpp" />
     <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\CommandQueues.hpp" />
     <ClInclude Include="include\GraphicData\ContextCollection.hpp" />
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
+    <ClInclude Include="include\GraphicData\GraphicResources.hpp" />
     <ClInclude Include="include\GraphicData\GraphicTaskConfig.hpp" />
     <ClInclude Include="include\GraphicData\GraphicTaskConfigCollection.hpp" />
     <ClInclude Include="include\GraphicData\MaterialProperty.hpp" />
@@ -35,10 +37,13 @@
     <ClInclude Include="include\GraphicData\SamplerCollection.hpp" />
     <ClInclude Include="include\GraphicData\SamplerMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\StaticCollection.hpp" />
+    <ClInclude Include="include\GraphicData\StaticSamplers.hpp" />
     <ClInclude Include="include\GraphicData\TopologyMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\VertexFormat.hpp" />
     <ClInclude Include="include\GraphicData\ViewportCollection.hpp" />
     <ClInclude Include="include\GraphicData\ViewportMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\Viewports.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\InputFactory.hpp" />
     <ClInclude Include="include\Input\MultiInput\MultiInput.hpp" />
@@ -62,7 +67,9 @@
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\GraphicData\BlendStateCollection.cpp" />
     <ClCompile Include="src\GraphicData\CameraMaterialProperty.cpp" />
+    <ClCompile Include="src\GraphicData\CommandQueues.cpp" />
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
+    <ClCompile Include="src\GraphicData\GraphicResources.cpp" />
     <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp" />
     <ClCompile Include="src\GraphicData\Material.cpp" />
     <ClCompile Include="src\GraphicData\RenderingListCollection.cpp" />
@@ -70,9 +77,11 @@
     <ClCompile Include="src\GraphicData\SamplerCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\ContextCollection.cpp" />
+    <ClCompile Include="src\GraphicData\StaticSamplers.cpp" />
     <ClCompile Include="src\GraphicData\TopologyMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\ViewportCollection.cpp" />
     <ClCompile Include="src\GraphicData\ViewportMaterialProperty.cpp" />
+    <ClCompile Include="src\GraphicData\Viewports.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\InputFactory.cpp" />
     <ClCompile Include="src\Input\MultiInput\MultiInput.cpp" />

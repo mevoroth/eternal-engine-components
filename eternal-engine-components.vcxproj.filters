@@ -139,6 +139,21 @@
     <ClInclude Include="include\Light\Shadow.hpp">
       <Filter>Light</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\StaticCollection.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\StaticSamplers.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\CommandQueues.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\GraphicResources.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\Viewports.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -226,6 +241,18 @@
       <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\RenderingListCollection.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\StaticSamplers.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\CommandQueues.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\GraphicResources.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\Viewports.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

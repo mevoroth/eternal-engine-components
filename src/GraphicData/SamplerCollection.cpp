@@ -17,7 +17,7 @@ SamplerCollection::SamplerCollection()
 	{
 		_Samplers[SamplerIndex] = nullptr;
 	}
-	_Samplers[BILINEAR] = CreateSampler(true, true, false, false, Sampler::WRAP, Sampler::WRAP, Sampler::WRAP);
+	//_Samplers[BILINEAR] = CreateSampler(true, true, false, false, Sampler::WRAP, Sampler::WRAP, Sampler::WRAP);
 }
 
 SamplerCollection::~SamplerCollection()
