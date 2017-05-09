@@ -154,6 +154,12 @@
     <ClInclude Include="include\GraphicData\Viewports.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\GraphicBuffers.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphicData\Shaders.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -253,6 +259,12 @@
       <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\Viewports.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\GraphicBuffers.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\Shaders.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

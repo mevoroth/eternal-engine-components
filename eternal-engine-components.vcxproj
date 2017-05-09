@@ -27,6 +27,7 @@
     <ClInclude Include="include\GraphicData\CameraMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\CommandQueues.hpp" />
     <ClInclude Include="include\GraphicData\ContextCollection.hpp" />
+    <ClInclude Include="include\GraphicData\GraphicBuffers.hpp" />
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp" />
     <ClInclude Include="include\GraphicData\GraphicResources.hpp" />
     <ClInclude Include="include\GraphicData\GraphicTaskConfig.hpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="include\GraphicData\SamplerCollection.hpp" />
     <ClInclude Include="include\GraphicData\SamplerMaterialProperty.hpp" />
     <ClInclude Include="include\GraphicData\ShaderMaterialProperty.hpp" />
+    <ClInclude Include="include\GraphicData\Shaders.hpp" />
     <ClInclude Include="include\GraphicData\StaticCollection.hpp" />
     <ClInclude Include="include\GraphicData\StaticSamplers.hpp" />
     <ClInclude Include="include\GraphicData\TopologyMaterialProperty.hpp" />
@@ -68,6 +70,7 @@
     <ClCompile Include="src\GraphicData\BlendStateCollection.cpp" />
     <ClCompile Include="src\GraphicData\CameraMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\CommandQueues.cpp" />
+    <ClCompile Include="src\GraphicData\GraphicBuffers.cpp" />
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp" />
     <ClCompile Include="src\GraphicData\GraphicResources.cpp" />
     <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp" />
@@ -77,6 +80,7 @@
     <ClCompile Include="src\GraphicData\SamplerCollection.cpp" />
     <ClCompile Include="src\GraphicData\SamplerMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\ContextCollection.cpp" />
+    <ClCompile Include="src\GraphicData\Shaders.cpp" />
     <ClCompile Include="src\GraphicData\StaticSamplers.cpp" />
     <ClCompile Include="src\GraphicData\TopologyMaterialProperty.cpp" />
     <ClCompile Include="src\GraphicData\ViewportCollection.cpp" />
@@ -155,7 +159,7 @@
     <LibraryPath>$(SolutionDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;$(ProgramW6432)\VulkanSDK\1.0.37.0\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

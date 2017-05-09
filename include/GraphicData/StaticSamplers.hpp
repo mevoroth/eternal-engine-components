@@ -17,7 +17,7 @@ namespace Eternal
 
 		enum SamplerKey
 		{
-			BILINEAR = 0,
+			SAMPLER_BILINEAR = 0,
 			SAMPLERS_COUNT
 		};
 

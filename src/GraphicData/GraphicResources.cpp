@@ -5,6 +5,8 @@
 #include "GraphicData/CommandQueues.hpp"
 #include "GraphicData/StaticSamplers.hpp"
 #include "GraphicData/Viewports.hpp"
+#include "GraphicData/GraphicBuffers.hpp"
+#include "GraphicData/Shaders.hpp"
 
 using namespace Eternal::GraphicData;
 
@@ -13,6 +15,8 @@ GraphicResources::GraphicResources()
 	_Collections.CommandQueuesResources		= new CommandQueues();
 	_Collections.StaticSamplersResources	= new StaticSamplers();
 	_Collections.ViewportsResources			= new Viewports();
+	_Collections.GraphicBuffersResources	= new GraphicBuffers();
+	_Collections.ShadersResources			= new Shaders();
 }
 
 GraphicResources::~GraphicResources()

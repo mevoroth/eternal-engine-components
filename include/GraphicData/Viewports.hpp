@@ -16,7 +16,7 @@ namespace Eternal
 
 		enum ViewportKey
 		{
-			FULLSCREEN	= 0,
+			VIEWPORT_FULLSCREEN	= 0,
 			VIEWPORT_COUNT
 		};
 

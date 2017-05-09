@@ -17,6 +17,8 @@ namespace Eternal
 		class CommandQueues;
 		class StaticSamplers;
 		class Viewports;
+		class GraphicBuffers;
+		class Shaders;
 
 		class GraphicResources : public StaticCollectionInitialization
 		{
@@ -39,6 +41,16 @@ namespace Eternal
 				return _Collections.ViewportsResources;
 			}
 
+			GraphicBuffers* GetGraphicBuffers()
+			{
+				return _Collections.GraphicBuffersResources;
+			}
+
+			Shaders* GetShaders()
+			{
+				return _Collections.ShadersResources;
+			}
+
 			virtual void Initialize(_In_ Device& DeviceObj) override;
 
 		private:
@@ -49,8 +61,10 @@ namespace Eternal
 					CommandQueues*	CommandQueuesResources;
 					StaticSamplers*	StaticSamplersResources;
 					Viewports*		ViewportsResources;
+					GraphicBuffers*	GraphicBuffersResources;
+					Shaders*		ShadersResources;
 				};
-				StaticCollectionInitialization* Initializers[3];
+				StaticCollectionInitialization* Initializers[5];
 			};
 
 			Collections _Collections;

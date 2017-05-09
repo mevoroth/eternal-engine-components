@@ -13,5 +13,5 @@ StaticSamplers::StaticSamplers()
 
 void StaticSamplers::Initialize(_In_ Device& DeviceObj)
 {
-	GetArray()[BILINEAR] = CreateSampler(DeviceObj, *(DescriptorHeap*)nullptr, true, true, false, false, Sampler::WRAP, Sampler::WRAP, Sampler::WRAP);
+	GetArray()[SAMPLER_BILINEAR] = CreateSampler(DeviceObj, *(DescriptorHeap*)nullptr, true, true, false, false, Sampler::WRAP, Sampler::WRAP, Sampler::WRAP);
 }

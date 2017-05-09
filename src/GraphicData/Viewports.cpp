@@ -11,5 +11,5 @@ Viewports::Viewports()
 
 void Viewports::Initialize(_In_ Device& DeviceObj)
 {
-	GetArray()[FULLSCREEN] = CreateViewport(0, 0, 1280, 720);
+	GetArray()[VIEWPORT_FULLSCREEN] = CreateViewport(0, 0, 1280, 720);
 }
