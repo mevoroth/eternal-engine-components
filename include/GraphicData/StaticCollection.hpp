@@ -18,6 +18,7 @@ namespace Eternal
 		class StaticCollectionInitialization
 		{
 		public:
+			virtual ~StaticCollectionInitialization() {}
 			virtual void Initialize(_In_ Device& DeviceObj) = 0;
 		};
 

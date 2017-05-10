@@ -13,6 +13,7 @@
 //#include "Graphics/IndexBufferFactory.hpp"
 #include "Graphics/ResourceFactory.hpp"
 #include "Graphics/HeapFactory.hpp"
+#include "Graphics/Heap.hpp"
 #include "NextGenGraphics/Resource.hpp"
 
 using namespace std;
@@ -81,8 +82,8 @@ namespace Eternal
 				size_t IndicesBufferSize = _Indices.size() * sizeof(IndexT);
 				size_t VerticesBufferSize = _Vertices.size() * sizeof(VertexT);
 
-				_IndicesHeap	= CreateHeap(DeviceObj, IndicesBufferSize,	1, true, false, false, false);
-				_VerticesHeap	= CreateHeap(DeviceObj, VerticesBufferSize,	1, true, false, false, false);
+				_IndicesHeap	= CreateHeap(DeviceObj, 1, true, false, false, false);
+				_VerticesHeap	= CreateHeap(DeviceObj, 1, true, false, false, false);
 				_IndicesBuffer	= CreateResource(DeviceObj, *_IndicesHeap,	IndicesBufferSize,	BUFFER_INDEX);
 				_VerticesBuffer = CreateResource(DeviceObj, *_VerticesHeap, VerticesBufferSize, BUFFER_VERTEX);
 
