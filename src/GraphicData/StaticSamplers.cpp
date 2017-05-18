@@ -7,11 +7,11 @@ using namespace Eternal::GraphicData;
 using namespace Eternal::Graphics;
 
 StaticSamplers::StaticSamplers()
-	: StaticCollection<SamplerKey, Sampler, SAMPLERS_COUNT>()
+	: StaticCollection<SamplerKey, Sampler, SAMPLER_COUNT>()
 {
 }
 
 void StaticSamplers::Initialize(_In_ Device& DeviceObj)
 {
-	GetArray()[SAMPLER_BILINEAR] = CreateSampler(DeviceObj, *(DescriptorHeap*)nullptr, true, true, false, false, Sampler::WRAP, Sampler::WRAP, Sampler::WRAP);
+	GetArray()[SAMPLER_BILINEAR] = CreateStaticSampler(DeviceObj, 0, true, true, false, false, ADDRESS_MODE_WRAP, ADDRESS_MODE_WRAP, ADDRESS_MODE_WRAP);
 }

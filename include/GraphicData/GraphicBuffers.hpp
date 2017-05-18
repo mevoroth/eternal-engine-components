@@ -40,6 +40,7 @@ namespace Eternal
 			Heap*			_GraphicBuffersHeap[GRAPHIC_BUFFER_COUNT];
 			Resource*		_GraphicBuffersResource[GRAPHIC_BUFFER_COUNT];
 			DescriptorHeap*	_GraphicBuffersDescriptorHeap = nullptr;
+			DescriptorHeap*	_DepthStencilDescriptorHeap = nullptr;
 		};
 	}
 }

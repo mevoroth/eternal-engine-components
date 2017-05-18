@@ -31,9 +31,9 @@ namespace Eternal
 			COMMAND_QUEUE_GRAPHIC_12	= 13,
 			COMMAND_QUEUE_GRAPHIC_13	= 14,
 			COMMAND_QUEUE_GRAPHIC_14	= 15,
-			COMMAND_QUEUES_COUNT
+			COMMAND_QUEUE_COUNT
 		};
-		class CommandQueues : public StaticCollection<CommandQueueKey, CommandQueue, COMMAND_QUEUES_COUNT>
+		class CommandQueues : public StaticCollection<CommandQueueKey, CommandQueue, COMMAND_QUEUE_COUNT>
 		{
 		public:
 			CommandQueues();

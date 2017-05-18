@@ -256,8 +256,8 @@ namespace Eternal
 				JOY3_BUTTON18,
 				JOY3_BUTTON19,
 
-				KEYS_COUNT,
-				KEYBOARD_KEYS_COUNT = MOUSE0,
+				KEY_COUNT,
+				KEYBOARD_KEY_COUNT = MOUSE0,
 				INVALID_KEY = ~0
 			};
 

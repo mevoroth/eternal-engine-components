@@ -18,10 +18,10 @@ namespace Eternal
 		enum SamplerKey
 		{
 			SAMPLER_BILINEAR = 0,
-			SAMPLERS_COUNT
+			SAMPLER_COUNT
 		};
 
-		class StaticSamplers : public StaticCollection<SamplerKey, Sampler, SAMPLERS_COUNT>
+		class StaticSamplers : public StaticCollection<SamplerKey, Sampler, SAMPLER_COUNT>
 		{
 		public:
 			StaticSamplers();

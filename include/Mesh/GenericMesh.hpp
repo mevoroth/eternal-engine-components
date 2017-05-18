@@ -84,8 +84,8 @@ namespace Eternal
 
 				_IndicesHeap	= CreateHeap(DeviceObj, 1, true, false, false, false);
 				_VerticesHeap	= CreateHeap(DeviceObj, 1, true, false, false, false);
-				_IndicesBuffer	= CreateResource(DeviceObj, *_IndicesHeap,	IndicesBufferSize,	BUFFER_INDEX);
-				_VerticesBuffer = CreateResource(DeviceObj, *_VerticesHeap, VerticesBufferSize, BUFFER_VERTEX);
+				_IndicesBuffer	= CreateResource(DeviceObj, *_IndicesHeap, sizeof(IndexT),		IndicesBufferSize,	BUFFER_INDEX);
+				_VerticesBuffer = CreateResource(DeviceObj, *_VerticesHeap, sizeof(VertexT),	VerticesBufferSize, BUFFER_VERTEX);
 
 			}
 			virtual void DestroyBuffers() override

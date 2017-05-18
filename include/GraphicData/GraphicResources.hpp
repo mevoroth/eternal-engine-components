@@ -19,6 +19,7 @@ namespace Eternal
 		class Viewports;
 		class GraphicBuffers;
 		class Shaders;
+		class BlendStates;
 
 		class GraphicResources : public StaticCollectionInitialization
 		{
@@ -51,6 +52,11 @@ namespace Eternal
 				return _Collections.ShadersResources;
 			}
 
+			BlendStates* GetBlendStates()
+			{
+				return _Collections.BlendStatesResources;
+			}
+
 			virtual void Initialize(_In_ Device& DeviceObj) override;
 
 		private:
@@ -63,8 +69,9 @@ namespace Eternal
 					Viewports*		ViewportsResources;
 					GraphicBuffers*	GraphicBuffersResources;
 					Shaders*		ShadersResources;
+					BlendStates*	BlendStatesResources;
 				};
-				StaticCollectionInitialization* Initializers[5];
+				StaticCollectionInitialization* Initializers[6];
 			};
 
 			Collections _Collections;

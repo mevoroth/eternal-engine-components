@@ -72,6 +72,7 @@ namespace Eternal
 			Value* Get(_In_ const Key& KeyObj)
 			{
 				ETERNAL_ASSERT(KeyObj < EntriesCount);
+				ETERNAL_ASSERT(_Objects[KeyObj]);
 				return _Objects[KeyObj];
 			}
 

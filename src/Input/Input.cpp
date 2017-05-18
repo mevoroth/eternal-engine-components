@@ -12,8 +12,8 @@ Input::Input()
 {
 	//ETERNAL_ASSERT(!_Inst);
 
-	_States = new uint8_t[KEYS_COUNT];
-	for (int i = 0; i < KEYS_COUNT; ++i)
+	_States = new uint8_t[KEY_COUNT];
+	for (int i = 0; i < KEY_COUNT; ++i)
 	{
 		_States[i] = 0;
 	}

@@ -6,7 +6,7 @@
 using namespace Eternal::GraphicData;
 
 Shaders::Shaders()
-	: StaticCollection<ShaderKey, Shader, SHADERS_COUNT>()
+	: StaticCollection<ShaderKey, Shader, SHADER_COUNT>()
 {
 }
 

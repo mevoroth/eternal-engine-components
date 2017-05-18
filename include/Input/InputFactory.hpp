@@ -1,6 +1,8 @@
 #ifndef _INPUT_FACTORY_HPP_
 #define _INPUT_FACTORY_HPP_
 
+#include <cstdint>
+
 namespace Eternal
 {
 	namespace Input
@@ -15,7 +17,7 @@ namespace Eternal
 		};
 
 		Input* CreateInput(_In_ const InputType& InputTypeObj);
-		Input* CreateMultiInput(_In_ Input** Inputs, _In_ int InputsCount);
+		Input* CreateMultiInput(_In_ Input** Inputs, _In_ uint32_t InputsCount);
 	}
 }
 

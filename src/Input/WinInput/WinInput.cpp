@@ -9,7 +9,7 @@ WinInput::WinInput()
 
 void WinInput::Update()
 {
-	for (uint32_t Key = A; Key < KEYBOARD_KEYS_COUNT; ++Key)
+	for (uint32_t Key = A; Key < KEYBOARD_KEY_COUNT; ++Key)
 	{
 		_States[Key] = (_States[Key] << 1) & (INPUT_CURRENT_STATE | INPUT_PREVIOUS_STATE);
 	}

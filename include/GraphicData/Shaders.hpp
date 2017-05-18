@@ -18,10 +18,10 @@ namespace Eternal
 		{
 			SHADER_OPAQUE_VS	= 0,
 			SHADER_OPAQUE_PS,
-			SHADERS_COUNT
+			SHADER_COUNT
 		};
 
-		class Shaders : public StaticCollection<ShaderKey, Shader, SHADERS_COUNT>
+		class Shaders : public StaticCollection<ShaderKey, Shader, SHADER_COUNT>
 		{
 		public:
 			Shaders();
