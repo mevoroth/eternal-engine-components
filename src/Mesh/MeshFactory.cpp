@@ -11,11 +11,15 @@ namespace Eternal
 		using namespace Eternal::Import;
 		using namespace Eternal::GraphicData;
 
-		Mesh* CreateMesh(_In_ const char* MeshFile)
+		//Mesh* CreateMesh(_In_ const char* MeshFile)
+		//{
+		//	Mesh* NewMesh = nullptr;
+		//	ImportFbx::Get()->Import(MeshFile, NewMesh);
+		//	return NewMesh;
+		//}
+		void CreateMesh(_In_ const char* MeshFile, _Out_ Mesh*& OutMesh, _Out_ Mesh*& OutBoundingBox)
 		{
-			Mesh* NewMesh = nullptr;
-			ImportFbx::Get()->Import(MeshFile, NewMesh);
-			return NewMesh;
+			ImportFbx::Get()->Import(MeshFile, OutMesh, OutBoundingBox);
 		}
 	}
 }

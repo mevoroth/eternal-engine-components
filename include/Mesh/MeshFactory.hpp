@@ -7,7 +7,7 @@ namespace Eternal
 	{
 		class Mesh;
 
-		Mesh* CreateMesh(_In_ const char* MeshFile);
+		void CreateMesh(_In_ const char* MeshFile, _Out_ Mesh*& OutMesh, _Out_ Mesh*& OutBoundingBox);
 	}
 }
 
