@@ -39,6 +39,7 @@
     <ClInclude Include="include\GraphicData\Shaders.hpp" />
     <ClInclude Include="include\GraphicData\StaticCollection.hpp" />
     <ClInclude Include="include\GraphicData\StaticSamplers.hpp" />
+    <ClInclude Include="include\GraphicData\UploadBuffers.hpp" />
     <ClInclude Include="include\GraphicData\VertexFormat.hpp" />
     <ClInclude Include="include\GraphicData\ViewportCollection.hpp" />
     <ClInclude Include="include\GraphicData\Viewports.hpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="src\GraphicData\ContextCollection.cpp" />
     <ClCompile Include="src\GraphicData\Shaders.cpp" />
     <ClCompile Include="src\GraphicData\StaticSamplers.cpp" />
+    <ClCompile Include="src\GraphicData\UploadBuffers.cpp" />
     <ClCompile Include="src\GraphicData\ViewportCollection.cpp" />
     <ClCompile Include="src\GraphicData\Viewports.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />

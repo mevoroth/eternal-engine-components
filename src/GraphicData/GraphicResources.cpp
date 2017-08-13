@@ -8,6 +8,7 @@
 #include "GraphicData/GraphicBuffers.hpp"
 #include "GraphicData/Shaders.hpp"
 #include "GraphicData/BlendStates.hpp"
+#include "GraphicData/UploadBuffers.hpp"
 
 using namespace Eternal::GraphicData;
 
@@ -19,6 +20,7 @@ GraphicResources::GraphicResources()
 	_Collections.GraphicBuffersResources	= new GraphicBuffers();
 	_Collections.ShadersResources			= new Shaders();
 	_Collections.BlendStatesResources		= new BlendStates();
+	_Collections.UploadBuffersResources		= new UploadBuffers();
 }
 
 GraphicResources::~GraphicResources()

@@ -1,6 +1,7 @@
 #include "GraphicData/GraphicBuffers.hpp"
 
 #include <cstdint>
+#include <cwchar>
 #include "Graphics/HeapFactory.hpp"
 #include "Graphics/ResourceFactory.hpp"
 #include "Graphics/CommandList.hpp"
@@ -35,17 +36,34 @@ void GraphicBuffers::Initialize(_In_ Device& DeviceObj)
 	const uint32_t Height = 720;
 	const uint32_t Size = Width * Height;
 
-	_GraphicBuffersDescriptorHeap	= CreateDescriptorHeap(DeviceObj, 0, 0, ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, GRAPHIC_BUFFER_NO_DEPTH_COUNT, (RootSignatureAccess)(ROOT_SIGNATURE_IA | ROOT_SIGNATURE_VS | ROOT_SIGNATURE_PS));
-	_DepthStencilDescriptorHeap		= CreateDescriptorHeap(DeviceObj, 0, 0, ROOT_SIGNATURE_PARAMETER_DEPTH_STENCIL, 1, (RootSignatureAccess)(ROOT_SIGNATURE_IA | ROOT_SIGNATURE_VS | ROOT_SIGNATURE_PS));
-	
+	RootSignatureParameter GraphicsBuffersParameters[] =
+	{
+		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 },
+		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 1 },
+		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 2 },
+		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 3 }
+	};
+
+	RootSignatureParameter DepthBufferParameter = { ROOT_SIGNATURE_PARAMETER_DEPTH_STENCIL, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 };
+
+	_GraphicBuffersDescriptorHeap	= CreateDescriptorHeap(DeviceObj, GraphicsBuffersParameters,	ETERNAL_ARRAYSIZE(GraphicsBuffersParameters));
+	_DepthStencilDescriptorHeap		= CreateDescriptorHeap(DeviceObj, &DepthBufferParameter,		1);
+
+	wchar_t GraphicBufferName[256];
 	for (uint32_t GraphicBufferIndex = 0; GraphicBufferIndex < GRAPHIC_BUFFER_NO_DEPTH_COUNT; ++GraphicBufferIndex)
 	{
-		_GraphicBuffersHeap[GraphicBufferIndex]		= CreateHeap(DeviceObj, 1, true, false, false, false);
-		_GraphicBuffersResource[GraphicBufferIndex]	= CreateResource(DeviceObj, *_GraphicBuffersHeap[GraphicBufferIndex], RESOURCE_DIMENSION_TEXTURE_2D, GraphicBufferFormats[GraphicBufferIndex], TEXTURE_RENDER_TARGET, Width, Height, 1, 1, TRANSITION_UNDEFINED);
+		swprintf(GraphicBufferName, ETERNAL_ARRAYSIZE(GraphicBufferName), L"Graphic Buffer %d", GraphicBufferIndex);
+		_GraphicBuffersHeap[GraphicBufferIndex]		= CreateHeap(DeviceObj, HEAP_TYPE_TEXTURE, 1, true, false, false, false);
+		_GraphicBuffersResource[GraphicBufferIndex]	= CreateResource(DeviceObj, *_GraphicBuffersHeap[GraphicBufferIndex], GraphicBufferName, RESOURCE_DIMENSION_TEXTURE_2D, GraphicBufferFormats[GraphicBufferIndex], TEXTURE_RENDER_TARGET, Width, Height, 1, 1, TRANSITION_UNDEFINED);
 		GetArray()[GraphicBufferIndex]				= _GraphicBuffersResource[GraphicBufferIndex]->CreateRenderTargetView(DeviceObj, *_GraphicBuffersDescriptorHeap, GraphicBufferFormats[GraphicBufferIndex]);
 	}
 
-	_GraphicBuffersHeap[GRAPHIC_BUFFER_DEPTH]		= CreateHeap(DeviceObj, 1, true, false, false, false);
-	_GraphicBuffersResource[GRAPHIC_BUFFER_DEPTH]	= CreateResource(DeviceObj, *_GraphicBuffersHeap[GRAPHIC_BUFFER_DEPTH], RESOURCE_DIMENSION_TEXTURE_2D, GraphicBufferFormats[GRAPHIC_BUFFER_DEPTH], TEXTURE_DEPTH_STENCIL, Width, Height, 1, 1, TRANSITION_UNDEFINED);
+	_GraphicBuffersHeap[GRAPHIC_BUFFER_DEPTH]		= CreateHeap(DeviceObj, HEAP_TYPE_TEXTURE, 1, true, false, false, false);
+	_GraphicBuffersResource[GRAPHIC_BUFFER_DEPTH]	= CreateResource(DeviceObj, *_GraphicBuffersHeap[GRAPHIC_BUFFER_DEPTH], L"Depth Buffer", RESOURCE_DIMENSION_TEXTURE_2D, GraphicBufferFormats[GRAPHIC_BUFFER_DEPTH], TEXTURE_DEPTH_STENCIL, Width, Height, 1, 1, TRANSITION_UNDEFINED);
 	GetArray()[GRAPHIC_BUFFER_DEPTH]				= _GraphicBuffersResource[GRAPHIC_BUFFER_DEPTH]->CreateDepthStencilView(DeviceObj, *_DepthStencilDescriptorHeap, GraphicBufferFormats[GRAPHIC_BUFFER_DEPTH]);
+}
+
+Resource* GraphicBuffers::GetResource(_In_ const GraphicBufferKey& Key)
+{
+	return _GraphicBuffersResource[Key];
 }

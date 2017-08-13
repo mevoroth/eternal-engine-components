@@ -12,6 +12,8 @@ Shaders::Shaders()
 
 void Shaders::Initialize(_In_ Device& DeviceObj)
 {
-	GetArray()[SHADER_OPAQUE_VS] = ShaderFactory::Get()->GetShader(DeviceObj, "OpaqueVS", "opaque.vs.hlsl", VS);
-	GetArray()[SHADER_OPAQUE_PS] = ShaderFactory::Get()->GetShader(DeviceObj, "OpaquePS", "opaque.ps.hlsl", PS);
+	GetArray()[POST_PROCESS_VS]		= ShaderFactory::Get()->GetShader(DeviceObj, "PostProcessVS", "postprocess.vs.hlsl", VS);
+	GetArray()[DEBUG_RENDER_PS]		= ShaderFactory::Get()->GetShader(DeviceObj, "DebugRenderPS", "debugrender.ps.hlsl", PS);
+	GetArray()[SHADER_OPAQUE_VS]	= ShaderFactory::Get()->GetShader(DeviceObj, "OpaqueVS", "opaque.vs.hlsl", VS);
+	GetArray()[SHADER_OPAQUE_PS]	= ShaderFactory::Get()->GetShader(DeviceObj, "OpaquePS", "opaque.ps.hlsl", PS);
 }

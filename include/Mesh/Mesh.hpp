@@ -11,22 +11,27 @@ namespace Eternal
 	namespace Graphics
 	{
 		class Device;
+		class CommandList;
 		class Resource;
-		//class VertexBuffer;
-		//class IndexBuffer;
-		//class Texture;
 	}
+
+	namespace GraphicData
+	{
+		class UploadBuffers;
+	}
+
 	namespace Components
 	{
 		using namespace std;
 		using namespace Eternal::Graphics;
+		using namespace Eternal::GraphicData;
 		class Bone;
 		class BoundingBox;
 
 		class Mesh
 		{
 		public:
-			virtual void InitializeBuffers(_In_ Device& DeviceObj) = 0;
+			virtual void InitializeBuffers(_In_ Device& DeviceObj, _Inout_ CommandList& CopyCommandList, _Inout_ UploadBuffers* UploadBufferObj) = 0;
 			virtual void DestroyBuffers() = 0;
 			virtual bool IsValidNode() const = 0;
 			virtual bool IsValid() const = 0;
@@ -59,9 +64,10 @@ namespace Eternal
 				_SubMeshes.push_back(SubMesh);
 			}
 
-		protected:
-			vector<Mesh*> _SubMeshes;
-			Transform _Transform;
+			virtual void InitializeMeshBuffers(_In_ Device& DeviceObj, _Inout_ CommandList& CopyCommandList, _Inout_ UploadBuffers* UploadBufferObj) = 0;
+
+			vector<Mesh*>	_SubMeshes;
+			Transform		_Transform;
 		};
 
 		//class Mesh

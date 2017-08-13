@@ -20,6 +20,7 @@ namespace Eternal
 		class GraphicBuffers;
 		class Shaders;
 		class BlendStates;
+		class UploadBuffers;
 
 		class GraphicResources : public StaticCollectionInitialization
 		{
@@ -57,6 +58,11 @@ namespace Eternal
 				return _Collections.BlendStatesResources;
 			}
 
+			UploadBuffers* GetUploadBuffers()
+			{
+				return _Collections.UploadBuffersResources;
+			}
+
 			virtual void Initialize(_In_ Device& DeviceObj) override;
 
 		private:
@@ -70,8 +76,9 @@ namespace Eternal
 					GraphicBuffers*	GraphicBuffersResources;
 					Shaders*		ShadersResources;
 					BlendStates*	BlendStatesResources;
+					UploadBuffers*	UploadBuffersResources;
 				};
-				StaticCollectionInitialization* Initializers[6];
+				StaticCollectionInitialization* Initializers[7];
 			};
 
 			Collections _Collections;

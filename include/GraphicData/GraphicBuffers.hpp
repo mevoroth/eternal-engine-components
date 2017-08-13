@@ -35,6 +35,7 @@ namespace Eternal
 			GraphicBuffers();
 
 			virtual void Initialize(_In_ Device& DeviceObj) override;
+			Resource* GetResource(_In_ const GraphicBufferKey& Key);
 
 		private:
 			Heap*			_GraphicBuffersHeap[GRAPHIC_BUFFER_COUNT];

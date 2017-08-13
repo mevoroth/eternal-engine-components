@@ -148,6 +148,9 @@
     <ClInclude Include="include\GraphicData\Material.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\UploadBuffers.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -244,6 +247,9 @@
       <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\Material.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\UploadBuffers.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

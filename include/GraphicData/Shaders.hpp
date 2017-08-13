@@ -16,7 +16,9 @@ namespace Eternal
 
 		enum ShaderKey
 		{
-			SHADER_OPAQUE_VS	= 0,
+			POST_PROCESS_VS		= 0,
+			DEBUG_RENDER_PS,
+			SHADER_OPAQUE_VS,
 			SHADER_OPAQUE_PS,
 			SHADER_COUNT
 		};

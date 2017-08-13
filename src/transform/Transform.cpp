@@ -57,9 +57,12 @@ void Transform::Scale(_In_ const Vector3& S)
 
 Matrix4x4 Transform::GetModelMatrix() const
 {
-	XMMATRIX ModelMatrix = XMMatrixTranslationFromVector(XMLoadFloat3(&Translation))
+	//XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
+	//	* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))
+	//	* XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
+	XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
 		* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))
-		* XMMatrixScalingFromVector(XMLoadFloat3(&Scaling));
+		* XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
 	Matrix4x4 ReturnMatrix;
 	XMStoreFloat4x4(&ReturnMatrix, /*XMMatrixTranspose*/(ModelMatrix));
 	return ReturnMatrix;
