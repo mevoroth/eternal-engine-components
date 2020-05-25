@@ -38,13 +38,13 @@ void GraphicBuffers::Initialize(_In_ Device& DeviceObj)
 
 	RootSignatureParameter GraphicsBuffersParameters[] =
 	{
-		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 },
-		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 1 },
-		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 2 },
-		{ ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 3 }
+		{ RootSignatureParameterType::ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, RootSignatureAccess::ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 },
+		{ RootSignatureParameterType::ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, RootSignatureAccess::ROOT_SIGNATURE_ACCESS_IA_VS_PS, 1 },
+		{ RootSignatureParameterType::ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, RootSignatureAccess::ROOT_SIGNATURE_ACCESS_IA_VS_PS, 2 },
+		{ RootSignatureParameterType::ROOT_SIGNATURE_PARAMETER_RENDER_TARGET, RootSignatureAccess::ROOT_SIGNATURE_ACCESS_IA_VS_PS, 3 }
 	};
 
-	RootSignatureParameter DepthBufferParameter = { ROOT_SIGNATURE_PARAMETER_DEPTH_STENCIL, ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 };
+	RootSignatureParameter DepthBufferParameter = { RootSignatureParameterType::ROOT_SIGNATURE_PARAMETER_DEPTH_STENCIL, RootSignatureAccess::ROOT_SIGNATURE_ACCESS_IA_VS_PS, 0 };
 
 	_GraphicBuffersDescriptorHeap	= CreateDescriptorHeap(DeviceObj, GraphicsBuffersParameters,	ETERNAL_ARRAYSIZE(GraphicsBuffersParameters));
 	_DepthStencilDescriptorHeap		= CreateDescriptorHeap(DeviceObj, &DepthBufferParameter,		1);
