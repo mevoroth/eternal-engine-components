@@ -1,7 +1,6 @@
 #ifndef _UPLOAD_BUFFERS_HPP_
 #define _UPLOAD_BUFFERS_HPP_
 
-#include <vector>
 #include "GraphicData/StaticCollection.hpp"
 #include "Container/FreeList.hpp"
 

@@ -101,7 +101,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8A5A5437-7E81-42BC-9DA7-1693D20B73BA}</ProjectGuid>
     <RootNamespace>eternalenginecomponents</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -113,7 +113,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -151,7 +151,7 @@
     <LibraryPath>$(SolutionDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;$(ProgramW6432)\VulkanSDK\1.2.131.2\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.141.2\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -171,7 +171,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES;ETERNAL_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
-      <ForcedIncludeFiles>sal.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>sal.h;ComponentsSettings.hpp</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2016.1.1\include\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>

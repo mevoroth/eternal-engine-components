@@ -1,7 +1,6 @@
 #ifndef _MULTI_INPUT_HPP_
 #define _MULTI_INPUT_HPP_
 
-#include <vector>
 #include "Input/Input.hpp"
 
 namespace Eternal

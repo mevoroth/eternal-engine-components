@@ -1,6 +1,5 @@
 #include "GraphicData/ContextCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Graphics/Renderer.hpp"
 #include "Graphics/Context.hpp"
 #include "Parallel/AtomicS32Factory.hpp"

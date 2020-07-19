@@ -1,7 +1,6 @@
 #ifndef _GRAPHIC_TASK_CONFIG_HPP_
 #define _GRAPHIC_TASK_CONFIG_HPP_
 
-#include <vector>
 #include <string>
 #include "GraphicData/BlendStateCollection.hpp"
 #include "GraphicData/ViewportCollection.hpp"

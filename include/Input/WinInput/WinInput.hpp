@@ -1,8 +1,6 @@
 #ifndef _WIN_INPUT_HPP_
 #define _WIN_INPUT_HPP_
 
-#include <vector>
-
 #include "Input/Input.hpp"
 
 namespace Eternal

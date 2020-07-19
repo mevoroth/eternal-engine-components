@@ -1,6 +1,5 @@
 #include "Input/MultiInput/MultiInput.hpp"
 
-#include "Macros/Macros.hpp"
 #include <cmath>
 
 using namespace Eternal::Input;

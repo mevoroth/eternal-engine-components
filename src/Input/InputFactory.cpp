@@ -1,6 +1,5 @@
 #include "Input/InputFactory.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Log/Log.hpp"
 #include "Input/WinInput/WinInput.hpp"
 #include "Input/XInput/XInput.hpp"

@@ -1,6 +1,5 @@
 #include "GraphicData/GraphicTaskConfigCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "GraphicData/BlendStateCollection.hpp"
 #include "GraphicData/ViewportCollection.hpp"
 

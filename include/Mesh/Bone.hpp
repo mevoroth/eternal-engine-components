@@ -1,9 +1,6 @@
 #ifndef _BONE_HPP_
 #define _BONE_HPP_
 
-#include <cstdint>
-#include <vector>
-
 namespace Eternal
 {
 	namespace Components

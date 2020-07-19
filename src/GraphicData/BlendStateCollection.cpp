@@ -1,6 +1,5 @@
 #include "GraphicData/BlendStateCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Graphics/BlendStateFactory.hpp"
 
 #include "Graphics/BlendState.hpp"

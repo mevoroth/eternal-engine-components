@@ -1,7 +1,5 @@
 #include "Light/Light.hpp"
 
-#include "Macros/Macros.hpp"
-
 using namespace Eternal::Components;
 
 Light::Light(_In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity)

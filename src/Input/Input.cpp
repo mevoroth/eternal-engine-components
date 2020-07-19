@@ -1,9 +1,5 @@
 #include "Input/Input.hpp"
 
-#include "Macros/Macros.hpp"
-
-#include <cassert>
-
 using namespace Eternal::Input;
 
 Input* Input::_Inst = nullptr;

@@ -1,8 +1,6 @@
 #ifndef _RENDERING_LIST_COLLECTION_HPP_
 #define _RENDERING_LIST_COLLECTION_HPP_
 
-#include <vector>
-
 namespace Eternal
 {
 	namespace Core

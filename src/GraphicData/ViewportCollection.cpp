@@ -1,6 +1,5 @@
 #include "GraphicData/ViewportCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Graphics/ViewportFactory.hpp"
 
 using namespace Eternal::GraphicData;

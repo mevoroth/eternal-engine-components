@@ -3,4 +3,8 @@
 
 #define ETERNAL_USE_DXMATH_TYPES
 
+#include <cstdint>
+#include <vector>
+#include "Macros/Macros.hpp"
+
 #endif

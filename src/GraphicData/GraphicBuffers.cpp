@@ -1,6 +1,5 @@
 #include "GraphicData/GraphicBuffers.hpp"
 
-#include <cstdint>
 #include <cwchar>
 #include "Graphics/HeapFactory.hpp"
 #include "Graphics/ResourceFactory.hpp"

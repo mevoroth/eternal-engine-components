@@ -1,7 +1,6 @@
 #include "GraphicData/UploadBuffers.hpp"
 
 #include "GraphicsSettings.hpp"
-#include <cstdint>
 #include <cwchar>
 #include "Graphics/Heap.hpp"
 #include "Graphics/HeapFactory.hpp"

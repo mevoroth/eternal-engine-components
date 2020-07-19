@@ -1,7 +1,5 @@
 #include "GraphicData/GraphicObjects.hpp"
 
-#include "Macros/Macros.hpp"
-
 using namespace Eternal::GraphicData;
 
 void GraphicObjects::SetGraphicGameObjects(_In_ vector<GraphicGameObject*>* GameObjects)

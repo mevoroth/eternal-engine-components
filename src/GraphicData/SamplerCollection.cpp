@@ -1,6 +1,5 @@
 #include "GraphicData/SamplerCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Graphics/SamplerFactory.hpp"
 
 using namespace Eternal::GraphicData;

@@ -1,7 +1,5 @@
 #include "Mesh/BoundingBox.hpp"
 
-#include "Macros/Macros.hpp"
-
 using namespace Eternal::Components;
 
 const Vector3& BoundingBox::GetMin() const

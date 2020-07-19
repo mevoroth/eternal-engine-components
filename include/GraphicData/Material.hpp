@@ -1,9 +1,7 @@
 #ifndef _MATERIAL_HPP_
 #define _MATERIAL_HPP_
 
-#include <vector>
 #include <string>
-//#include "GraphicData/MaterialProperty.hpp"
 
 namespace Eternal
 {

@@ -1,6 +1,5 @@
 #include "GraphicData/GraphicResources.hpp"
 
-#include "Macros/Macros.hpp"
 #include "GraphicData/StaticCollection.hpp"
 #include "GraphicData/CommandQueues.hpp"
 #include "GraphicData/StaticSamplers.hpp"

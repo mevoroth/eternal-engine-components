@@ -1,6 +1,5 @@
 #include "Types/Types.hpp"
 
-#include "Macros/Macros.hpp"
 #include <cmath>
 
 using namespace Eternal::Types;

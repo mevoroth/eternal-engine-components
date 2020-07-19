@@ -1,9 +1,6 @@
 #ifndef _INPUT_HPP_
 #define _INPUT_HPP_
 
-#include <cstdint>
-
-
 #define INPUT_CURRENT_STATE		(0x1)
 //0x1 << 1
 #define INPUT_PREVIOUS_STATE	(0x2)

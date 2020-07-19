@@ -1,16 +1,8 @@
 #ifndef _GENERIC_MESH_HPP_
 #define _GENERIC_MESH_HPP_
 
-#include <cstdint>
-#include <vector>
-
-#include "Macros/Macros.hpp"
 #include "Mesh/Mesh.hpp"
 #include "Transform/Transform.hpp"
-//#include "Graphics/VertexBuffer.hpp"
-//#include "Graphics/VertexBufferFactory.hpp"
-//#include "Graphics/IndexBuffer.hpp"
-//#include "Graphics/IndexBufferFactory.hpp"
 #include "Graphics/ResourceFactory.hpp"
 #include "Graphics/HeapFactory.hpp"
 #include "Graphics/Heap.hpp"

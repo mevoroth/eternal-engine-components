@@ -1,9 +1,6 @@
 #ifndef _STATIC_COLLECTION_HPP_
 #define _STATIC_COLLECTION_HPP_
 
-#include <cstdint>
-#include "Macros/Macros.hpp"
-
 namespace Eternal
 {
 	namespace Graphics

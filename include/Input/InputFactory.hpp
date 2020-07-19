@@ -1,8 +1,6 @@
 #ifndef _INPUT_FACTORY_HPP_
 #define _INPUT_FACTORY_HPP_
 
-#include <cstdint>
-
 namespace Eternal
 {
 	namespace Input

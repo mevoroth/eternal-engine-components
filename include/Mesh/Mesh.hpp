@@ -1,9 +1,7 @@
 #ifndef _MESH_HPP_
 #define _MESH_HPP_
 
-#include "Macros/Macros.hpp"
 #include <string>
-#include <vector>
 #include "Transform/Transform.hpp"
 
 namespace Eternal

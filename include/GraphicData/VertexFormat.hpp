@@ -2,7 +2,6 @@
 #define _VERTEX_FORMAT_HPP_
 
 #include "Types/Types.hpp"
-#include <cstdint>
 
 namespace Eternal
 {

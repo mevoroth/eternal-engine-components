@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include "Macros/Macros.hpp"
-
 using namespace Eternal::Input;
 
 XInput::XInput()

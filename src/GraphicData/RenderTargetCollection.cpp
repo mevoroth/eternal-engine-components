@@ -1,6 +1,5 @@
 #include "GraphicData/RenderTargetCollection.hpp"
 
-#include "Macros/Macros.hpp"
 #include "Graphics/RenderTargetFactory.hpp"
 
 using namespace Eternal::GraphicData;

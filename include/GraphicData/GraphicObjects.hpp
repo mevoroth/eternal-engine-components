@@ -1,8 +1,6 @@
 #ifndef _GRAPHIC_OBJECTS_HPP_
 #define _GRAPHIC_OBJECTS_HPP_
 
-#include <vector>
-
 namespace Eternal
 {
 	namespace Core
