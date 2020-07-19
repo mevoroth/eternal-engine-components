@@ -25,7 +25,7 @@ namespace Eternal
 
 			case MULTI:	// Must be created with CreateMultiInput
 			default:
-				ETERNAL_ASSERT(false);
+				ETERNAL_BREAK();
 				break;
 			}
 			return nullptr;

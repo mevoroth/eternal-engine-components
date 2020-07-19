@@ -40,7 +40,7 @@ Context& ContextCollection::Get()
 			return *_Contexts[ContextIndex];
 	}
 
-	ETERNAL_ASSERT(false);
+	ETERNAL_BREAK();
 	return *(Context*)nullptr;
 }
 
