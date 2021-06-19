@@ -151,7 +151,10 @@
     <LibraryPath>$(SolutionDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.141.2\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\Code\VulkanSDK\1.2.176.1\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -201,6 +204,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Code\VulkanSDK\1.2.176.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
