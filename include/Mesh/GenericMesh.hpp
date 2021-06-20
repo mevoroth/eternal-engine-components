@@ -6,7 +6,7 @@
 #include "Graphics_deprecated/ResourceFactory.hpp"
 #include "Graphics_deprecated/HeapFactory.hpp"
 #include "Graphics_deprecated/Heap.hpp"
-#include "Graphics_deprecated/CommandList.hpp"
+#include "Graphics/CommandList.hpp"
 #include "NextGenGraphics/Resource.hpp"
 #include "GraphicData/UploadBuffers.hpp"
 
@@ -124,38 +124,38 @@ namespace Eternal
 
 			virtual void InitializeMeshBuffers(_In_ Device& DeviceObj, _Inout_ CommandList& CopyCommandList, _Inout_ UploadBuffers* UploadBuffersObj) override
 			{
-				if (!(_Indices.size() || _Vertices.size()))
-					return;
+				//if (!(_Indices.size() || _Vertices.size()))
+				//	return;
 
-				size_t IndicesBufferSize = _Indices.size() * sizeof(IndexT);
-				size_t VerticesBufferSize = _Vertices.size() * sizeof(VertexT);
+				//size_t IndicesBufferSize = _Indices.size() * sizeof(IndexT);
+				//size_t VerticesBufferSize = _Vertices.size() * sizeof(VertexT);
 
-				_IndicesHeap	= CreateHeap(DeviceObj, HEAP_TYPE_BUFFER, 1, true, false, false, false);
-				_VerticesHeap	= CreateHeap(DeviceObj, HEAP_TYPE_BUFFER, 1, true, false, false, false);
-				_IndicesBuffer	= CreateResource(DeviceObj, *_IndicesHeap,	L"Indices Buffer",	sizeof(IndexT),		IndicesBufferSize,	BUFFER_INDEX);
-				_VerticesBuffer = CreateResource(DeviceObj, *_VerticesHeap,	L"Vertices Buffer",	sizeof(VertexT),	VerticesBufferSize, BUFFER_VERTEX);
+				//_IndicesHeap	= CreateHeap(DeviceObj, HEAP_TYPE_BUFFER, 1, true, false, false, false);
+				//_VerticesHeap	= CreateHeap(DeviceObj, HEAP_TYPE_BUFFER, 1, true, false, false, false);
+				//_IndicesBuffer	= CreateResource(DeviceObj, *_IndicesHeap,	L"Indices Buffer",	sizeof(IndexT),		IndicesBufferSize,	BUFFER_INDEX);
+				//_VerticesBuffer = CreateResource(DeviceObj, *_VerticesHeap,	L"Vertices Buffer",	sizeof(VertexT),	VerticesBufferSize, BUFFER_VERTEX);
 
-				Resource* UploadBuffer = UploadBuffersObj->Get(UPLOAD_BUFFER_BUFFER)->Pop();
-				void* Data = UploadBuffer->Map(DeviceObj);
-				memcpy(Data, _Indices.data(), IndicesBufferSize);
-				UploadBuffer->Unmap(DeviceObj);
+				//Resource* UploadBuffer = UploadBuffersObj->Get(UPLOAD_BUFFER_BUFFER)->Pop();
+				//void* Data = UploadBuffer->Map(DeviceObj);
+				//memcpy(Data, _Indices.data(), IndicesBufferSize);
+				//UploadBuffer->Unmap(DeviceObj);
 
-				CopyCommandList.CopyBuffer(*UploadBuffer, *_IndicesBuffer, 0ull, 0ull, IndicesBufferSize);
+				//CopyCommandList.CopyBuffer(*UploadBuffer, *_IndicesBuffer, 0ull, 0ull, IndicesBufferSize);
 
-				UploadBuffer = UploadBuffersObj->Get(UPLOAD_BUFFER_BUFFER)->Pop();
-				Data = UploadBuffer->Map(DeviceObj);
-				memcpy(Data, _Vertices.data(), VerticesBufferSize);
-				UploadBuffer->Unmap(DeviceObj);
+				//UploadBuffer = UploadBuffersObj->Get(UPLOAD_BUFFER_BUFFER)->Pop();
+				//Data = UploadBuffer->Map(DeviceObj);
+				//memcpy(Data, _Vertices.data(), VerticesBufferSize);
+				//UploadBuffer->Unmap(DeviceObj);
 
-				CopyCommandList.CopyBuffer(*UploadBuffer, *_VerticesBuffer, 0ull, 0ull, VerticesBufferSize);
+				//CopyCommandList.CopyBuffer(*UploadBuffer, *_VerticesBuffer, 0ull, 0ull, VerticesBufferSize);
 
-				ResourceTransition Transitions[] =
-				{
-					ResourceTransition(_IndicesBuffer, TRANSITION_COPY_WRITE, TRANSITION_INDEX_READ),
-					ResourceTransition(_VerticesBuffer, TRANSITION_COPY_WRITE, TRANSITION_VERTEX_ATTRIBUTE_READ)
-				};
+				//ResourceTransition Transitions[] =
+				//{
+				//	ResourceTransition(_IndicesBuffer, TRANSITION_COPY_WRITE, TRANSITION_INDEX_READ),
+				//	ResourceTransition(_VerticesBuffer, TRANSITION_COPY_WRITE, TRANSITION_VERTEX_ATTRIBUTE_READ)
+				//};
 
-				CopyCommandList.Transition(Transitions, ETERNAL_ARRAYSIZE(Transitions), nullptr, 0u);
+				//CopyCommandList.Transition(Transitions, ETERNAL_ARRAYSIZE(Transitions), nullptr, 0u);
 			}
 
 		private:
