@@ -1,8 +1,8 @@
 #include "GraphicData/CommandQueues.hpp"
 
 #include "GraphicsSettings.hpp"
-#include "Graphics/CommandQueueFactory.hpp"
-#include "Graphics/FenceFactory.hpp"
+#include "Graphics_deprecated/CommandQueueFactory.hpp"
+#include "Graphics_deprecated/FenceFactory.hpp"
 
 using namespace Eternal::GraphicData;
 

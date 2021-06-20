@@ -3,10 +3,10 @@
 
 #include "Mesh/Mesh.hpp"
 #include "Transform/Transform.hpp"
-#include "Graphics/ResourceFactory.hpp"
-#include "Graphics/HeapFactory.hpp"
-#include "Graphics/Heap.hpp"
-#include "Graphics/CommandList.hpp"
+#include "Graphics_deprecated/ResourceFactory.hpp"
+#include "Graphics_deprecated/HeapFactory.hpp"
+#include "Graphics_deprecated/Heap.hpp"
+#include "Graphics_deprecated/CommandList.hpp"
 #include "NextGenGraphics/Resource.hpp"
 #include "GraphicData/UploadBuffers.hpp"
 

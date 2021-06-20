@@ -1,7 +1,7 @@
 #include "GraphicData/StaticSamplers.hpp"
 
 #include "NextGenGraphics/SamplerFactory.hpp"
-#include "Graphics/Sampler.hpp"
+#include "Graphics_deprecated/Sampler.hpp"
 
 using namespace Eternal::GraphicData;
 using namespace Eternal::Graphics;
