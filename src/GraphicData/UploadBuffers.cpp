@@ -5,7 +5,7 @@
 #include "Graphics_deprecated/Heap.hpp"
 #include "Graphics_deprecated/HeapFactory.hpp"
 #include "Graphics_deprecated/ResourceFactory.hpp"
-#include "Graphics_deprecated/Format.hpp"
+#include "Graphics/Format.hpp"
 #include "Graphics/CommandList.hpp"
 #include "NextGenGraphics/Resource.hpp"
 
