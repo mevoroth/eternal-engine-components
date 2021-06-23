@@ -3,7 +3,6 @@
 
 #include "Mesh/Mesh.hpp"
 #include "Transform/Transform.hpp"
-#include "Graphics_deprecated/ResourceFactory.hpp"
 #include "Graphics_deprecated/HeapFactory.hpp"
 #include "Graphics_deprecated/Heap.hpp"
 #include "Graphics/CommandList.hpp"

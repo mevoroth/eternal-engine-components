@@ -7,7 +7,7 @@
 #include "Graphics_deprecated/ResourceFactory.hpp"
 #include "Graphics/Format.hpp"
 #include "Graphics/CommandList.hpp"
-#include "NextGenGraphics/Resource.hpp"
+//#include "NextGenGraphics/Resource.hpp"
 
 using namespace Eternal::GraphicData;
 
