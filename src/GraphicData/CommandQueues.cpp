@@ -2,7 +2,7 @@
 
 #include "GraphicsSettings.hpp"
 #include "Graphics/CommandQueueFactory.hpp"
-#include "Graphics_deprecated/FenceFactory.hpp"
+#include "Graphics/FenceFactory.hpp"
 
 using namespace Eternal::GraphicData;
 

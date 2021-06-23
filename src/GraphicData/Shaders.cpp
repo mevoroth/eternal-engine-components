@@ -1,6 +1,6 @@
 #include "GraphicData/Shaders.hpp"
 
-#include "NextGenGraphics/ShaderFactory.hpp"
+#include "Graphics/ShaderFactory.hpp"
 #include "Graphics/ShaderType.hpp"
 
 using namespace Eternal::GraphicData;
