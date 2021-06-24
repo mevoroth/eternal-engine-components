@@ -1,6 +1,6 @@
 #include "GraphicData/SamplerCollection.hpp"
 
-#include "Graphics/SamplerFactory.hpp"
+//#include "Graphics/SamplerFactory.hpp"
 
 using namespace Eternal::GraphicData;
 
@@ -21,11 +21,11 @@ SamplerCollection::SamplerCollection()
 
 SamplerCollection::~SamplerCollection()
 {
-	for (int SamplerIndex = 0; SamplerIndex < SAMPLER_COUNT; ++SamplerIndex)
-	{
-		delete _Samplers[SamplerIndex];
-		_Samplers[SamplerIndex] = nullptr;
-	}
+	//for (int SamplerIndex = 0; SamplerIndex < SAMPLER_COUNT; ++SamplerIndex)
+	//{
+	//	delete _Samplers[SamplerIndex];
+	//	_Samplers[SamplerIndex] = nullptr;
+	//}
 }
 
 Sampler* SamplerCollection::GetSampler(_In_ const SamplerKey& Key)

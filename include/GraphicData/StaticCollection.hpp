@@ -49,11 +49,11 @@ namespace Eternal
 
 			void Release()
 			{
-				for (uint32_t ObjectIndex = 0; ObjectIndex < EntriesCount; ++ObjectIndex)
-				{
-					delete _Objects[ObjectIndex];
-					_Objects[ObjectIndex] = nullptr;
-				}
+				//for (uint32_t ObjectIndex = 0; ObjectIndex < EntriesCount; ++ObjectIndex)
+				//{
+				//	delete _Objects[ObjectIndex];
+				//	_Objects[ObjectIndex] = nullptr;
+				//}
 			}
 
 #ifdef ETERNAL_DEBUG

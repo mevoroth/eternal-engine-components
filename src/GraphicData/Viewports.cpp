@@ -1,6 +1,6 @@
 #include "GraphicData/Viewports.hpp"
 
-#include "Graphics/ViewportFactory.hpp"
+//#include "Graphics/ViewportFactory.hpp"
 
 using namespace Eternal::GraphicData;
 
@@ -11,5 +11,5 @@ Viewports::Viewports()
 
 void Viewports::Initialize(_In_ Device& DeviceObj)
 {
-	GetArray()[VIEWPORT_FULLSCREEN] = CreateViewport(0, 0, 1280, 720);
+	//GetArray()[VIEWPORT_FULLSCREEN] = CreateViewport(0, 0, 1280, 720);
 }

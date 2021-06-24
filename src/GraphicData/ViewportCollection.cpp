@@ -1,6 +1,6 @@
 #include "GraphicData/ViewportCollection.hpp"
 
-#include "Graphics/ViewportFactory.hpp"
+//#include "Graphics/ViewportFactory.hpp"
 
 using namespace Eternal::GraphicData;
 
@@ -30,11 +30,11 @@ ViewportCollection::ViewportCollection()
 
 ViewportCollection::~ViewportCollection()
 {
-	for (int ViewportIndex = 0; ViewportIndex < VIEWPORT_COUNT; ++ViewportIndex)
-	{
-		delete _Viewports[ViewportIndex];
-		_Viewports[ViewportIndex] = nullptr;
-	}
+	//for (int ViewportIndex = 0; ViewportIndex < VIEWPORT_COUNT; ++ViewportIndex)
+	//{
+	//	delete _Viewports[ViewportIndex];
+	//	_Viewports[ViewportIndex] = nullptr;
+	//}
 }
 
 Viewport* ViewportCollection::GetViewport(_In_ const ViewportKey& Key)

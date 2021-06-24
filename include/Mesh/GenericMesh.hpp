@@ -53,12 +53,12 @@ namespace Eternal
 
 			virtual uint32_t GetVerticesCount() const override
 			{
-				return _Vertices.size();
+				return static_cast<uint32_t>(_Vertices.size());
 			}
 
 			virtual uint32_t GetIndicesCount() const override
 			{
-				return _Indices.size();
+				return static_cast<uint32_t>(_Indices.size());
 			}
 
 			virtual void InitializeBuffers(_In_ Device& DeviceObj, _Inout_ CommandList& CopyCommandList, _Inout_ UploadBuffers* UploadBuffersObj) override
