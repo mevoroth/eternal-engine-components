@@ -6,7 +6,7 @@
 #include "Graphics_deprecated/HeapFactory.hpp"
 #include "Graphics_deprecated/Heap.hpp"
 #include "Graphics/CommandList.hpp"
-#include "NextGenGraphics/Resource.hpp"
+#include "Graphics/Resource.hpp"
 #include "GraphicData/UploadBuffers.hpp"
 
 using namespace std;

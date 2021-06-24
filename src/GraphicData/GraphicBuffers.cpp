@@ -7,7 +7,7 @@
 //#include "Graphics/DescriptorHeapFactory.hpp"
 //#include "Graphics/RootSignature.hpp"
 //#include "Graphics/Heap.hpp"
-#include "NextGenGraphics/Resource.hpp"
+#include "Graphics/Resource.hpp"
 //#include "Vulkan/VulkanFormat.hpp"
 
 using namespace Eternal::GraphicData;
