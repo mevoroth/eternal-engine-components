@@ -3,8 +3,6 @@
 
 #include "Mesh/Mesh.hpp"
 #include "Transform/Transform.hpp"
-#include "Graphics_deprecated/HeapFactory.hpp"
-#include "Graphics_deprecated/Heap.hpp"
 #include "Graphics/CommandList.hpp"
 #include "Graphics/Resource.hpp"
 #include "GraphicData/UploadBuffers.hpp"
@@ -94,11 +92,11 @@ namespace Eternal
 				delete _IndicesBuffer;
 				_IndicesBuffer = nullptr;
 
-				delete _VerticesHeap;
-				_VerticesHeap = nullptr;
+				//delete _VerticesHeap;
+				//_VerticesHeap = nullptr;
 
-				delete _IndicesHeap;
-				_IndicesHeap = nullptr;
+				//delete _IndicesHeap;
+				//_IndicesHeap = nullptr;
 			}
 
 			virtual bool IsValidNode() const override
@@ -160,8 +158,6 @@ namespace Eternal
 		private:
 			vector<IndexT>	_Indices;
 			vector<VertexT>	_Vertices;
-			Heap*			_IndicesHeap	= nullptr;
-			Heap*			_VerticesHeap	= nullptr;
 			Resource*		_IndicesBuffer	= nullptr;
 			Resource*		_VerticesBuffer	= nullptr;
 		};
