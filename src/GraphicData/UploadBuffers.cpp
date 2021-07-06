@@ -2,8 +2,6 @@
 
 #include "GraphicsSettings.hpp"
 #include <cwchar>
-#include "Graphics_deprecated/Heap.hpp"
-#include "Graphics_deprecated/HeapFactory.hpp"
 //#include "Graphics_deprecated/ResourceFactory.hpp"
 #include "Graphics/Format.hpp"
 #include "Graphics/CommandList.hpp"

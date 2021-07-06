@@ -1,7 +1,6 @@
 #include "GraphicData/BlendStates.hpp"
 
 #include "Graphics/BlendState.hpp"
-#include "Graphics/BlendStateFactory.hpp"
 
 using namespace Eternal::GraphicData;
 using namespace Eternal::Graphics;

@@ -1,8 +1,6 @@
-#ifndef _INPUT_HPP_
-#define _INPUT_HPP_
+#pragma once
 
 #define INPUT_CURRENT_STATE		(0x1)
-//0x1 << 1
 #define INPUT_PREVIOUS_STATE	(0x2)
 
 namespace Eternal
@@ -11,8 +9,6 @@ namespace Eternal
 	{
 		class Input
 		{
-		private:
-			static Input* _Inst;
 		public:
 			enum Key
 			{
@@ -294,9 +290,6 @@ namespace Eternal
 				AXIS_COUNT
 			};
 
-		protected:
-			uint8_t* _States;
-			float* _Axis;
 		public:
 			Input();
 			virtual ~Input();
@@ -327,8 +320,13 @@ namespace Eternal
 			 * @return float between -1 and 1
 			 */
 			virtual float GetAxis(_In_ const Axis& AxisName);
+
+		protected:
+			uint8_t* _States	= nullptr;
+			float* _Axis		= nullptr;
+
+		private:
+			static Input* _Instance;
 		};
 	}
 }
-
-#endif

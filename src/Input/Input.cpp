@@ -2,7 +2,7 @@
 
 using namespace Eternal::Input;
 
-Input* Input::_Inst = nullptr;
+Input* Input::_Instance = nullptr;
 
 Input::Input()
 {
@@ -26,20 +26,22 @@ Input::Input()
 Input::~Input()
 {
 	delete[] _States;
+	_States = nullptr;
 	delete[] _Axis;
+	_Axis = nullptr;
 }
 
 Input* Input::Get()
 {
-	ETERNAL_ASSERT(_Inst);
-	return _Inst;
+	ETERNAL_ASSERT(_Instance);
+	return _Instance;
 }
 
-void Input::Initialize(_In_ Input* InputObj)
+void Input::Initialize(_In_ Input* InInput)
 {
-	ETERNAL_ASSERT(!_Inst);
-	ETERNAL_ASSERT(InputObj);
-	_Inst = InputObj;
+	ETERNAL_ASSERT(!_Instance);
+	ETERNAL_ASSERT(InInput);
+	_Instance = InInput;
 }
 
 bool Eternal::Input::Input::IsDown(_In_ const Key& KeyName)
