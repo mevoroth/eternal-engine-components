@@ -11,19 +11,19 @@ namespace Eternal
 	{
 		using namespace Eternal::Log;
 
-		Input* CreateInput(const InputType& InputTypeObj)
+		Input* CreateInput(const InputType& InInputType)
 		{
-			switch (InputTypeObj)
+			switch (InInputType)
 			{
-			case WIN:
-				Eternal::Log::Log::Get()->Write(Eternal::Log::Log::Info, Eternal::Log::Log::Engine, "[Input::CreateInput]Creating Windows Keyboard input");
+			case InputType::WIN:
+				LogWrite(LogInfo, LogEngine, "[Input::CreateInput]Creating Windows Keyboard input");
 				return new WinInput();
 
-			case XINPUT:
-				Eternal::Log::Log::Get()->Write(Eternal::Log::Log::Info, Eternal::Log::Log::Engine, "[Input::CreateInput]Creating Xbox Pad input");
+			case InputType::XINPUT:
+				LogWrite(LogInfo, LogEngine, "[Input::CreateInput]Creating Xbox Pad input");
 				return new XInput();
 
-			case MULTI:	// Must be created with CreateMultiInput
+			case InputType::MULTI:	// Must be created with CreateMultiInput
 			default:
 				ETERNAL_BREAK();
 				break;
@@ -31,13 +31,13 @@ namespace Eternal
 			return nullptr;
 		}
 
-		Input* CreateMultiInput(_In_ Input** Inputs, _In_ uint32_t InputsCount)
+		Input* CreateMultiInput(_In_ const std::vector<InputType>& InInputTypes)
 		{
-			Eternal::Log::Log::Get()->Write(Eternal::Log::Log::Info, Eternal::Log::Log::Engine, "[Input::CreateMultiInput]Creating Multi input");
-			MultiInput* MultiInputObj = new MultiInput();
-			for (uint32_t InputIndex = 0; InputIndex < InputsCount; ++InputIndex)
-				MultiInputObj->Add(Inputs[InputIndex]);
-			return MultiInputObj;
+			LogWrite(LogInfo, LogEngine, "[Input::CreateMultiInput]Creating Multi input");
+			MultiInput* OutMultiInput = new MultiInput();
+			for (uint32_t InputIndex = 0; InputIndex < InInputTypes.size(); ++InputIndex)
+				OutMultiInput->Add(CreateInput(InInputTypes[InputIndex]));
+			return OutMultiInput;
 		}
 	}
 }
