@@ -10,55 +10,61 @@ MultiInput::MultiInput()
 	Initialize(this);
 }
 
-void MultiInput::NotifyKeyPressed(_In_ const Key& KeyName)
+void MultiInput::Update()
 {
-	for (int InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
-		_Inputs[InputIndex]->NotifyKeyPressed(KeyName);
+	for (uint32_t InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
+		_Inputs[InputIndex]->Update();
 }
-void MultiInput::NotifyKeyReleased(_In_ const Key& KeyName)
+
+void MultiInput::NotifyKeyPressed(_In_ const Key& InKeyName)
 {
-	for (int InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
-		_Inputs[InputIndex]->NotifyKeyReleased(KeyName);
+	for (uint32_t InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
+		_Inputs[InputIndex]->NotifyKeyPressed(InKeyName);
 }
-void MultiInput::NotifyAxis(_In_ const Axis& AxisName, _In_ float AxisValue)
+void MultiInput::NotifyKeyReleased(_In_ const Key& InKeyName)
 {
-	for (int InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
-		_Inputs[InputIndex]->NotifyAxis(AxisName, AxisValue);
+	for (uint32_t InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
+		_Inputs[InputIndex]->NotifyKeyReleased(InKeyName);
 }
-bool MultiInput::IsPressed(_In_ const Key& KeyName)
+void MultiInput::NotifyAxis(_In_ const Axis& InAxisName, _In_ float InAxisValue)
+{
+	for (uint32_t InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
+		_Inputs[InputIndex]->NotifyAxis(InAxisName, InAxisValue);
+}
+bool MultiInput::IsPressed(_In_ const Key& InKeyName)
 {
 	bool Pressed = false;
-	for (int InputIndex = 0; !Pressed && InputIndex < _Inputs.size(); ++InputIndex)
-		Pressed = _Inputs[InputIndex]->IsPressed(KeyName);
+	for (uint32_t InputIndex = 0; !Pressed && InputIndex < _Inputs.size(); ++InputIndex)
+		Pressed = _Inputs[InputIndex]->IsPressed(InKeyName);
 	return Pressed;
 }
-bool MultiInput::IsReleased(_In_ const Key& KeyName)
+bool MultiInput::IsReleased(_In_ const Key& InKeyName)
 {
 	bool Released = false;
-	for (int InputIndex = 0; !Released && InputIndex < _Inputs.size(); ++InputIndex)
-		Released = _Inputs[InputIndex]->IsReleased(KeyName);
+	for (uint32_t InputIndex = 0; !Released && InputIndex < _Inputs.size(); ++InputIndex)
+		Released = _Inputs[InputIndex]->IsReleased(InKeyName);
 	return Released;
 }
-bool MultiInput::IsUp(_In_ const Key& KeyName)
+bool MultiInput::IsUp(_In_ const Key& InKeyName)
 {
 	bool Up = false;
-	for (int InputIndex = 0; !Up && InputIndex < _Inputs.size(); ++InputIndex)
-		Up = _Inputs[InputIndex]->IsUp(KeyName);
+	for (uint32_t InputIndex = 0; !Up && InputIndex < _Inputs.size(); ++InputIndex)
+		Up = _Inputs[InputIndex]->IsUp(InKeyName);
 	return Up;
 }
-bool MultiInput::IsDown(_In_ const Key& KeyName)
+bool MultiInput::IsDown(_In_ const Key& InKeyName)
 {
 	bool Down = false;
-	for (int InputIndex = 0; !Down && InputIndex < _Inputs.size(); ++InputIndex)
-		Down = _Inputs[InputIndex]->IsDown(KeyName);
+	for (uint32_t InputIndex = 0; !Down && InputIndex < _Inputs.size(); ++InputIndex)
+		Down = _Inputs[InputIndex]->IsDown(InKeyName);
 	return Down;
 }
-float MultiInput::GetAxis(_In_ const Axis& AxisName)
+float MultiInput::GetAxis(_In_ const Axis& InAxisName)
 {
 	float AxisValue = 0.f;
-	for (int InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
+	for (uint32_t InputIndex = 0; InputIndex < _Inputs.size(); ++InputIndex)
 	{
-		float CurrentAxisValue = _Inputs[InputIndex]->GetAxis(AxisName);
+		float CurrentAxisValue = _Inputs[InputIndex]->GetAxis(InAxisName);
 		if (CurrentAxisValue != 0.f)
 		{
 			ETERNAL_ASSERT(AxisValue == 0.f);
@@ -68,8 +74,8 @@ float MultiInput::GetAxis(_In_ const Axis& AxisName)
 	return AxisValue;
 }
 
-void MultiInput::Add(_In_ Input* InputObj)
+void MultiInput::Add(_In_ Input* InInput)
 {
-	ETERNAL_ASSERT(InputObj);
-	_Inputs.push_back(InputObj);
+	ETERNAL_ASSERT(InInput);
+	_Inputs.push_back(InInput);
 }
