@@ -34,9 +34,10 @@ void Material::SetMaterialName(_In_ const string& MaterialName)
 
 string& Material::GetMaterialName()
 {
+	static string DefaultMaterialName;
 #ifdef ETERNAL_DEBUG
 	return _MaterialName;
 #else
-	return "";
+	return DefaultMaterialName;
 #endif
 }
