@@ -14,10 +14,6 @@ namespace Eternal
 	{
 		class XInput : public Input
 		{
-		private:
-			// Xbox360 Pad
-			DWORD _Changed[XUSER_MAX_COUNT];
-
 		public:
 			XInput();
 			virtual void Update() override;
@@ -28,7 +24,10 @@ namespace Eternal
 		private:
 			void _Pad();
 
-
+			// Xbox360 Pad
+			DWORD _Changed[XUSER_MAX_COUNT];
+			DWORD _Users[XUSER_MAX_COUNT];
+			uint32_t _UsersCount = 0;
 		};
 	}
 }

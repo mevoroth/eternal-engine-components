@@ -9,7 +9,22 @@ XInput::XInput()
 {
 	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
 	{
-		_Changed[User] = -1;
+		_Changed[User] = ~0u;
+	}
+
+	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
+	{
+		XINPUT_CAPABILITIES XInputCapabilities;
+		DWORD Result = XInputGetCapabilities(
+			User,
+			0,
+			&XInputCapabilities
+		);
+
+		if (Result == ERROR_SUCCESS)
+		{
+			_Users[_UsersCount++];
+		}
 	}
 }
 
@@ -21,10 +36,13 @@ void XInput::Update()
 void XInput::_Pad()
 {
 	// Update Pad
-	for (DWORD User = 0; User < XUSER_MAX_COUNT; ++User)
+	for (uint32_t UserIndex = 0; UserIndex < _UsersCount; ++UserIndex)
 	{
 		XINPUT_STATE State;
 		ZeroMemory(&State, sizeof(XINPUT_STATE));
+
+		DWORD User = _Users[UserIndex];
+
 		if (XInputGetState(User, &State) == ERROR_SUCCESS)
 		{
 			for (int StateIndex = JOY0_UP + User * 24, StateCount = User + 24; StateIndex < StateCount; ++StateIndex)
@@ -34,12 +52,12 @@ void XInput::_Pad()
 			if (State.dwPacketNumber != _Changed[User])
 			{
 				int Pad = User * 6;
-				_Axis[JOY0_LX + Pad] = (float)State.Gamepad.sThumbLX / 32767.f;
-				_Axis[JOY0_LY + Pad] = (float)State.Gamepad.sThumbLY / 32767.f;
-				_Axis[JOY0_RX + Pad] = (float)State.Gamepad.sThumbRX / 32767.f;
-				_Axis[JOY0_RY + Pad] = (float)State.Gamepad.sThumbRY / 32767.f;
-				_Axis[JOY0_ZM + Pad] = (float)State.Gamepad.bLeftTrigger / 255.f;
-				_Axis[JOY0_ZP + Pad] = (float)State.Gamepad.bRightTrigger / 255.f;
+				_Axis[JOY0_LX + Pad] = (float)State.Gamepad.sThumbLX * (1.0f / 32767.f);
+				_Axis[JOY0_LY + Pad] = (float)State.Gamepad.sThumbLY * (1.0f / 32767.f);
+				_Axis[JOY0_RX + Pad] = (float)State.Gamepad.sThumbRX * (1.0f / 32767.f);
+				_Axis[JOY0_RY + Pad] = (float)State.Gamepad.sThumbRY * (1.0f / 32767.f);
+				_Axis[JOY0_ZM + Pad] = (float)State.Gamepad.bLeftTrigger * (1.0f / 255.0f);
+				_Axis[JOY0_ZP + Pad] = (float)State.Gamepad.bRightTrigger * (1.0f / 255.0f);
 
 				Pad = User * 24; // 20 buttons + D-Pad (4 buttons)
 				_States[JOY0_UP + Pad] |= (State.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) ? 0x1 : 0x0;
@@ -76,7 +94,7 @@ void XInput::_Pad()
 				{
 					_States[StateIndex] = 0;
 				}
-				_Changed[User] = -1;
+				_Changed[User] = ~0u;
 			}
 		}
 	}
