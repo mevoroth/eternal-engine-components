@@ -5,7 +5,7 @@
 
 namespace Eternal
 {
-	namespace Input
+	namespace InputSystem
 	{
 		class Input
 		{

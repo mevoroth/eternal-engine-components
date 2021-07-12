@@ -10,7 +10,7 @@
 
 namespace Eternal
 {
-	namespace Input
+	namespace InputSystem
 	{
 		class XInput : public Input
 		{

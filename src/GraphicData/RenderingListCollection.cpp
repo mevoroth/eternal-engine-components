@@ -1,7 +1,7 @@
 #include "GraphicData/RenderingListCollection.hpp"
 
 #include <algorithm>
-#include "Core/GameObject.hpp"
+//#include "Core/GameObject.hpp"
 
 using namespace Eternal::GraphicData;
 

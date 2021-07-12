@@ -1,11 +1,10 @@
-#ifndef _MULTI_INPUT_HPP_
-#define _MULTI_INPUT_HPP_
+#pragma once
 
 #include "Input/Input.hpp"
 
 namespace Eternal
 {
-	namespace Input
+	namespace InputSystem
 	{
 		using namespace std;
 
@@ -31,5 +30,3 @@ namespace Eternal
 		};
 	}
 }
-
-#endif

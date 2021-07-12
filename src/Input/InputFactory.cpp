@@ -7,23 +7,23 @@
 
 namespace Eternal
 {
-	namespace Input
+	namespace InputSystem
 	{
-		using namespace Eternal::Log;
+		using namespace Eternal::LogSystem;
 
 		Input* CreateInput(const InputType& InInputType)
 		{
 			switch (InInputType)
 			{
-			case InputType::WIN:
+			case InputType::INPUT_TYPE_WIN:
 				LogWrite(LogInfo, LogEngine, "[Input::CreateInput]Creating Windows Keyboard input");
 				return new WinInput();
 
-			case InputType::XINPUT:
+			case InputType::INPUT_TYPE_XINPUT:
 				LogWrite(LogInfo, LogEngine, "[Input::CreateInput]Creating Xbox Pad input");
 				return new XInput();
 
-			case InputType::MULTI:	// Must be created with CreateMultiInput
+			case InputType::INPUT_TYPE_MULTI:	// Must be created with CreateMultiInput
 			default:
 				ETERNAL_BREAK();
 				break;
@@ -38,6 +38,12 @@ namespace Eternal
 			for (uint32_t InputIndex = 0; InputIndex < InInputTypes.size(); ++InputIndex)
 				OutMultiInput->Add(CreateInput(InInputTypes[InputIndex]));
 			return OutMultiInput;
+		}
+
+		void DeleteInput(_Inout_ Input*& InOutInput)
+		{
+			delete InOutInput;
+			InOutInput = nullptr;
 		}
 	}
 }

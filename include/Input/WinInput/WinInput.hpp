@@ -1,11 +1,10 @@
-#ifndef _WIN_INPUT_HPP_
-#define _WIN_INPUT_HPP_
+#pragma once
 
 #include "Input/Input.hpp"
 
 namespace Eternal
 {
-	namespace Input
+	namespace InputSystem
 	{
 		class WinInput : public Input
 		{
@@ -38,5 +37,3 @@ namespace Eternal
 		};
 	}
 }
-
-#endif
