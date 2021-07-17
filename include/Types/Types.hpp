@@ -1,5 +1,4 @@
-#ifndef _TYPES_HPP_
-#define _TYPES_HPP_
+#pragma once
 
 #include "ComponentsSettings.hpp"
 #ifdef ETERNAL_USE_DXMATH_TYPES
@@ -17,7 +16,19 @@ namespace Eternal
 		typedef char				s8;
 		typedef unsigned char		u8;
 
-		extern Matrix4x4 NewIdentity();
+		struct Color8888
+		{
+			uint8_t R = 0;
+			uint8_t G = 0;
+			uint8_t B = 0;
+			uint8_t A = 0;
+		};
+		union PackedColor
+		{
+			Color8888 Color;
+			uint32_t Packed;
+		};
+
 		extern Matrix4x4 operator*(_In_ const Matrix4x4& A, _In_ const Matrix4x4& B);
 		extern Matrix4x4& operator*=(_In_ Matrix4x4& A, _In_ const Matrix4x4& B);
 		extern Vector4 operator+(_In_ const Vector4& A, _In_ const Vector4& B);
@@ -46,15 +57,25 @@ namespace Eternal
 		extern Vector2 operator*(_In_ const Vector2& A, _In_ float B);
 		extern Vector2 operator*(_In_ float A, _In_ const Vector2& B);
 		extern Vector2 operator/(_In_ const Vector2& A, _In_ float B);
+		extern Vector4 operator-(_In_ const Vector4& InVector);
+		extern Vector3 operator-(_In_ const Vector3& InVector);
+		extern Vector2 operator-(_In_ const Vector2& InVector);
 
 		extern bool operator==(_In_ const Vector4& A, _In_ const Vector4& B);
 		extern bool operator==(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern bool operator<(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern bool operator>(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern bool operator<=(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern bool operator>=(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern bool operator<(_In_ const Vector2& A, _In_ const Vector2& B);
-		extern bool operator>=(_In_ const Vector2& A, _In_ const Vector2& B);
+		extern Vector3 operator<(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector3 operator>(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector3 operator<=(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector3 operator>=(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector2 operator<(_In_ const Vector2& A, _In_ const Vector2& B);
+		extern Vector2 operator>=(_In_ const Vector2& A, _In_ const Vector2& B);
+
+		extern Vector4 Min(_In_ const Vector4& A, _In_ const Vector4& B);
+		extern Vector3 Min(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector2 Min(_In_ const Vector2& A, _In_ const Vector2& B);
+		extern Vector4 Max(_In_ const Vector4& A, _In_ const Vector4& B);
+		extern Vector3 Max(_In_ const Vector3& A, _In_ const Vector3& B);
+		extern Vector2 Max(_In_ const Vector2& A, _In_ const Vector2& B);
 
 		// MATH STUFF: MOVE THIS
 		extern void Transpose(_Inout_ Matrix4x4& A);
@@ -68,11 +89,7 @@ namespace Eternal
 		extern Vector3 Normalize(_In_ const Vector3& V);
 		extern float Dot(_In_ const Vector3& A, _In_ const Vector3& B);
 		extern Vector3 Cross(_In_ const Vector3& A, const Vector3& B);
-		extern Vector3 Min(_In_ const Vector3& A, _In_ const Vector3& B);
-		extern Vector3 Max(_In_ const Vector3& A, _In_ const Vector3& B);
 		extern float Lerp(_In_ float A, _In_ float B, _In_ float X);
 		extern Vector3 Lerp(_In_ const Vector3& A, _In_ const Vector3& B, _In_ float X);
 	}
 }
-
-#endif

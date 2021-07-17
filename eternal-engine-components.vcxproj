@@ -40,7 +40,7 @@
     <ClInclude Include="include\GraphicData\StaticCollection.hpp" />
     <ClInclude Include="include\GraphicData\StaticSamplers.hpp" />
     <ClInclude Include="include\GraphicData\UploadBuffers.hpp" />
-    <ClInclude Include="include\GraphicData\VertexFormat.hpp" />
+    <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp" />
     <ClInclude Include="include\GraphicData\ViewportCollection.hpp" />
     <ClInclude Include="include\GraphicData\Viewports.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
@@ -55,7 +55,6 @@
     <ClInclude Include="include\Mesh\BoundingBox.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
-    <ClInclude Include="include\Mesh\MeshFactory.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
     <ClInclude Include="include\Types\DXMathTypes.hpp" />
     <ClInclude Include="include\Types\Types.hpp" />
@@ -91,7 +90,6 @@
     <ClCompile Include="src\Mesh\Bone.cpp" />
     <ClCompile Include="src\Mesh\BoundingBox.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
-    <ClCompile Include="src\Mesh\MeshFactory.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -155,7 +153,7 @@
     <LibraryPath>$(SolutionDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(SolutionDir)eternal-engine-extern\optick\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Software\FBXSDK\2020.2\include;$(SolutionDir)eternal-engine-extern\optick\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(SolutionDir)eternal-engine-extern\optick\src;$(IncludePath)</IncludePath>
@@ -187,7 +185,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES;ETERNAL_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES=1;ETERNAL_DEBUG=1;IMGUI_USER_CONFIG="Imgui/ImguiConfig.hpp";ETERNAL_USE_STD_PARALLEL=1;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ForcedIncludeFiles>sal.h;ComponentsSettings.hpp;optick.h</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2016.1.1\include\</AdditionalIncludeDirectories>

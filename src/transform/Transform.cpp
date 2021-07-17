@@ -5,8 +5,6 @@
 using namespace Eternal::Components;
 
 Transform::Transform()
-	: Translation(0.f, 0.f, 0.f)
-	, Scaling(1.f, 1.f, 1.f)
 {
 	XMStoreFloat4(&Rotation, XMQuaternionIdentity());
 }

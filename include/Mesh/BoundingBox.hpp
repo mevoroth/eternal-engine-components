@@ -1,8 +1,6 @@
-#ifndef _BOUNDING_BOX_HPP_
-#define _BOUNDING_BOX_HPP_
+#pragma once
 
 #include "Types/Types.hpp"
-#include "Mesh/Mesh.hpp"
 
 namespace Eternal
 {
@@ -19,10 +17,8 @@ namespace Eternal
 			void SetMax(_In_ const Vector3& Max);
 
 		private:
-			Vector3 _Min = Vector3(-1.f, -1.f, -1.f);
-			Vector3 _Max = Vector3(1.f, 1.f, 1.f);
+			Vector3 _Min = -Vector3::One;
+			Vector3 _Max = Vector3::One;
 		};
 	}
 }
-
-#endif

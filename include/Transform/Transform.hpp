@@ -1,5 +1,4 @@
-#ifndef _TRANSFORM_HPP_
-#define _TRANSFORM_HPP_
+#pragma once
 
 #include "ComponentsSettings.hpp"
 #include "Types/Types.hpp"
@@ -31,16 +30,11 @@ namespace Eternal
 			void Rotate(_In_ const Vector3& R);
 			void Scale(_In_ const Vector3& S);
 			Matrix4x4 GetModelMatrix() const;
-			//Vector3 GetForward() const;
-			//Vector3 GetUp() const;
-			//Vector3 GetRight() const;
 
 		private:
-			Vector3 Translation;
-			Vector4 Rotation;
-			Vector3 Scaling;
+			Vector3 Translation	= Vector3::Zero;
+			Vector4 Rotation	= Vector4::ZeroPosition;
+			Vector3 Scaling		= Vector3::Zero;
 		};
 	}
 }
-
-#endif

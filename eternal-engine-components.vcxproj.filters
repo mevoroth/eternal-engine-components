@@ -79,9 +79,6 @@
     <ClInclude Include="include\GraphicData\GraphicObjects.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh\MeshFactory.hpp">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
@@ -103,7 +100,7 @@
     <ClInclude Include="include\GraphicData\ContextCollection.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\VertexFormat.hpp">
+    <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
     <ClInclude Include="include\Mesh\GenericMesh.hpp">
@@ -194,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="src\GraphicData\GraphicObjects.cpp">
       <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh\MeshFactory.cpp">
-      <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp">
       <Filter>GraphicData</Filter>

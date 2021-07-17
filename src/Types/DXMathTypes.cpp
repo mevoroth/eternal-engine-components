@@ -8,21 +8,33 @@ namespace Eternal
 {
 	namespace Types
 	{
-		Matrix4x4 NewIdentity()
-		{
-			return Matrix4x4(
-				1.f, 0.f, 0.f, 0.f,
-				0.f, 1.f, 0.f, 0.f,
-				0.f, 0.f, 1.f, 0.f,
-				0.f, 0.f, 0.f, 1.f
-			);
-		}
+		Matrix4x4 Matrix4x4::Identity(
+			1.f, 0.f, 0.f, 0.f,
+			0.f, 1.f, 0.f, 0.f,
+			0.f, 0.f, 1.f, 0.f,
+			0.f, 0.f, 0.f, 1.f
+		);
+		Vector4 Vector4::ZeroPosition(0.0f, 0.0f, 0.0f, 1.0f);
+		Vector4 Vector4::QuaternionIdentity(0.0f, 0.0f, 0.0f, 1.0f);
 
+		Vector3 Vector3::Right(		 1.0f,  0.0f,  0.0f);
+		Vector3 Vector3::Up(		 0.0f,  1.0f,  0.0f);
+		Vector3 Vector3::Forward(	 0.0f,  0.0f,  1.0f);
+		Vector3 Vector3::Left(		-1.0f,  0.0f,  0.0f);
+		Vector3 Vector3::Down(		 0.0f, -1.0f,  0.0f);
+		Vector3 Vector3::Backward(	 0.0f,  0.0f, -1.0f);
+
+		Vector4 Vector4::One(1.0f);
+		Vector3 Vector3::One(1.0f);
+		Vector2 Vector2::One(1.0f);
+		Vector4 Vector4::Zero(0.0f);
+		Vector3 Vector3::Zero(0.0f);
+		Vector2 Vector2::Zero(0.0f);
 
 		Matrix4x4 operator*(_In_ const Matrix4x4& A, _In_ const Matrix4x4& B)
 		{
 			Matrix4x4 ReturnMatrix;
-			XMStoreFloat4x4(&ReturnMatrix, XMMatrixMultiply(XMLoadFloat4x4(&A), XMLoadFloat4x4(&B)));
+			XMStoreFloat4x4A(&ReturnMatrix, XMMatrixMultiply(XMLoadFloat4x4A(&A), XMLoadFloat4x4A(&B)));
 			return ReturnMatrix;
 		}
 
@@ -34,93 +46,108 @@ namespace Eternal
 
 		Vector4 operator+(_In_ const Vector4& A, _In_ const Vector4& B)
 		{
-			return Vector4(A.x + B.x, A.y + B.y, A.z + B.z, A.w + B.w);
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorAdd(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
+			return Result;
 		}
 		Vector3 operator+(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return Vector3(A.x + B.x, A.y + B.y, A.z + B.z);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorAdd(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
 		Vector2 operator+(_In_ const Vector2& A, _In_ const Vector2& B)
 		{
-			return Vector2(A.x + B.x, A.y + B.y);
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorAdd(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
 		}
 		Vector4 operator-(_In_ const Vector4& A, _In_ const Vector4& B)
 		{
-			return Vector4(A.x - B.x, A.y - B.y, A.z - B.z, A.w - B.w);
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorSubtract(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
+			return Result;
 		}
 		Vector3 operator-(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return Vector3(A.x - B.x, A.y - B.y, A.z - B.z);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorSubtract(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
 		Vector2 operator-(_In_ const Vector2& A, _In_ const Vector2& B)
 		{
-			return Vector2(A.x - B.x, A.y - B.y);
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorSubtract(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
 		}
 		Vector4 operator*(_In_ const Vector4& A, _In_ const Vector4& B)
 		{
-			return Vector4(A.x * B.x, A.y * B.y, A.z * B.z, A.w * B.w);
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorMultiply(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
+			return Result;
 		}
 		Vector3 operator*(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return Vector3(A.x * B.x, A.y * B.y, A.z * B.z);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorMultiply(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
 		Vector2 operator*(_In_ const Vector2& A, _In_ const Vector2& B)
 		{
-			return Vector2(A.x * B.x, A.y * B.y);
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorMultiply(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
 		}
 		Vector4& operator+=(_In_ Vector4& A, _In_ const Vector4& B)
 		{
-			A = Vector4(A.x + B.x, A.y + B.y, A.z + B.z, A.w + B.w);
+			XMStoreFloat4A(&A, XMVectorAdd(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
 			return A;
 		}
 		Vector3& Eternal::Types::operator+=(_In_ Vector3& A, _In_ const Vector3& B)
 		{
-			A = Vector3(A.x + B.x, A.y + B.y, A.z + B.z);
+			XMStoreFloat3(&A, XMVectorAdd(XMLoadFloat3(&A), XMLoadFloat3(&B)));
 			return A;
 		}
 		Vector2& operator+=(_In_ Vector2& A, _In_ const Vector2& B)
 		{
-			A = Vector2(A.x + B.x, A.y + B.y);
+			XMStoreFloat2(&A, XMVectorAdd(XMLoadFloat2(&A), XMLoadFloat2(&B)));
 			return A;
 		}
 		Vector4& operator-=(_In_ Vector4& A, _In_ const Vector4& B)
 		{
-			A = Vector4(A.x - B.x, A.y - B.y, A.z - B.z, A.w - B.w);
+			XMStoreFloat4A(&A, XMVectorSubtract(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
 			return A;
 		}
 		Vector3& operator-=(_In_ Vector3& A, _In_ const Vector3& B)
 		{
-			A = Vector3(A.x - B.x, A.y - B.y, A.z - B.z);
+			XMStoreFloat3(&A, XMVectorSubtract(XMLoadFloat3(&A), XMLoadFloat3(&B)));
 			return A;
 		}
 		Vector2& operator-=(_In_ Vector2& A, _In_ const Vector2& B)
 		{
-			A = Vector2(A.x - B.x, A.y - B.y);
+			XMStoreFloat2(&A, XMVectorSubtract(XMLoadFloat2(&A), XMLoadFloat2(&B)));
 			return A;
 		}
 		Vector4& operator*=(_In_ Vector4& A, _In_ const Vector4& B)
 		{
-			A = Vector4(A.x * B.x, A.y * B.y, A.z * B.z, A.w * B.w);
+			XMStoreFloat4A(&A, XMVectorMultiply(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
 			return A;
 		}
 		Vector3& operator*=(_In_ Vector3& A, _In_ const Vector3& B)
 		{
-			A = Vector3(A.x * B.x, A.y * B.y, A.z * B.z);
+			XMStoreFloat3(&A, XMVectorMultiply(XMLoadFloat3(&A), XMLoadFloat3(&B)));
 			return A;
 		}
 		Vector2& operator*=(_In_ Vector2& A, _In_ const Vector2& B)
 		{
-			A = Vector2(A.x * B.x, A.y * B.y);
+			XMStoreFloat2(&A, XMVectorMultiply(XMLoadFloat2(&A), XMLoadFloat2(&B)));
 			return A;
 		}
 		Vector4 operator*(_In_ const Vector4& A, _In_ float B)
 		{
-			return Vector4(
-				A.x * B,
-				A.y * B,
-				A.z * B,
-				A.w * B
-			);
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorMultiply(XMLoadFloat4A(&A), XMVectorReplicate(B)));
+			return Result;
 		}
 		Vector4 operator*(_In_ float A, _In_ const Vector4& B)
 		{
@@ -128,11 +155,9 @@ namespace Eternal
 		}
 		Vector3 operator*(_In_ const Vector3& A, _In_ float B)
 		{
-			return Vector3(
-				A.x * B,
-				A.y * B,
-				A.z * B
-			);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorMultiply(XMLoadFloat3(&A), XMVectorReplicate(B)));
+			return Result;
 		}
 		Vector3 operator*(_In_ float A, _In_ const Vector3& B)
 		{
@@ -140,78 +165,135 @@ namespace Eternal
 		}
 		Vector2 operator*(_In_ const Vector2& A, _In_ float B)
 		{
-			return Vector2(
-				A.x * B,
-				A.y * B
-			);
-		}
-		Vector2 operator/(_In_ const Vector2& A, _In_ float B)
-		{
-			return Vector2(
-				A.x / B,
-				A.y / B
-			);
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorMultiply(XMLoadFloat2(&A), XMVectorReplicate(B)));
+			return Result;
 		}
 		Vector2 operator*(_In_ float A, _In_ const Vector2& B)
 		{
 			return B * A;
 		}
+		Vector2 operator/(_In_ const Vector2& A, _In_ float B)
+		{
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorDivide(XMLoadFloat2(&A), XMVectorReplicate(B)));
+			return Result;
+		}
 		Vector4 operator*(_In_ const Matrix4x4& A, _In_ const Vector4& B)
 		{
-			Vector4 ReturnVector;
-			XMStoreFloat4(&ReturnVector, XMVector4Transform(
-				XMLoadFloat4(&B),
-				XMLoadFloat4x4(&A)
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVector4Transform(
+				XMLoadFloat4A(&B),
+				XMLoadFloat4x4A(&A)
 			));
-			return ReturnVector;
+			return Result;
 		}
 
 		bool operator==(_In_ const Vector4& A, _In_ const Vector4& B)
 		{
-			return A.x == B.x
-				&& A.y == B.y
-				&& A.z == B.z
-				&& A.w == B.w;
+			uint32_t ComparisonResult;
+			XMVectorEqualR(&ComparisonResult, XMLoadFloat4A(&A), XMLoadFloat4A(&B));
+			return XMComparisonAllTrue(ComparisonResult);
 		}
 		bool operator==(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return A.x == B.x
-				&& A.y == B.y
-				&& A.z == B.z;
+			uint32_t ComparisonResult;
+			XMVectorEqualR(&ComparisonResult, XMLoadFloat3(&A), XMLoadFloat3(&B));
+			return XMComparisonAllTrue(ComparisonResult);
 		}
-		bool operator<(_In_ const Vector3& A, _In_ const Vector3& B)
+		Vector3 operator<(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return A.x < B.x
-				&& A.y < B.y
-				&& A.z < B.z;
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorLess(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
-		bool operator>(_In_ const Vector3& A, _In_ const Vector3& B)
+		Vector3 operator>(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return A.x > B.x
-				&& A.y > B.y
-				&& A.z > B.z;
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorGreater(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
-		bool operator<=(_In_ const Vector3& A, _In_ const Vector3& B)
+		Vector3 operator<=(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return (A.x < B.x || A.x == B.x)
-				&& (A.y < B.y || A.y == B.y)
-				&& (A.z < B.z || A.z == B.z);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorLessOrEqual(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
-		bool operator>=(_In_ const Vector3& A, _In_ const Vector3& B)
+		Vector3 operator>=(_In_ const Vector3& A, _In_ const Vector3& B)
 		{
-			return (A.x > B.x || A.x == B.x)
-				&& (A.y > B.y || A.y == B.y)
-				&& (A.z > B.z || A.z == B.z);
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorGreaterOrEqual(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
 		}
-		bool operator<(_In_ const Vector2& A, _In_ const Vector2& B)
+		Vector2 operator<(_In_ const Vector2& A, _In_ const Vector2& B)
 		{
-			return A.x < B.x
-				&& A.y < B.y;
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorLess(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
 		}
-		bool operator>=(_In_ const Vector2& A, _In_ const Vector2& B)
+		Vector2 operator>=(_In_ const Vector2& A, _In_ const Vector2& B)
 		{
-			return A.x >= B.x
-				&& A.y >= B.y;
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorGreaterOrEqual(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
+		}
+
+		Vector4 operator-(_In_ const Vector4& InVector)
+		{
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorNegate(XMLoadFloat4A(&InVector)));
+			return Result;
+		}
+
+		Vector3 operator-(_In_ const Vector3& InVector)
+		{
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorNegate(XMLoadFloat3(&InVector)));
+			return Result;
+		}
+
+		Vector2 operator-(_In_ const Vector2& InVector)
+		{
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorNegate(XMLoadFloat2(&InVector)));
+			return Result;
+		}
+
+		Vector4 Min(_In_ const Vector4& A, _In_ const Vector4& B)
+		{
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorMin(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
+			return Result;
+		}
+		Vector3 Min(_In_ const Vector3& A, _In_ const Vector3& B)
+		{
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorMin(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
+		}
+		Vector2 Min(_In_ const Vector2& A, _In_ const Vector2& B)
+		{
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorMin(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
+		}
+		Vector4 Max(_In_ const Vector4& A, _In_ const Vector4& B)
+		{
+			Vector4 Result;
+			XMStoreFloat4A(&Result, XMVectorMax(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
+			return Result;
+		}
+		Vector3 Max(_In_ const Vector3& A, _In_ const Vector3& B)
+		{
+			Vector3 Result;
+			XMStoreFloat3(&Result, XMVectorMax(XMLoadFloat3(&A), XMLoadFloat3(&B)));
+			return Result;
+		}
+		Vector2 Max(_In_ const Vector2& A, _In_ const Vector2& B)
+		{
+			Vector2 Result;
+			XMStoreFloat2(&Result, XMVectorMin(XMLoadFloat2(&A), XMLoadFloat2(&B)));
+			return Result;
 		}
 
 		Matrix4x4 NewOrthoLH(_In_ float Top, _In_ float Bottom, _In_ float Left, _In_ float Right, _In_ float Near, _In_ float Far)
@@ -310,14 +392,6 @@ namespace Eternal
 			);
 		}
 
-		Vector3 Min(_In_ const Vector3& A, _In_ const Vector3& B)
-		{
-			return A <= B ? A : B;
-		}
-		Vector3 Max(_In_ const Vector3& A, _In_ const Vector3& B)
-		{
-			return A >= B ? A : B;
-		}
 		void Transpose(_Inout_ Matrix4x4& A)
 		{
 			XMStoreFloat4x4(&A, XMMatrixTranspose(XMLoadFloat4x4(&A)));

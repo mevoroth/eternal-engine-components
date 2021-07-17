@@ -41,7 +41,7 @@ namespace Eternal
 			void _UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
 			void _UpdateViewMatrix();
 
-			Matrix4x4 _View = NewIdentity();
+			Matrix4x4 _View = Matrix4x4::Identity;
 			Matrix4x4 _Proj;
 
 			Vector3 _Position = Vector3(0.f, 0.f, 0.f);
