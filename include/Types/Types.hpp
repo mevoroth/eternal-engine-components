@@ -27,6 +27,11 @@ namespace Eternal
 		{
 			Color8888 Color;
 			uint32_t Packed;
+
+			PackedColor(_In_ uint32_t InPacked)
+				: Packed(InPacked)
+			{
+			}
 		};
 
 		extern Matrix4x4 operator*(_In_ const Matrix4x4& A, _In_ const Matrix4x4& B);

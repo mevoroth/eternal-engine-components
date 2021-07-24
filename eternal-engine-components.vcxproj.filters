@@ -76,29 +76,8 @@
     <ClInclude Include="include\Mesh\Bone.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\GraphicObjects.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\RenderTargetCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\SamplerCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\ViewportCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\BlendStateCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\RenderingListCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
     <ClInclude Include="include\Mesh\BoundingBox.hpp">
       <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\ContextCollection.hpp">
-      <Filter>GraphicData</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp">
       <Filter>GraphicData</Filter>
@@ -106,46 +85,16 @@
     <ClInclude Include="include\Mesh\GenericMesh.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\GraphicTaskConfig.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\GraphicTaskConfigCollection.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
     <ClInclude Include="include\Light\SpotLight.hpp">
       <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="include\Light\Shadow.hpp">
       <Filter>Light</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\StaticCollection.hpp">
+    <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\StaticSamplers.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\CommandQueues.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\GraphicResources.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\Viewports.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\GraphicBuffers.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\Shaders.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\BlendStates.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\Material.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\UploadBuffers.hpp">
+    <ClInclude Include="include\GraphicData\SceneResources.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
   </ItemGroup>
@@ -189,61 +138,16 @@
     <ClCompile Include="src\Mesh\Mesh.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\GraphicObjects.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\RenderTargetCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\SamplerCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\ViewportCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\BlendStateCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
     <ClCompile Include="src\Mesh\BoundingBox.cpp">
       <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\ContextCollection.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\GraphicTaskConfigCollection.cpp">
-      <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\Light\SpotLight.cpp">
       <Filter>Light</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\RenderingListCollection.cpp">
+    <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\StaticSamplers.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\CommandQueues.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\GraphicResources.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\Viewports.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\GraphicBuffers.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\Shaders.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\BlendStates.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\Material.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\UploadBuffers.cpp">
+    <ClCompile Include="src\GraphicData\SceneResources.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

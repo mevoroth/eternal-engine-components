@@ -1,33 +1,22 @@
 #include "Mesh/Mesh.hpp"
 
-using namespace Eternal::Components;
+namespace Eternal
+{
+	namespace Components
+	{
+		void Mesh::SetPerDrawConstantBufferViewVS(_In_ uint32_t InSubMeshIndex, _In_ View* InConstantBuffer)
+		{
+			ETERNAL_ASSERT(InSubMeshIndex < _GPUMesh.PerDrawInformations.size());
+			_GPUMesh.PerDrawInformations[InSubMeshIndex].PerDrawConstantBufferVS = InConstantBuffer;
+		}
 
-//void Mesh::SetBone(_In_ Bone* BoneObj)
-//{
-//	_Bone = BoneObj;
-//}
-//
-//Bone* Mesh::GetBone()
-//{
-//	return _Bone;
-//}
-//
-//void Mesh::SetBoundingBox(_In_ BoundingBox* BoundingBoxObj)
-//{
-//	_BoundingBox = BoundingBoxObj;
-//}
-//
-//BoundingBox* Mesh::GetBoundingBox()
-//{
-//	return _BoundingBox;
-//}
-//
-//void Mesh::SetBBMesh(Mesh* MeshObj)
-//{
-//	_BBMesh = MeshObj;
-//}
-//
-//Mesh* Mesh::GetBBMesh()
-//{
-//	return _BBMesh;
-//}
+		MeshCollection::~MeshCollection()
+		{
+			for (uint32_t MeshIndex = 0; MeshIndex < Meshes.size(); ++MeshIndex)
+			{
+				delete Meshes[MeshIndex];
+				Meshes[MeshIndex] = nullptr;
+			}
+		}
+	}
+}

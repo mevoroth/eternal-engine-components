@@ -34,7 +34,7 @@ namespace Eternal
 		private:
 			Vector3 Translation	= Vector3::Zero;
 			Vector4 Rotation	= Vector4::ZeroPosition;
-			Vector3 Scaling		= Vector3::Zero;
+			Vector3 Scaling		= Vector3::One;
 		};
 	}
 }

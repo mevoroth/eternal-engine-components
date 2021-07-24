@@ -1,72 +1,67 @@
 #pragma once
 
 #include "Mesh/Mesh.hpp"
+#include "GraphicData/MeshVertexFormat.hpp"
 
 namespace Eternal
 {
+	namespace Types
+	{
+		struct Matrix4x4;
+	}
+
 	namespace Components
 	{
 		using namespace std;
+		using namespace Eternal::Types;
+		using namespace Eternal::GraphicData;
 
 		template<class VertexT, typename IndexT = uint16_t>
 		class GenericMesh final : public Mesh
 		{
 		public:
-			void PushVertex(_In_ const VertexT& V)
+
+			virtual uint32_t GetVerticesCount() const override final { return static_cast<uint32_t>(_Vertices.size()); }
+			virtual uint32_t GetIndicesCount() const override final { return static_cast<uint32_t>(_Indices.size()); }
+			virtual uint32_t GetConstantBufferCount() const override final { return static_cast<uint32_t>(_Transforms.size()); }
+			virtual uint32_t GetVertexStride() const override final { return sizeof(VertexT); }
+			virtual uint32_t GetIndexStride() const override final { return sizeof(IndexT); }
+			virtual uint32_t GetConstantBufferStride() const override final { return sizeof(Matrix4x4); }
+			virtual uint32_t GetIndicesMaxCount() const override final { return  1 << (GetIndexStride() * 8); }
+			virtual const void* GetVerticesData() const override final { return reinterpret_cast<const void*>(_Vertices.data()); }
+			virtual const void* GetIndicesData() const override final { return reinterpret_cast<const void*>(_Indices.data()); }
+			virtual const void* GetConstantBufferData() const override final { return reinterpret_cast<const void*>(_Transforms.data()); }
+
+			void Add(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix)
 			{
-				_Vertices.push_back(V);
+				_GPUMesh.PerDrawInformations.push_back(GPUMesh::PerDrawInformation());
+				GPUMesh::PerDrawInformation& PerDraw = _GPUMesh.PerDrawInformations.back();
+				PerDraw.IndicesCount	= static_cast<uint32_t>(InIndices.size());
+				PerDraw.Offset			= static_cast<uint32_t>(_Indices.size());
+				_Vertices.insert(_Vertices.end(), InVertices.begin(), InVertices.end());
+				_Indices.insert(_Indices.end(), InIndices.begin(), InIndices.end());
+				_Transforms.push_back(InModelMatrix);
 			}
 
-			void PushTriangle(_In_ IndexT V0, _In_ IndexT V1, _In_ IndexT V2)
+			void AddMerge(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix)
 			{
-				_Indices.push_back(V0);
-				_Indices.push_back(V1);
-				_Indices.push_back(V2);
+				IndexT TotalVertexCount = static_cast<IndexT>(_Vertices.size());
+				uint32_t TotalIndexCount = static_cast<uint32_t>(_Indices.size());
+
+				Add(InIndices, InVertices, InModelMatrix);
+
+				for (uint32_t Index = 0; Index < InIndices.size(); ++Index)
+					_Indices[TotalIndexCount + Index] += TotalVertexCount;
 			}
 
-			inline VertexT& GetVertex(_In_ uint32_t VertexIndex)
-			{
-				ETERNAL_ASSERT(VertexIndex < GetVerticesCount());
-				return _Vertices[VertexIndex];
-			}
-			inline uint32_t GetVerticesCount()
-			{
-				return static_cast<uint32_t>(_Vertices.size());
-			}
-
-			virtual uint32_t GetVerticesCount() const override
-			{
-				return static_cast<uint32_t>(_Vertices.size());
-			}
-
-			virtual uint32_t GetIndicesCount() const override
-			{
-				return static_cast<uint32_t>(_Indices.size());
-			}
-
-			virtual bool IsValidNode() const override
-			{
-				return _Vertices.size() > 0;
-			}
-			virtual bool IsValid() const override
-			{
-				if (_Vertices.size() > 0)
-				{
-					return true;
-				}
-				for (uint32_t SubMeshIndex = 0; SubMeshIndex < _SubMeshes.size(); ++SubMeshIndex)
-				{
-					if (_SubMeshes[SubMeshIndex]->IsValid())
-					{
-						return true;
-					}
-				}
-				return false;
-			}
+			const vector<IndexT>& GetIndices() const { return _Indices; }
+			const vector<VertexT>& GetVertices() const { return _Vertices; }
 
 		private:
-			vector<IndexT>	_Indices;
-			vector<VertexT>	_Vertices;
+
+			vector<Matrix4x4>	_Transforms;
+			vector<IndexT>		_Indices;
+			vector<VertexT>		_Vertices;
 		};
 	}
 }
