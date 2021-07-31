@@ -37,7 +37,8 @@ namespace Eternal
 				_GPUMesh.PerDrawInformations.push_back(GPUMesh::PerDrawInformation());
 				GPUMesh::PerDrawInformation& PerDraw = _GPUMesh.PerDrawInformations.back();
 				PerDraw.IndicesCount	= static_cast<uint32_t>(InIndices.size());
-				PerDraw.Offset			= static_cast<uint32_t>(_Indices.size());
+				PerDraw.IndicesOffset	= static_cast<uint32_t>(_Indices.size());
+				PerDraw.VerticesOffset	= static_cast<uint32_t>(_Vertices.size());
 				_Vertices.insert(_Vertices.end(), InVertices.begin(), InVertices.end());
 				_Indices.insert(_Indices.end(), InIndices.begin(), InIndices.end());
 				_Transforms.push_back(InModelMatrix);

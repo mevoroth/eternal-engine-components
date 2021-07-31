@@ -15,7 +15,8 @@ namespace Eternal
 			0.f, 0.f, 0.f, 1.f
 		);
 		Vector4 Vector4::ZeroPosition(0.0f, 0.0f, 0.0f, 1.0f);
-		Vector4 Vector4::QuaternionIdentity(0.0f, 0.0f, 0.0f, 1.0f);
+
+		Quaternion Quaternion::QuaternionIdentity(0.0f, 0.0f, 0.0f, 1.0f);
 
 		Vector3 Vector3::Right(		 1.0f,  0.0f,  0.0f);
 		Vector3 Vector3::Up(		 0.0f,  1.0f,  0.0f);
@@ -41,6 +42,12 @@ namespace Eternal
 		Matrix4x4& operator*=(_In_ Matrix4x4& A, const _In_ Matrix4x4& B)
 		{
 			XMStoreFloat4x4(&A, XMMatrixMultiply(XMLoadFloat4x4(&A), XMLoadFloat4x4(&B)));
+			return A;
+		}
+
+		Quaternion& operator*=(_In_ Quaternion& A, const Quaternion& B)
+		{
+			XMStoreFloat4(&A, XMQuaternionMultiply(XMLoadFloat4A(&A), XMLoadFloat4A(&B)));
 			return A;
 		}
 
@@ -296,69 +303,6 @@ namespace Eternal
 			return Result;
 		}
 
-		Matrix4x4 NewOrthoLH(_In_ float Top, _In_ float Bottom, _In_ float Left, _In_ float Right, _In_ float Near, _In_ float Far)
-		{
-			float DepthRange	= 1.f / (Far - Near);
-			float XRange		= 1.f / (Right - Left);
-			float YRange		= 1.f / (Top - Bottom);
-
-			Matrix4x4 ProjMatrix(
-				2.f * XRange,				0.f,						0.f,					0.f,
-				0.f,						2.f * YRange,				0.f,					0.f,
-				0.f,						0.f,						DepthRange,				0.f,
-				- (Left + Right) * XRange,	- (Top + Bottom) * YRange,	- Near * DepthRange,	1.f
-			);
-
-			return ProjMatrix;
-		}
-
-		Matrix4x4 NewPerspectiveLH(_In_ float YFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far)
-		{
-			float Height		= tan(YFOV / 2.f);
-			float Width			= Height / ScreenRatio;
-			float DepthRange	= Far / (Far - Near);
-
-			//Matrix4x4 ProjMatrix/*(
-			//	Width,	0.f,	0.f,					0.f,
-			//	0.f,	Height,	0.f,					0.f,
-			//	0.f,	0.f,	DepthRange,				1.f,
-			//	0.f,	0.f,	-Near * DepthRange,		0.f
-			//)*/;
-			//XMStoreFloat4x4(&ProjMatrix, XMMatrixPerspectiveFovLH(YFOV, ScreenRatio, Near, Far));
-
-			Matrix4x4 ProjMatrix(
-				Width,	0.f,	0.f,					0.f,
-				0.f,	Height,	0.f,					0.f,
-				0.f,	0.f,	DepthRange,				1.f,
-				0.f,	0.f,	-(Near * DepthRange),	0.f
-			);
-
-			return ProjMatrix;
-		}
-
-		Matrix4x4 NewLookToLH(_In_ const Vector3& Position, _In_ const Vector3& Direction, _In_ const Vector3& Up)
-		{
-			Vector3 NormalizedDirection	= Normalize(Direction);
-			Vector3 NormalizedUp		= Normalize(Up);
-			Vector3 NormalizedRight		= Normalize(Cross(NormalizedUp, NormalizedDirection));
-
-			Vector3 NegativePosition(-Position.x, -Position.y, -Position.z);
-			Vector3 TransformedPosition(
-				Dot(NormalizedRight, NegativePosition),
-				Dot(NormalizedUp, NegativePosition),
-				Dot(NormalizedDirection, NegativePosition)
-			);
-
-			Matrix4x4 LookToMatrix(
-				NormalizedRight.x,		NormalizedUp.x,			NormalizedDirection.x,	0.f,
-				NormalizedRight.y,		NormalizedUp.y,			NormalizedDirection.y,	0.f,
-				NormalizedRight.z,		NormalizedUp.z,			NormalizedDirection.z,	0.f,
-				TransformedPosition.x,	TransformedPosition.y,	TransformedPosition.z,	1.0f
-			);
-
-			return LookToMatrix;
-		}
-
 		float SquareLength(_In_ const Vector3& V)
 		{
 			return Dot(V, V);
@@ -411,6 +355,200 @@ namespace Eternal
 				Lerp(A.y, B.y, X),
 				Lerp(A.z, B.z, X)
 			);
+		}
+
+		PerspectiveLHMatrix::PerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
+			: Matrix4x4()
+		{
+			XMStoreFloat4x4A(this, XMMatrixPerspectiveFovLH(InYFOV, InScreenRatio, InNear, InFar));
+		}
+
+		inline XMMATRIX XM_CALLCONV XMMatrixInversePerspectiveFovLH
+		(
+			_In_ float InNear,
+			_In_ float InFar,
+			_In_ float InYFOV,
+			_In_ float InScreenRatio
+		)
+		{
+			ETERNAL_ASSERT(InNear > 0.f && InFar > 0.f);
+			ETERNAL_ASSERT(!XMScalarNearEqual(InYFOV, 0.0f, 0.00001f * 2.0f));
+			ETERNAL_ASSERT(!XMScalarNearEqual(InScreenRatio, 0.0f, 0.00001f));
+			ETERNAL_ASSERT(!XMScalarNearEqual(InFar, InNear, 0.00001f));
+
+#if defined(_XM_NO_INTRINSICS_)
+			float	SinFov;
+			float	CosFov;
+			XMScalarSinCos(&SinFov, &CosFov, 0.5f * InYFOV);
+
+			float HeightRcp				= SinFov / CosFov;
+			float WidthRcp				= HeightRcp * InScreenRatio;
+			float InverseNearByRange	= -(InFar - InNear) / (InNear * InFar);
+			float InverseNear			= 1.0f / InNear;
+
+			XMMATRIX M(
+				WidthRcp,	0.0f,		0.0f,	0.0f,
+				0.0f,		HeightRcp,	0.0f,	0.0f,
+				0.0f,		0.0f,		0.0f,	InverseNearByRange,
+				0.0f,		0.0f,		1.0f,	InverseNear
+			);
+			return M;
+#elif defined(_XM_SSE_INTRINSICS_)
+			float	SinFov;
+			float	CosFov;
+			XMScalarSinCos(&SinFov, &CosFov, 0.5f * InYFOV);
+
+			float HeightRcp				= SinFov / CosFov;
+			float InverseNearByRange	= -(InFar - InNear) / (InNear * InFar);
+			// On stack
+			XMVECTOR rMem = {
+				HeightRcp * InScreenRatio,
+				HeightRcp,
+				InverseNearByRange,
+				1.0f / InNear
+			};
+			// Copy from memory to SSE register
+			XMVECTOR vValues = rMem;
+			// Copy x only
+			XMMATRIX M;
+
+			XMVECTOR vTemp = _mm_setzero_ps();
+			vTemp = _mm_move_ss(vTemp, vValues);
+			M.r[0] = vTemp;
+			
+			vTemp = vValues;
+			vTemp = _mm_and_ps(vTemp, g_XMMaskY);
+			M.r[1] = vTemp;
+			
+			vTemp = vValues;
+			vTemp = _mm_and_ps(vTemp, g_XMMaskZ);
+			vTemp = _mm_shuffle_ps(vTemp, vTemp, _MM_SHUFFLE(2, 0, 0, 0));
+			M.r[2] = vTemp;
+
+			vTemp = _mm_and_ps(rMem, g_XMMaskW);
+			vTemp = _mm_or_ps(vTemp, g_XMIdentityR2);
+			M.r[3] = vTemp;
+
+			return M;
+#endif
+		}
+
+		InversePerspectiveLHMatrix::InversePerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
+			: Matrix4x4()
+		{
+			XMStoreFloat4x4A(this, XMMatrixInversePerspectiveFovLH(InNear, InFar, InYFOV, InScreenRatio));
+		}
+
+		ReverseZPerspectiveLHMatrix::ReverseZPerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
+			: PerspectiveLHMatrix(InFar, InNear, InYFOV, InScreenRatio)
+		{
+		}
+
+		ReverseZInversePerspectiveLHMatrix::ReverseZInversePerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
+			: InversePerspectiveLHMatrix(InFar, InNear, InYFOV, InScreenRatio)
+		{
+		}
+
+		OrthographicLHMatrix::OrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight)
+			: Matrix4x4()
+		{
+			XMStoreFloat4x4A(this, XMMatrixOrthographicOffCenterLH(
+				0.0f, InWidth,
+				0.0f, InHeight,
+				InNear, InFar
+			));
+		}
+
+		inline XMMATRIX XM_CALLCONV XMMatrixInverseOrthographicOffCenterLH
+		(
+			float InNear,
+			float InFar,
+			float InWidth,
+			float InHeight
+		)
+		{
+			ETERNAL_ASSERT(InWidth >= 0.00001f);
+			ETERNAL_ASSERT(InHeight >= 0.00001f);
+			ETERNAL_ASSERT(!XMScalarNearEqual(InFar, InNear, 0.00001f));
+
+#if defined(_XM_NO_INTRINSICS_)
+
+			float HalfWidth			= InWidth * 0.5f;
+			float HalfHeight		= InHeight * 0.5f;
+			float Range				= (InFar - InNear);
+			float NegativeHalfRange	= InNear;
+
+			XMMATRIX M(
+				HalfWidth,	0.0f,		0.0f,				0.0f,
+				0.0f,		HalfHeight,	0.0f,				0.0f,
+				0.0f,		0.0f,		Range,				0.0f,
+				HalfWidth,	HalfHeight,	NegativeHalfRange,	1.0f
+			);
+			return M;
+
+#elif defined(_XM_SSE_INTRINSICS_)
+			XMMATRIX M;
+
+			// Note: This is recorded on the stack
+			XMVECTOR rMem = {
+				InWidth * 0.5f,
+				InHeight * 0.5f,
+				InNear,
+				1.0f
+			};
+			XMVECTOR rMem2 = {
+				0.0f,
+				0.0f,
+				InFar - InNear,
+				0.0f
+			};
+
+			// Copy from memory to SSE register
+			XMVECTOR vValues = rMem;
+			XMVECTOR vTemp = _mm_setzero_ps();
+			// Copy x only
+			vTemp = _mm_move_ss(vTemp, vValues);
+			M.r[0] = vTemp;
+
+			vTemp = vValues;
+			vTemp = _mm_and_ps(vTemp, g_XMMaskY);
+			M.r[1] = vTemp;
+
+			M.r[2] = rMem2;
+
+			M.r[3] = rMem;
+
+			return M;
+#endif
+		}
+
+		InverseOrthographicLHMatrix::InverseOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight)
+			: Matrix4x4()
+		{
+			XMStoreFloat4x4A(this, XMMatrixInverseOrthographicOffCenterLH(
+				InNear, InFar,
+				InWidth, InHeight
+			));
+		}
+
+		ReverseZOrthographicLHMatrix::ReverseZOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight)
+			: OrthographicLHMatrix(InFar, InNear, InWidth, InHeight)
+		{
+		}
+
+		ReverseZInverseOrthographicLHMatrix::ReverseZInverseOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight)
+			: InverseOrthographicLHMatrix(InFar, InNear, InWidth, InHeight)
+		{
+		}
+
+		LookToLHMatrix::LookToLHMatrix(_In_ const Vector3& InPosition, _In_ const Vector3& InForward, _In_ const Vector3& InUp)
+			: Matrix4x4()
+		{
+			XMStoreFloat4x4A(this, XMMatrixLookToLH(
+				XMLoadFloat3(&InPosition),
+				XMLoadFloat3(&InForward),
+				XMLoadFloat3(&InUp)
+			));
 		}
 	}
 }

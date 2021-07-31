@@ -81,14 +81,21 @@ namespace Eternal
 			return VIEW_DEPTH_STENCIL_TYPES[static_cast<uint32_t>(InResourceDimension)];
 		}
 
-		RenderTargetTexture::RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& Flags)
+		RenderTargetTextureFlags operator&(_In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsLeft, _In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsRight)
 		{
-			ETERNAL_ASSERT(Flags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
-						|| Flags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
-						|| Flags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_COMPUTE);
+			return static_cast<RenderTargetTextureFlags>(
+				static_cast<uint32_t>(InRenderTargetTextureFlagsLeft) & static_cast<uint32_t>(InRenderTargetTextureFlagsRight)
+			);
+		}
+
+		RenderTargetTexture::RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags)
+		{
+			ETERNAL_ASSERT(InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
+						|| InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
+						|| InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_COMPUTE);
 			_Texture = CreateTexture(InTextureResourceCreateInformation);
 
-			if ((Flags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW)
+			if ((InFlags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW)
 			{
 				ViewMetaData MetaData;
 				switch (InTextureResourceCreateInformation.TextureInformation.Dimension)
@@ -135,7 +142,7 @@ namespace Eternal
 				_ShaderResourceView = CreateShaderResourceView(TextureShaderResourceViewCreateInformation);
 			}
 
-			if ((Flags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW)
+			if ((InFlags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW)
 			{
 				if (IsDepthStencilFormat(InTextureResourceCreateInformation.TextureInformation.ResourceFormat))
 				{
@@ -202,7 +209,7 @@ namespace Eternal
 				}
 			}
 
-			if ((Flags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_UNORDERED_ACCESS_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_UNORDERED_ACCESS_VIEW)
+			if ((InFlags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_UNORDERED_ACCESS_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_UNORDERED_ACCESS_VIEW)
 			{
 				ViewMetaData MetaData;
 				switch (InTextureResourceCreateInformation.TextureInformation.Dimension)

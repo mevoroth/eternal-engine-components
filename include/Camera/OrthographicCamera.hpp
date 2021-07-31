@@ -1,5 +1,4 @@
-#ifndef _ORTHOGRAPHIC_CAMERA_HPP_
-#define _ORTHOGRAPHIC_CAMERA_HPP_
+#pragma once
 
 #include "Camera/Camera.hpp"
 
@@ -7,20 +6,19 @@ namespace Eternal
 {
 	namespace Components
 	{
-		class OrthographicCamera : public Camera
+		class OrthographicCamera final : public Camera
 		{
 		public:
-			OrthographicCamera(_In_ float Near, _In_ float Far, _In_ float Size);
+			OrthographicCamera(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
 
-			void SetSize(_In_ float Size);
+			void SetSize(_In_ float InSize);
 
 		protected:
-			virtual void _UpdateProjectionMatrix() override;
+			virtual void _UpdateViewToClip() override final;
 
 		private:
-			float _Size;
+			float _Width	= 0;
+			float _Height	= 0;
 		};
 	}
 }
-
-#endif

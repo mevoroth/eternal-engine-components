@@ -1,5 +1,4 @@
-#ifndef _PERSPECTIVE_CAMERA_HPP_
-#define _PERSPECTIVE_CAMERA_HPP_
+#pragma once
 
 #include "Camera.hpp"
 
@@ -10,19 +9,17 @@ namespace Eternal
 		class PerspectiveCamera : public Camera
 		{
 		public:
-			PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float XFOV, _In_ float ScreenRatio);
+			PerspectiveCamera(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
 
-			void SetYFOV(_In_ float YFOV);
-			void SetScreenRatio(_In_ float Ratio);
+			void SetYFOV(_In_ float InYFOV);
+			void SetScreenRatio(_In_ float InRatio);
 
 		protected:
-			virtual void _UpdateProjectionMatrix() override;
+			virtual void _UpdateViewToClip() override final;
 
 		private:
-			float _YFOV = 0.78539816339f; // 90° / 2
-			float _ScreenRatio = 16.f / 9.f;
+			float _YFOV			= 0.78539816339f; // 90° / 2
+			float _ScreenRatio	= 16.f / 9.f;
 		};
 	}
 }
-
-#endif

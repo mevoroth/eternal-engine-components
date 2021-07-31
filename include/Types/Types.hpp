@@ -36,6 +36,7 @@ namespace Eternal
 
 		extern Matrix4x4 operator*(_In_ const Matrix4x4& A, _In_ const Matrix4x4& B);
 		extern Matrix4x4& operator*=(_In_ Matrix4x4& A, _In_ const Matrix4x4& B);
+		extern Quaternion& operator*=(_In_ Quaternion& A, _In_ const Quaternion& B);
 		extern Vector4 operator+(_In_ const Vector4& A, _In_ const Vector4& B);
 		extern Vector3 operator+(_In_ const Vector3& A, _In_ const Vector3& B);
 		extern Vector2 operator+(_In_ const Vector2& A, _In_ const Vector2& B);
@@ -85,10 +86,6 @@ namespace Eternal
 		// MATH STUFF: MOVE THIS
 		extern void Transpose(_Inout_ Matrix4x4& A);
 		extern void Inverse(_Inout_ Matrix4x4& A);
-		extern Matrix4x4 NewOrthoLH(_In_ float Top, _In_ float Bottom, _In_ float Left, _In_ float Right, _In_ float Near, _In_ float Far);
-		extern Matrix4x4 NewPerspectiveLH(_In_ float YFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far);
-		extern Matrix4x4 NewReversePerspectiveLH(_In_ float YFOV, _In_ float ScreenRatio, _In_ float Near, _In_ float Far);
-		extern Matrix4x4 NewLookToLH(_In_ const Vector3& Position, _In_ const Vector3& Direction, _In_ const Vector3& Up);
 		extern float SquareLength(_In_ const Vector3& V);
 		extern float Length(_In_ const Vector3& V);
 		extern Vector3 Normalize(_In_ const Vector3& V);

@@ -34,8 +34,9 @@ namespace Eternal
 		{
 			struct PerDrawInformation
 			{
-				uint32_t Offset					= 0;
+				uint32_t IndicesOffset			= 0;
 				uint32_t IndicesCount			= 0;
+				uint32_t VerticesOffset			= 0;
 				View* PerDrawConstantBufferVS	= nullptr;
 			};
 
@@ -68,6 +69,7 @@ namespace Eternal
 			void SetMeshConstantBuffer(_In_ Resource* InMeshConstantBuffer) { _GPUMesh.MeshConstantBuffer = InMeshConstantBuffer; }
 			const string& GetName() const { return _Name; }
 			void SetName(_In_ const string& InName) { _Name = InName; }
+			GPUMesh& GetGPUMesh() { return _GPUMesh; }
 
 			//void SetTexture(_In_ const TextureType& InTextureType, _In_ const string& InTextureKey)
 			//{

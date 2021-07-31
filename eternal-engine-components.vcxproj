@@ -25,7 +25,7 @@
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp" />
     <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp" />
-    <ClInclude Include="include\GraphicData\SceneResources.hpp" />
+    <ClInclude Include="include\GraphicData\GlobalResources.hpp" />
     <ClInclude Include="include\Input\Input.hpp" />
     <ClInclude Include="include\Input\InputFactory.hpp" />
     <ClInclude Include="include\Input\MultiInput\MultiInput.hpp" />
@@ -47,7 +47,7 @@
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp" />
-    <ClCompile Include="src\GraphicData\SceneResources.cpp" />
+    <ClCompile Include="src\GraphicData\GlobalResources.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\InputFactory.cpp" />
     <ClCompile Include="src\Input\MultiInput\MultiInput.cpp" />
@@ -121,7 +121,7 @@
     <LibraryPath>$(SolutionDir)\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Software\FBXSDK\2020.2\include;$(SolutionDir)eternal-engine-extern\optick\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Software\FBXSDK\2020.2\include;$(SolutionDir)eternal-engine-extern\optick\src;$(SolutionDir)eternal-engine-extern\imgui;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.2.176.1\Include;D:\Code\FBX\FBX SDK\2020.0.1\include;$(SolutionDir)eternal-engine-extern\optick\src;$(IncludePath)</IncludePath>
@@ -160,6 +160,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4189;4100</DisableSpecificWarnings>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

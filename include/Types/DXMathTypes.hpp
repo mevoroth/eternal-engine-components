@@ -8,11 +8,58 @@ namespace Eternal
 	{
 		using namespace DirectX;
 
+		struct Vector3;
+
 		struct Matrix4x4 : public XMFLOAT4X4A
 		{
 			static Matrix4x4 Identity;
 
 			using XMFLOAT4X4A::XMFLOAT4X4A;
+		};
+
+		struct PerspectiveLHMatrix : public Matrix4x4
+		{
+			PerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
+		};
+
+		struct InversePerspectiveLHMatrix : public Matrix4x4
+		{
+			InversePerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
+		};
+
+		struct ReverseZPerspectiveLHMatrix : public PerspectiveLHMatrix
+		{
+			ReverseZPerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
+		};
+
+		struct ReverseZInversePerspectiveLHMatrix : public InversePerspectiveLHMatrix
+		{
+			ReverseZInversePerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
+		};
+
+		struct OrthographicLHMatrix : public Matrix4x4
+		{
+			OrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
+		};
+
+		struct InverseOrthographicLHMatrix : public Matrix4x4
+		{
+			InverseOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
+		};
+
+		struct ReverseZOrthographicLHMatrix : public OrthographicLHMatrix
+		{
+			ReverseZOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
+		};
+
+		struct ReverseZInverseOrthographicLHMatrix : public InverseOrthographicLHMatrix
+		{
+			ReverseZInverseOrthographicLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
+		};
+
+		struct LookToLHMatrix : public Matrix4x4
+		{
+			LookToLHMatrix(_In_ const Vector3& InPosition, _In_ const Vector3& InForward, _In_ const Vector3& InUp);
 		};
 
 		struct Vector2 : public XMFLOAT2
@@ -60,7 +107,6 @@ namespace Eternal
 			static Vector4 One;
 			static Vector4 Zero;
 			static Vector4 ZeroPosition;
-			static Vector4 QuaternionIdentity;
 
 			using XMFLOAT4A::XMFLOAT4A;
 
@@ -72,6 +118,13 @@ namespace Eternal
 				: XMFLOAT4A(Scalar, Scalar, Scalar, Scalar)
 			{
 			}
+		};
+
+		struct Quaternion : public Vector4
+		{
+			static Quaternion QuaternionIdentity;
+
+			using Vector4::Vector4;
 		};
 	}
 }

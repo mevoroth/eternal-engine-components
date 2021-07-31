@@ -1,134 +1,151 @@
 #include "Camera/Camera.hpp"
 
-#include <string>
 #include "Transform/Transform.hpp"
 
-using namespace Eternal::Components;
-
-Camera::Camera(_In_ float Near, _In_ float Far)
-	: _Near(Near)
-	, _Far(Far)
+namespace Eternal
 {
-	_UpdateViewMatrix();
-}
+	namespace Components
+	{
+		Camera::Camera(_In_ float Near, _In_ float Far)
+			: _Near(Near)
+			, _Far(Far)
+		{
+			_Dirty = true;
+		}
 
-void Camera::GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const
-{
-	ViewMatrix = _View;
-}
+		void Camera::GetWorldToView(_Out_ Matrix4x4& OutWorldToView)
+		{
+			_UpdateCache();
+			OutWorldToView = _WorldToView;
+		}
 
-void Camera::GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const
-{
-	ProjectionMatrix = _Proj;
-}
+		void Camera::GetViewToWorld(_Out_ Matrix4x4& OutViewToWorld)
+		{
+			_UpdateCache();
+			OutViewToWorld = _ViewToWorld;
+		}
 
-void Camera::GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const
-{
-	ViewProjectionMatrix = _View * _Proj;
-}
+		void Camera::GetViewToClip(_Out_ Matrix4x4& OutViewToClip)
+		{
+			_UpdateCache();
+			OutViewToClip = _ViewToClip;
+		}
+		
+		void Camera::GetClipToView(_Out_ Matrix4x4& OutClipToView)
+		{
+			_UpdateCache();
+			OutClipToView = _ClipToView;
+		}
 
-void Camera::GetViewProjectionMatrixTransposed(_Out_ Matrix4x4& ViewProjectionMatrix) const
-{
-	GetViewProjectionMatrix(ViewProjectionMatrix);
-	Transpose(ViewProjectionMatrix);
-}
+		void Camera::GetWorldToClip(_Out_ Matrix4x4& OutWorldToClip)
+		{
+			_UpdateCache();
+			OutWorldToClip = _WorldToView * _ViewToClip;
+		}
 
-void Camera::GetViewProjectionMatrixInverse(_Out_ Matrix4x4& ViewProjectionInverse) const
-{
-	GetViewProjectionMatrix(ViewProjectionInverse);
-	Inverse(ViewProjectionInverse);
-}
+		void Camera::GetClipToWorld(_Out_ Matrix4x4& OutClipToWorld)
+		{
+			_UpdateCache();
+			OutClipToWorld = _ClipToView * _ViewToWorld;
+		}
 
-void Camera::GetViewProjectionMatrixInverseTransposed(_Out_ Matrix4x4& ViewProjectionInverse) const
-{
-	GetViewProjectionMatrixInverse(ViewProjectionInverse);
-	Transpose(ViewProjectionInverse);
-}
+		void Camera::SetNear(_In_ float Near)
+		{
+			_Near = Near;
+			_Dirty = true;
+		}
 
-void Camera::SetNear(_In_ float Near)
-{
-	_Near = Near;
-	_UpdateProjectionMatrix();
-}
+		void Camera::SetFar(_In_ float Far)
+		{
+			_Far = Far;
+			_Dirty = true;
+		}
 
-void Camera::SetFar(_In_ float Far)
-{
-	_Far = Far;
-	_UpdateProjectionMatrix();
-}
+		const Vector3& Camera::GetPosition() const
+		{
+			return _Position;
+		}
 
-const Vector3& Camera::GetPosition() const
-{
-	return _Position;
-}
+		const Vector3& Camera::GetForward() const
+		{
+			return _Forward;
+		}
 
-const Vector3& Camera::GetForward() const
-{
-	return _Forward;
-}
+		const Vector3& Camera::GetRight() const
+		{
+			return _Right;
+		}
 
-const Vector3& Camera::GetRight() const
-{
-	return _Right;
-}
+		const Vector3& Camera::GetUp() const
+		{
+			return _Up;
+		}
 
-const Vector3& Camera::GetUp() const
-{
-	return _Up;
-}
+		void Camera::SetPosition(_In_ const Vector3& Position)
+		{
+			_Position = Position;
+			_Dirty = true;
+		}
 
-void Camera::SetPosition(_In_ const Vector3& Position)
-{
-	_Position = Position;
-	_UpdateViewMatrix();
-}
+		void Camera::SetForward(_In_ const Vector3& Forward)
+		{
+			_Forward = Forward;
+			_Dirty = true;
+		}
 
-void Camera::SetForward(_In_ const Vector3& Forward)
-{
-	_Forward = Forward;
-	_UpdateViewMatrix();
-}
+		void Camera::SetUp(_In_ const Vector3& Up)
+		{
+			_Up = Up;
+			_Dirty = true;
+		}
 
-void Camera::SetUp(_In_ const Vector3& Up)
-{
-	_Up = Up;
-	_UpdateViewMatrix();
-}
+		void Camera::_UpdateCache()
+		{
+			if (_Dirty)
+			{
+				_UpdateViewToClip();
+				_UpdateWorldToView();
+				_Dirty = false;
+			}
+		}
 
-void Camera::_UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up)
-{
-	_Position = Position;
-	_Forward = Normalize(Forward);
-	_Up = Normalize(Up);
-	_UpdateViewMatrix();
-}
+		void Camera::_UpdateWorldToView(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up)
+		{
+			_Position	= Position;
+			_Forward	= Normalize(Forward);
+			_Up			= Normalize(Up);
+			_Dirty		= true;
+		}
 
-void Camera::_UpdateViewMatrix()
-{
-	_View = NewLookToLH(_Position, _Forward, _Up);
-	_Right = Normalize(Cross(_Up, _Forward));
-}
+		void Camera::_UpdateWorldToView()
+		{
+			_Right			= Normalize(Cross(_Up, _Forward));
+			_WorldToView	= LookToLHMatrix(_Position, _Forward, _Up);
+		}
 
-void Camera::UpdateView(const Transform& TransformObj)
-{
-	const Vector3& Position = TransformObj.GetTranslation();
+		void Camera::UpdateWorldToView(_In_ const Transform& InTransform)
+		{
+			const Vector3& Position = InTransform.GetTranslation();
 
-	Transform TempTransform = TransformObj;
-	TempTransform.SetTranslation(Vector3(0.f, 0.f, 0.f));
-	Vector3 TempForward3 = Vector3(0.f, 0.f, 0.f);
-	Vector3 TempUp3 = Vector3(0.f, 0.f, 0.f);
+			Transform TempTransform = InTransform;
+			TempTransform.SetTranslation(Vector3::Zero);
+			Vector3 TempForward3	= Vector3::Forward;
+			Vector3 TempUp3			= Vector3::Up;
 
-	// Compute rotation
-	Vector4 Forward = TempTransform.GetModelMatrix() * Vector4(0.f, 0.f, 1.f, 1.f);
-	Vector4 Up = TempTransform.GetModelMatrix() * Vector4(0.f, 1.f, 0.f, 1.f);
+			// Compute rotation
+			Vector4 Forward			= TempTransform.GetViewToWorld() * Vector4(0.f, 0.f, 1.f, 1.f);
+			Vector4 Up				= TempTransform.GetViewToWorld() * Vector4(0.f, 1.f, 0.f, 1.f);
 
-	TempForward3.x = Forward.x;
-	TempForward3.y = Forward.y;
-	TempForward3.z = Forward.z;
+			TempForward3.x = Forward.x;
+			TempForward3.y = Forward.y;
+			TempForward3.z = Forward.z;
 
-	TempUp3.x = Up.x;
-	TempUp3.y = Up.y;
-	TempUp3.z = Up.z;
-
-	_UpdateViewMatrix(Position, TempForward3, TempUp3);
+			TempUp3.x = Up.x;
+			TempUp3.y = Up.y;
+			TempUp3.z = Up.z;
+			
+			_ViewToWorld = InTransform.GetViewToWorld();
+			_UpdateWorldToView(Position, TempForward3, TempUp3);
+		}
+	}
 }

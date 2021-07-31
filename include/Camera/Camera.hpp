@@ -1,5 +1,4 @@
-#ifndef _CAMERA_HPP_
-#define _CAMERA_HPP_
+#pragma once
 
 #include "ComponentsSettings.hpp"
 #include "Types/Types.hpp"
@@ -16,47 +15,49 @@ namespace Eternal
 		{
 		public:
 			Camera(_In_ float Near, _In_ float Far);
-			void GetViewMatrix(_Out_ Matrix4x4& ViewMatrix) const;
-			void GetProjectionMatrix(_Out_ Matrix4x4& ProjectionMatrix) const;
-			void GetViewProjectionMatrix(_Out_ Matrix4x4& ViewProjectionMatrix) const;
-			void GetViewProjectionMatrixTransposed(_Out_ Matrix4x4& ViewProjectionMatrix) const;
-			void GetViewProjectionMatrixInverse(_Out_ Matrix4x4& ViewProjectionInverse) const;
-			void GetViewProjectionMatrixInverseTransposed(_Out_ Matrix4x4& ViewProjectionInverse) const;
-			void SetNear(_In_ float Near);
-			void SetFar(_In_ float Far);
+			void GetWorldToView(_Out_ Matrix4x4& OutWorldToView);
+			void GetViewToWorld(_Out_ Matrix4x4& OutViewToWorld);
+			void GetViewToClip(_Out_ Matrix4x4& OutViewToClip);
+			void GetClipToView(_Out_ Matrix4x4& OutClipToView);
+			void GetWorldToClip(_Out_ Matrix4x4& OutWorldToClip);
+			void GetClipToWorld(_Out_ Matrix4x4& OutClipToWorld);
+			void SetNear(_In_ float InNear);
+			void SetFar(_In_ float InFar);
 
-			void SetForward(_In_ const Vector3& Forward);
-			void SetPosition(_In_ const Vector3& Position);
-			void SetUp(_In_ const Vector3& Up);
+			void SetForward(_In_ const Vector3& InForward);
+			void SetPosition(_In_ const Vector3& InPosition);
+			void SetUp(_In_ const Vector3& InUp);
 
 			const Vector3& GetPosition() const;
 			const Vector3& GetForward() const;
 			const Vector3& GetRight() const;
 			const Vector3& GetUp() const;
 
-			void UpdateView(const Transform& TransformObj);
+			void UpdateWorldToView(_In_ const Transform& InTransform);
 
 		protected:
-			virtual void _UpdateProjectionMatrix() = 0;
-			void _UpdateViewMatrix(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
-			void _UpdateViewMatrix();
+			virtual void _UpdateViewToClip() = 0;
+			void _UpdateCache();
+			void _UpdateWorldToView(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
+			void _UpdateWorldToView();
 
-			Matrix4x4 _View = Matrix4x4::Identity;
-			Matrix4x4 _Proj;
+			Matrix4x4 _WorldToView	= Matrix4x4::Identity;
+			Matrix4x4 _ViewToWorld	= Matrix4x4::Identity;
+			Matrix4x4 _ViewToClip	= Matrix4x4::Identity;
+			Matrix4x4 _ClipToView	= Matrix4x4::Identity;
 
-			Vector3 _Position = Vector3(0.f, 0.f, 0.f);
-			Vector3 _Forward = Vector3(0.f, 0.f, 1.f);
-			Vector3 _Up = Vector3(0.f, 1.f, 0.f);
+			Vector3 _Position		= Vector3::Zero;
+			Vector3 _Forward		= Vector3::Forward;
+			Vector3 _Up				= Vector3::Up;
 
 			/**
 			 * Cache Value
 			 */
-			Vector3 _Right = Vector3(1.f, 0.f, 0.f);
+			Vector3 _Right			= Vector3::Right;
 
-			float _Near = 0.f;
-			float _Far = 0.f;
+			bool _Dirty				= true;
+			float _Near				= 0.f;
+			float _Far				= 0.f;
 		};
 	}
 }
-
-#endif

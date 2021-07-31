@@ -94,7 +94,7 @@
     <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\SceneResources.hpp">
+    <ClInclude Include="include\GraphicData\GlobalResources.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
   </ItemGroup>
@@ -147,7 +147,7 @@
     <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\SceneResources.cpp">
+    <ClCompile Include="src\GraphicData\GlobalResources.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

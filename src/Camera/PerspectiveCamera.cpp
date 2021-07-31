@@ -1,31 +1,32 @@
 #include "Camera/PerspectiveCamera.hpp"
 
-#include "Graphics/Device.hpp"
-
-using namespace Eternal::Graphics;
-using namespace Eternal::Components;
-
-PerspectiveCamera::PerspectiveCamera(_In_ float Near, _In_ float Far, _In_ float YFOV, _In_ float ScreenRatio)
-	: Camera(Near, Far)
-	, _YFOV(XMConvertToRadians(YFOV))
-	, _ScreenRatio(ScreenRatio)
+namespace Eternal
 {
-	_UpdateProjectionMatrix();
-}
+	namespace Components
+	{
+		PerspectiveCamera::PerspectiveCamera(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
+			: Camera(InNear, InFar)
+			, _YFOV(InYFOV)
+			, _ScreenRatio(InScreenRatio)
+		{
+		}
 
-void PerspectiveCamera::SetYFOV(_In_ float XFOV)
-{
-	_YFOV = XMConvertToRadians(XFOV);
-	_UpdateProjectionMatrix();
-}
+		void PerspectiveCamera::SetYFOV(_In_ float InYFOV)
+		{
+			_YFOV = InYFOV;
+			_Dirty = true;
+		}
 
-void PerspectiveCamera::SetScreenRatio(_In_ float Ratio)
-{
-	_ScreenRatio = Ratio;
-	_UpdateProjectionMatrix();
-}
+		void PerspectiveCamera::SetScreenRatio(_In_ float Ratio)
+		{
+			_ScreenRatio = Ratio;
+			_Dirty = true;
+		}
 
-void PerspectiveCamera::_UpdateProjectionMatrix()
-{
-	_Proj = NewPerspectiveLH(_YFOV, _ScreenRatio, _Near, _Far);
+		void PerspectiveCamera::_UpdateViewToClip()
+		{
+			_ViewToClip = ReverseZPerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
+			_ClipToView = ReverseZInversePerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
+		}
+	}
 }

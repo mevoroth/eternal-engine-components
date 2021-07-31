@@ -6,6 +6,7 @@ namespace Eternal
 {
 	namespace Graphics
 	{
+		class GraphicsContext;
 		class Resource;
 		class View;
 		struct TextureResourceCreateInformation;
@@ -27,23 +28,19 @@ namespace Eternal
 			RENDER_TARGET_TEXTURE_FLAGS_ALL									= (RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW | RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW | RENDER_TARGET_TEXTURE_FLAGS_UNORDERED_ACCESS_VIEW)
 		};
 
-		RenderTargetTextureFlags operator&(_In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsLeft, _In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsRight)
-		{
-			return static_cast<RenderTargetTextureFlags>(
-				static_cast<uint32_t>(InRenderTargetTextureFlagsLeft) & static_cast<uint32_t>(InRenderTargetTextureFlagsRight)
-			);
-		}
+		RenderTargetTextureFlags operator&(_In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsLeft, _In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsRight);
 
 		class RenderTargetTexture
 		{
 		public:
 
-			RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& Flags);
+			RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
 			~RenderTargetTexture();
 
-			View* GetShaderResourceView() { return _ShaderResourceView; }
-			View* GetRenderTargetDepthStencilView() { return _RenderTargetDepthStencilView; }
-			View* GetUnorderedAccessView() { return _UnorderedAccessView; }
+			Resource&	GetTexture() { return *_Texture; }
+			View*		GetShaderResourceView() { return _ShaderResourceView; }
+			View*		GetRenderTargetDepthStencilView() { return _RenderTargetDepthStencilView; }
+			View*		GetUnorderedAccessView() { return _UnorderedAccessView; }
 
 		private:
 			Resource*	_Texture						= nullptr;
