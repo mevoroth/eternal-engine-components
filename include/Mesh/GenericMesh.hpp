@@ -32,24 +32,25 @@ namespace Eternal
 			virtual const void* GetIndicesData() const override final { return reinterpret_cast<const void*>(_Indices.data()); }
 			virtual const void* GetConstantBufferData() const override final { return reinterpret_cast<const void*>(_Transforms.data()); }
 
-			void Add(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix)
+			void AddMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
 			{
 				_GPUMesh.PerDrawInformations.push_back(GPUMesh::PerDrawInformation());
 				GPUMesh::PerDrawInformation& PerDraw = _GPUMesh.PerDrawInformations.back();
 				PerDraw.IndicesCount	= static_cast<uint32_t>(InIndices.size());
 				PerDraw.IndicesOffset	= static_cast<uint32_t>(_Indices.size());
 				PerDraw.VerticesOffset	= static_cast<uint32_t>(_Vertices.size());
+				PerDraw.PerDrawMaterial	= InMaterial;
 				_Vertices.insert(_Vertices.end(), InVertices.begin(), InVertices.end());
 				_Indices.insert(_Indices.end(), InIndices.begin(), InIndices.end());
 				_Transforms.push_back(InModelMatrix);
 			}
 
-			void AddMerge(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix)
+			void AddMergeMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
 			{
 				IndexT TotalVertexCount = static_cast<IndexT>(_Vertices.size());
 				uint32_t TotalIndexCount = static_cast<uint32_t>(_Indices.size());
 
-				Add(InIndices, InVertices, InModelMatrix);
+				AddMesh(InIndices, InVertices, InModelMatrix, InMaterial);
 
 				for (uint32_t Index = 0; Index < InIndices.size(); ++Index)
 					_Indices[TotalIndexCount + Index] += TotalVertexCount;

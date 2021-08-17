@@ -18,17 +18,7 @@ namespace Eternal
 		using namespace std;
 		using namespace Eternal::Graphics;
 
-		enum class TextureType
-		{
-			TEXTURE_TYPE_DIFFUSE	= 0,
-			TEXTURE_TYPE_NORMAL,
-			TEXTURE_TYPE_ROUGHNESS,
-			TEXTURE_TYPE_METALLIC,
-			TEXTURE_TYPE_SPECULAR,
-			TEXTURE_TYPE_COUNT
-		};
-
-		using MeshTextures = array<string, static_cast<uint32_t>(TextureType::TEXTURE_TYPE_COUNT)>;
+		class Material;
 
 		struct GPUMesh
 		{
@@ -38,6 +28,7 @@ namespace Eternal
 				uint32_t IndicesCount			= 0;
 				uint32_t VerticesOffset			= 0;
 				View* PerDrawConstantBufferVS	= nullptr;
+				Material* PerDrawMaterial		= nullptr;
 			};
 
 			vector<PerDrawInformation> PerDrawInformations;
@@ -71,15 +62,9 @@ namespace Eternal
 			void SetName(_In_ const string& InName) { _Name = InName; }
 			GPUMesh& GetGPUMesh() { return _GPUMesh; }
 
-			//void SetTexture(_In_ const TextureType& InTextureType, _In_ const string& InTextureKey)
-			//{
-			//	_Maps[static_cast<uint32_t>(InTextureType)] = InTextureKey;
-			//}
-
 		protected:
 			GPUMesh					_GPUMesh;
 			string					_Name;
-			vector<MeshTextures>	_Maps;
 		};
 
 		class MeshCollection
