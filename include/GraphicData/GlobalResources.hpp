@@ -23,7 +23,7 @@ namespace Eternal
 			GlobalResources(_In_ GraphicsContext& InContext);
 			~GlobalResources();
 
-			bool BeginRender(_In_ System& InSystem);
+			bool BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem);
 
 			RenderTargetTexture& GetGBufferLuminance()
 			{
