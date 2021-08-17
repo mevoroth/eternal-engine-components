@@ -127,14 +127,14 @@ namespace Eternal
 		{
 			const Vector3& Position = InTransform.GetTranslation();
 
-			Transform TempTransform = InTransform;
-			TempTransform.SetTranslation(Vector3::Zero);
+			Transform TransformNoTranslation = InTransform;
+			TransformNoTranslation.SetTranslation(Vector3::Zero);
 			Vector3 TempForward3	= Vector3::Forward;
 			Vector3 TempUp3			= Vector3::Up;
 
 			// Compute rotation
-			Vector4 Forward			= TempTransform.GetViewToWorld() * Vector4(0.f, 0.f, 1.f, 1.f);
-			Vector4 Up				= TempTransform.GetViewToWorld() * Vector4(0.f, 1.f, 0.f, 1.f);
+			Vector4 Forward			= TransformNoTranslation.GetViewToWorld() * Vector4::ForwardPosition;
+			Vector4 Up				= TransformNoTranslation.GetViewToWorld() * Vector4::UpPosition;
 
 			TempForward3.x = Forward.x;
 			TempForward3.y = Forward.y;
