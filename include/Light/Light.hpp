@@ -1,5 +1,4 @@
-#ifndef _LIGHTS_HPP_
-#define _LIGHTS_HPP_
+#pragma once
 
 #include "ComponentsSettings.hpp"
 #include "Types/Types.hpp"
@@ -9,25 +8,31 @@ namespace Eternal
 	namespace Components
 	{
 		using namespace Types;
+		
+		class Transform;
+
 		class Light
 		{
 		public:
-			Light(_In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity);
+			//Light(_In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity);
+			
+			virtual void UpdateWorldToView(_In_ const Transform& InTransform);
+			void SetDistance(_In_ float InDistance);
+			void SetIntensity(_In_ float InIntensity);
+			void SetColor(_In_ const Vector3& InColor);
 
-			void SetDistance(_In_ float Distance);
-			void SetIntensity(_In_ float Intensity);
-			void SetColor(_In_ const Vector3& Color);
-
+			inline const Vector3& GetPosition() const { return _Position; }
+			inline const Vector3& GetDirection() const { return _Direction; }
 			const Vector3& GetColor() const;
 			float GetDistance() const;
 			float GetIntensity() const;
 
 		private:
-			Vector3 _Color = Vector3(1.f, 1.f, 1.f);
-			float _Distance = 10.f;
-			float _Intensity = 1.f;
+			Vector3 _Position	= Vector3::Zero;
+			Vector3 _Direction	= Vector3::Down;
+			Vector3 _Color		= Vector3(1.f, 1.f, 1.f);
+			float _Distance		= 10.f;
+			float _Intensity	= 1.f;
 		};
 	}
 }
-
-#endif
