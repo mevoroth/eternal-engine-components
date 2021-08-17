@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include "GraphicData/Texture.hpp"
 
 namespace Eternal
 {
@@ -14,7 +14,6 @@ namespace Eternal
 
 	namespace GraphicData
 	{
-		using namespace std;
 		using namespace Eternal::Graphics;
 
 		enum class RenderTargetTextureFlags
@@ -30,21 +29,17 @@ namespace Eternal
 
 		RenderTargetTextureFlags operator&(_In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsLeft, _In_ const RenderTargetTextureFlags& InRenderTargetTextureFlagsRight);
 
-		class RenderTargetTexture
+		class RenderTargetTexture : public Texture
 		{
 		public:
 
 			RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
 			~RenderTargetTexture();
 
-			Resource&	GetTexture() { return *_Texture; }
-			View*		GetShaderResourceView() { return _ShaderResourceView; }
 			View*		GetRenderTargetDepthStencilView() { return _RenderTargetDepthStencilView; }
 			View*		GetUnorderedAccessView() { return _UnorderedAccessView; }
 
 		private:
-			Resource*	_Texture						= nullptr;
-			View*		_ShaderResourceView				= nullptr;
 			View*		_RenderTargetDepthStencilView	= nullptr;
 			View*		_UnorderedAccessView			= nullptr;
 		};

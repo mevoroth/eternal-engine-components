@@ -5,20 +5,6 @@ namespace Eternal
 {
 	namespace GraphicData
 	{
-		static constexpr ViewShaderResourceType VIEW_SHADER_RESOURCE_TYPES[] =
-		{
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_UNKNOWN,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_BUFFER,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_1D,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_1D_ARRAY,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_2D,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_2D_ARRAY,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_3D,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_CUBE,
-			ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_CUBE_ARRAY
-		};
-		ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(VIEW_SHADER_RESOURCE_TYPES) == static_cast<uint32_t>(ResourceDimension::RESOURCE_DIMENSION_COUNT), "Mismatch between resource dimension and view shader resource types");
-
 		static constexpr ViewRenderTargetType VIEW_RENDER_TARGET_TYPES[] =
 		{
 			ViewRenderTargetType::VIEW_RENDER_TARGET_UNKNOWN,
@@ -61,11 +47,6 @@ namespace Eternal
 		};
 		ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(VIEW_UNORDERED_ACCESS_TYPES) == static_cast<uint32_t>(ResourceDimension::RESOURCE_DIMENSION_COUNT), "Mismatch between resource dimension and view depth stencil types");
 
-		ViewShaderResourceType ConvertResourceDimensionToViewShaderResourceType(_In_ const ResourceDimension& InResourceDimension)
-		{
-			return VIEW_SHADER_RESOURCE_TYPES[static_cast<uint32_t>(InResourceDimension)];
-		}
-
 		ViewRenderTargetType ConvertResourceDimensionToViewRenderTargetType(_In_ const ResourceDimension& InResourceDimension)
 		{
 			return VIEW_RENDER_TARGET_TYPES[static_cast<uint32_t>(InResourceDimension)];
@@ -89,58 +70,11 @@ namespace Eternal
 		}
 
 		RenderTargetTexture::RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags)
+			: Texture(InContext, InTextureResourceCreateInformation)
 		{
 			ETERNAL_ASSERT(InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
 						|| InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
 						|| InFlags == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_COMPUTE);
-			_Texture = CreateTexture(InTextureResourceCreateInformation);
-
-			if ((InFlags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_SHADER_RESOURCE_VIEW)
-			{
-				ViewMetaData MetaData;
-				switch (InTextureResourceCreateInformation.TextureInformation.Dimension)
-				{
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_1D:
-				{
-					MetaData.ShaderResourceViewTexture1D.MipLevels			= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_1D_ARRAY:
-				{
-					MetaData.ShaderResourceViewTexture1DArray.MipLevels		= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-					MetaData.ShaderResourceViewTexture1DArray.ArraySize		= InTextureResourceCreateInformation.TextureInformation.DepthOrArraySize;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D:
-				{
-					MetaData.ShaderResourceViewTexture2D.MipLevels			= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D_ARRAY:
-				{
-					MetaData.ShaderResourceViewTexture2DArray.MipLevels		= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-					MetaData.ShaderResourceViewTexture2DArray.ArraySize		= InTextureResourceCreateInformation.TextureInformation.DepthOrArraySize;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_3D:
-				{
-					MetaData.ShaderResourceViewTexture3D.MipLevels			= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_CUBE:
-				{
-					MetaData.ShaderResourceViewTextureCube.MipLevels		= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-				} break;
-				case ResourceDimension::RESOURCE_DIMENSION_TEXTURE_CUBE_ARRAY:
-				{
-					MetaData.ShaderResourceViewTextureCubeArray.MipLevels	= InTextureResourceCreateInformation.TextureInformation.MIPLevels;
-					MetaData.ShaderResourceViewTextureCubeArray.NumCubes	= InTextureResourceCreateInformation.TextureInformation.DepthOrArraySize / 6;
-				} break;
-				}
-				ShaderResourceViewCreateInformation TextureShaderResourceViewCreateInformation(
-					InContext,
-					_Texture,
-					MetaData,
-					ConvertDepthStencilFormatToFormat(InTextureResourceCreateInformation.TextureInformation.ResourceFormat),
-					ConvertResourceDimensionToViewShaderResourceType(InTextureResourceCreateInformation.TextureInformation.Dimension)
-				);
-				_ShaderResourceView = CreateShaderResourceView(TextureShaderResourceViewCreateInformation);
-			}
 
 			if ((InFlags & RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW) == RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_RENDER_TARGET_DEPTH_STENCIL_VIEW)
 			{
@@ -246,17 +180,10 @@ namespace Eternal
 
 		RenderTargetTexture::~RenderTargetTexture()
 		{
-			delete _ShaderResourceView;
-			_ShaderResourceView = nullptr;
-
-			delete _RenderTargetDepthStencilView;
-			_RenderTargetDepthStencilView = nullptr;
-
-			delete _UnorderedAccessView;
-			_UnorderedAccessView = nullptr;
-
-			delete _Texture;
-			_Texture = nullptr;
+			if (_RenderTargetDepthStencilView)
+				DestroyView(_RenderTargetDepthStencilView);
+			if (_UnorderedAccessView)
+				DestroyView(_UnorderedAccessView);
 		}
 	}
 }
