@@ -1,5 +1,4 @@
-#ifndef _SHADOW_HPP_
-#define _SHADOW_HPP_
+#pragma once
 
 #include "Camera/PerspectiveCamera.hpp"
 
@@ -10,5 +9,3 @@ namespace Eternal
 		typedef PerspectiveCamera Shadow;
 	}
 }
-
-#endif
