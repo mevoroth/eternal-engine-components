@@ -25,6 +25,14 @@ namespace Eternal
 		Vector3 Vector3::Down(		 0.0f, -1.0f,  0.0f);
 		Vector3 Vector3::Backward(	 0.0f,  0.0f, -1.0f);
 
+
+		Vector4 Vector4::RightPosition(		 1.0f,  0.0f,  0.0f, 1.0f);
+		Vector4 Vector4::UpPosition(		 0.0f,  1.0f,  0.0f, 1.0f);
+		Vector4 Vector4::ForwardPosition(	 0.0f,  0.0f,  1.0f, 1.0f);
+		Vector4 Vector4::LeftPosition(		-1.0f,  0.0f,  0.0f, 1.0f);
+		Vector4 Vector4::DownPosition(		 0.0f, -1.0f,  0.0f, 1.0f);
+		Vector4 Vector4::BackwardPosition(	 0.0f,  0.0f, -1.0f, 1.0f);
+
 		Vector4 Vector4::One(1.0f);
 		Vector3 Vector3::One(1.0f);
 		Vector2 Vector2::One(1.0f);

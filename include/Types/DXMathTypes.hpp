@@ -107,6 +107,12 @@ namespace Eternal
 			static Vector4 One;
 			static Vector4 Zero;
 			static Vector4 ZeroPosition;
+			static Vector4 RightPosition;
+			static Vector4 UpPosition;
+			static Vector4 ForwardPosition;
+			static Vector4 LeftPosition;
+			static Vector4 DownPosition;
+			static Vector4 BackwardPosition;
 
 			using XMFLOAT4A::XMFLOAT4A;
 
@@ -116,6 +122,10 @@ namespace Eternal
 			}
 			Vector4(_In_ float Scalar)
 				: XMFLOAT4A(Scalar, Scalar, Scalar, Scalar)
+			{
+			}
+			Vector4(_In_ const Vector3& InPosition, float InW)
+				: XMFLOAT4A(InPosition.x, InPosition.y, InPosition.z, InW)
 			{
 			}
 		};
