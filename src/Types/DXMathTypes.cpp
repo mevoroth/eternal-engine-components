@@ -352,18 +352,6 @@ namespace Eternal
 		{
 			XMStoreFloat4x4(&A, XMMatrixInverse(nullptr, XMLoadFloat4x4(&A)));
 		}
-		float Lerp(_In_ float A, _In_ float B, _In_ float X)
-		{
-			return A + (B - A) * X;
-		}
-		Vector3 Lerp(_In_ const Vector3& A, _In_ const Vector3& B, _In_ float X)
-		{
-			return Vector3(
-				Lerp(A.x, B.x, X),
-				Lerp(A.y, B.y, X),
-				Lerp(A.z, B.z, X)
-			);
-		}
 
 		PerspectiveLHMatrix::PerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
 			: Matrix4x4()

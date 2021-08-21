@@ -91,7 +91,5 @@ namespace Eternal
 		extern Vector3 Normalize(_In_ const Vector3& V);
 		extern float Dot(_In_ const Vector3& A, _In_ const Vector3& B);
 		extern Vector3 Cross(_In_ const Vector3& A, const Vector3& B);
-		extern float Lerp(_In_ float A, _In_ float B, _In_ float X);
-		extern Vector3 Lerp(_In_ const Vector3& A, _In_ const Vector3& B, _In_ float X);
 	}
 }
