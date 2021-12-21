@@ -348,9 +348,11 @@ namespace Eternal
 		{
 			XMStoreFloat4x4(&A, XMMatrixTranspose(XMLoadFloat4x4(&A)));
 		}
-		void Inverse(_Inout_ Matrix4x4& A)
+		Matrix4x4 Inverse(_In_ const Matrix4x4& A)
 		{
-			XMStoreFloat4x4(&A, XMMatrixInverse(nullptr, XMLoadFloat4x4(&A)));
+			Matrix4x4 Result;
+			XMStoreFloat4x4(&Result, XMMatrixInverse(nullptr, XMLoadFloat4x4(&A)));
+			return Result;
 		}
 
 		PerspectiveLHMatrix::PerspectiveLHMatrix(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio)
