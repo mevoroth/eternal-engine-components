@@ -121,7 +121,10 @@ namespace Eternal
 						Format::FORMAT_DS328,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_DEPTH_STENCIL,
 						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight()
+						InContext.GetWindow().GetHeight(),
+						1,
+						1,
+						ETERNAL_USE_REVERSED_Z ? TextureCreateInformation::DefaultClearValue : TextureCreateInformation::DefaultClearValueOne
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_DEPTH_STENCIL_WRITE

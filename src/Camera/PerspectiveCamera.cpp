@@ -25,8 +25,13 @@ namespace Eternal
 
 		void PerspectiveCamera::_UpdateViewToClip()
 		{
+#if ETERNAL_USE_REVERSED_Z
 			_ViewToClip = ReverseZPerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
 			_ClipToView = ReverseZInversePerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
+#else
+			_ViewToClip = PerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
+			_ClipToView = InversePerspectiveLHMatrix(_Near, _Far, _YFOV, _ScreenRatio);
+#endif
 		}
 	}
 }
