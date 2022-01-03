@@ -153,7 +153,7 @@
       <PreprocessorDefinitions>ETERNAL_USE_DXMATH_TYPES=1;ETERNAL_DEBUG=1;IMGUI_USER_CONFIG="Imgui/ImguiConfig.hpp";ETERNAL_USE_STD_PARALLEL=1;ETERNAL_PROFILER_USE_VERBOSE=0;_MBCS;NOMINMAX=1;ETERNAL_USE_REVERSED_Z=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ForcedIncludeFiles>sal.h;Types/HLSLReflection.hpp;ComponentsSettings.hpp;optick.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2016.1.1\include\;$(SolutionDir)\eternal-engine-shaders\ShadersReflection</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)eternal-engine-shaders\ShadersReflection</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4189;4100</DisableSpecificWarnings>

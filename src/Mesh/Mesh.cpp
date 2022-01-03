@@ -4,10 +4,10 @@ namespace Eternal
 {
 	namespace Components
 	{
-		void Mesh::SetPerDrawConstantBufferViewVS(_In_ uint32_t InSubMeshIndex, _In_ View* InConstantBuffer)
+		void Mesh::SetPerDrawConstantBufferViewMSVS(_In_ uint32_t InSubMeshIndex, _In_ View* InConstantBuffer)
 		{
 			ETERNAL_ASSERT(InSubMeshIndex < _GPUMesh.PerDrawInformations.size());
-			_GPUMesh.PerDrawInformations[InSubMeshIndex].PerDrawConstantBufferVS = InConstantBuffer;
+			_GPUMesh.PerDrawInformations[InSubMeshIndex].PerDrawConstantBufferMSVS = InConstantBuffer;
 		}
 
 		MeshCollection::~MeshCollection()

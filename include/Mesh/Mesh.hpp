@@ -27,14 +27,16 @@ namespace Eternal
 				uint32_t IndicesOffset			= 0;
 				uint32_t IndicesCount			= 0;
 				uint32_t VerticesOffset			= 0;
-				View* PerDrawConstantBufferVS	= nullptr;
+				View* PerDrawConstantBufferMSVS	= nullptr;
 				Material* PerDrawMaterial		= nullptr;
 			};
 
 			vector<PerDrawInformation> PerDrawInformations;
-			Resource* MeshVertexBuffer		= nullptr;
-			Resource* MeshIndexBuffer		= nullptr;
-			Resource* MeshConstantBuffer	= nullptr;
+			Resource* MeshVertexBuffer				= nullptr;
+			Resource* MeshIndexBuffer				= nullptr;
+			Resource* MeshConstantBuffer			= nullptr;
+			View* MeshVertexStructuredBufferView	= nullptr;
+			View* MeshIndexStructuredBufferView		= nullptr;
 		};
 
 		class Mesh
@@ -54,9 +56,11 @@ namespace Eternal
 			virtual const void* GetIndicesData() const = 0;
 			virtual const void* GetConstantBufferData() const = 0;
 
-			void SetPerDrawConstantBufferViewVS(_In_ uint32_t InSubMeshIndex, _In_ View* InConstantBuffer);
+			void SetPerDrawConstantBufferViewMSVS(_In_ uint32_t InSubMeshIndex, _In_ View* InConstantBuffer);
 			void SetMeshVertexBuffer(_In_ Resource* InVertexBuffer) { _GPUMesh.MeshVertexBuffer = InVertexBuffer; }
+			void SetMeshVertexStructuredBufferView(_In_ View* InVertexStructuredBufferView) { _GPUMesh.MeshVertexStructuredBufferView = InVertexStructuredBufferView; }
 			void SetMeshIndexBuffer(_In_ Resource* InIndexBuffer) { _GPUMesh.MeshIndexBuffer = InIndexBuffer; }
+			void SetMeshIndexStructuredBufferView(_In_ View* InIndexStructuredBufferView) { _GPUMesh.MeshIndexStructuredBufferView = InIndexStructuredBufferView; }
 			void SetMeshConstantBuffer(_In_ Resource* InMeshConstantBuffer) { _GPUMesh.MeshConstantBuffer = InMeshConstantBuffer; }
 			const string& GetName() const { return _Name; }
 			void SetName(_In_ const string& InName) { _Name = InName; }

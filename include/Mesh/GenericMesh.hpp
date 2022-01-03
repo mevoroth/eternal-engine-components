@@ -2,6 +2,7 @@
 
 #include "Mesh/Mesh.hpp"
 #include "GraphicData/MeshVertexFormat.hpp"
+#include "HLSLPerDrawConstants.hpp"
 
 namespace Eternal
 {
@@ -15,6 +16,7 @@ namespace Eternal
 		using namespace std;
 		using namespace Eternal::Types;
 		using namespace Eternal::GraphicData;
+		using namespace Eternal::HLSL;
 
 		template<class VertexT, typename IndexT = uint16_t>
 		class GenericMesh final : public Mesh
@@ -23,26 +25,35 @@ namespace Eternal
 
 			virtual uint32_t GetVerticesCount() const override final { return static_cast<uint32_t>(_Vertices.size()); }
 			virtual uint32_t GetIndicesCount() const override final { return static_cast<uint32_t>(_Indices.size()); }
-			virtual uint32_t GetConstantBufferCount() const override final { return static_cast<uint32_t>(_Transforms.size()); }
+			virtual uint32_t GetConstantBufferCount() const override final { return static_cast<uint32_t>(_PerDrawConstants.size()); }
 			virtual uint32_t GetVertexStride() const override final { return sizeof(VertexT); }
 			virtual uint32_t GetIndexStride() const override final { return sizeof(IndexT); }
-			virtual uint32_t GetConstantBufferStride() const override final { return sizeof(Matrix4x4); }
+			virtual uint32_t GetConstantBufferStride() const override final { return sizeof(PerDrawConstants); }
 			virtual uint32_t GetIndicesMaxCount() const override final { return  1 << (GetIndexStride() * 8); }
 			virtual const void* GetVerticesData() const override final { return reinterpret_cast<const void*>(_Vertices.data()); }
 			virtual const void* GetIndicesData() const override final { return reinterpret_cast<const void*>(_Indices.data()); }
-			virtual const void* GetConstantBufferData() const override final { return reinterpret_cast<const void*>(_Transforms.data()); }
+			virtual const void* GetConstantBufferData() const override final { return reinterpret_cast<const void*>(_PerDrawConstants.data()); }
 
 			void AddMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
 			{
 				_GPUMesh.PerDrawInformations.push_back(GPUMesh::PerDrawInformation());
+
+				uint32_t IndicesCount	= static_cast<uint32_t>(_Indices.size());
+				uint32_t VerticesCount	= static_cast<uint32_t>(_Vertices.size());
+
 				GPUMesh::PerDrawInformation& PerDraw = _GPUMesh.PerDrawInformations.back();
 				PerDraw.IndicesCount	= static_cast<uint32_t>(InIndices.size());
-				PerDraw.IndicesOffset	= static_cast<uint32_t>(_Indices.size());
-				PerDraw.VerticesOffset	= static_cast<uint32_t>(_Vertices.size());
+				PerDraw.IndicesOffset	= IndicesCount;
+				PerDraw.VerticesOffset	= VerticesCount;
 				PerDraw.PerDrawMaterial	= InMaterial;
 				_Vertices.insert(_Vertices.end(), InVertices.begin(), InVertices.end());
 				_Indices.insert(_Indices.end(), InIndices.begin(), InIndices.end());
-				_Transforms.push_back(InModelMatrix);
+				_PerDrawConstants.push_back({
+					InModelMatrix,
+					VerticesCount,
+					IndicesCount / 3,
+					0, 0 // Dummy
+				});
 			}
 
 			void AddMergeMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
@@ -61,9 +72,9 @@ namespace Eternal
 
 		private:
 
-			vector<Matrix4x4>	_Transforms;
-			vector<IndexT>		_Indices;
-			vector<VertexT>		_Vertices;
+			vector<PerDrawConstants>	_PerDrawConstants;
+			vector<IndexT>				_Indices;
+			vector<VertexT>				_Vertices;
 		};
 	}
 }
