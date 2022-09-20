@@ -171,6 +171,7 @@ namespace Eternal
 				CurrentCamera->GetViewToClip(ViewConstantsPointer->ViewToClip);
 				CurrentCamera->GetClipToView(ViewConstantsPointer->ClipToView);
 				ViewConstantsPointer->ViewPosition				= Vector4(CurrentCamera->GetPosition(), 1.0f);
+				ViewConstantsPointer->ViewForward				= Vector4(CurrentCamera->GetForward(), 0.0f);
 				ViewConstantsPointer->ScreenSizeAndInverseSize	= Vector4(
 					static_cast<float>(InContext.GetWindow().GetWidth()),
 					static_cast<float>(InContext.GetWindow().GetHeight()),
