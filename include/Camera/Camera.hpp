@@ -32,6 +32,8 @@ namespace Eternal
 			const Vector3& GetForward() const;
 			const Vector3& GetRight() const;
 			const Vector3& GetUp() const;
+			float GetRenderNear() const;
+			float GetRenderFar() const;
 
 			void UpdateWorldToView(_In_ const Transform& InTransform);
 

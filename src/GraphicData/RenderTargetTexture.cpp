@@ -45,7 +45,7 @@ namespace Eternal
 			ViewDepthStencilType::VIEW_DEPTH_STENCIL_TEXTURE_2D_ARRAY,
 			ViewDepthStencilType::VIEW_DEPTH_STENCIL_TEXTURE_2D_ARRAY
 		};
-		ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(VIEW_UNORDERED_ACCESS_TYPES) == static_cast<uint32_t>(ResourceDimension::RESOURCE_DIMENSION_COUNT), "Mismatch between resource dimension and view depth stencil types");
+		ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(VIEW_DEPTH_STENCIL_TYPES) == static_cast<uint32_t>(ResourceDimension::RESOURCE_DIMENSION_COUNT), "Mismatch between resource dimension and view depth stencil types");
 
 		ViewRenderTargetType ConvertResourceDimensionToViewRenderTargetType(_In_ const ResourceDimension& InResourceDimension)
 		{

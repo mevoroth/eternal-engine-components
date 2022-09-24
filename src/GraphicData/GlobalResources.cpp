@@ -178,6 +178,8 @@ namespace Eternal
 					1.0f / static_cast<float>(InContext.GetWindow().GetWidth()),
 					1.0f / static_cast<float>(InContext.GetWindow().GetHeight())
 				);
+				ViewConstantsPointer->RenderNearPlane	= CurrentCamera->GetRenderNear();
+				ViewConstantsPointer->RenderFarPlane	= CurrentCamera->GetRenderFar();
 			}
 			return CanRender;
 		}
