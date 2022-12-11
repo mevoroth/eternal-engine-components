@@ -36,12 +36,24 @@ namespace Eternal
 			RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
 			~RenderTargetTexture();
 
-			View*		GetRenderTargetDepthStencilView() { return _RenderTargetDepthStencilView; }
+			View*		GetRenderTargetDepthView() { return _RenderTargetDepthView; }
 			View*		GetUnorderedAccessView() { return _UnorderedAccessView; }
 
 		private:
-			View*		_RenderTargetDepthStencilView	= nullptr;
+			View*		_RenderTargetDepthView	= nullptr;
 			View*		_UnorderedAccessView			= nullptr;
+		};
+
+		class DepthStencilRenderTargetTexture : public RenderTargetTexture
+		{
+		public:
+			DepthStencilRenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
+			~DepthStencilRenderTargetTexture();
+
+			View*		GetStencilView() { return _StencilView; }
+
+		private:
+			View*		_StencilView					= nullptr;
 		};
 	}
 }

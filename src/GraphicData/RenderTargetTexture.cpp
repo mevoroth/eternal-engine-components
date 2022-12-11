@@ -106,7 +106,7 @@ namespace Eternal
 						InTextureResourceCreateInformation.TextureInformation.ResourceFormat,
 						ConvertResourceDimensionToViewDepthStencilType(InTextureResourceCreateInformation.TextureInformation.Dimension)
 					);
-					_RenderTargetDepthStencilView = CreateDepthStencilView(TextureDepthStencilViewCreateInformation);
+					_RenderTargetDepthView = CreateDepthStencilView(TextureDepthStencilViewCreateInformation);
 				}
 				else
 				{
@@ -139,7 +139,7 @@ namespace Eternal
 						InTextureResourceCreateInformation.TextureInformation.ResourceFormat,
 						ConvertResourceDimensionToViewRenderTargetType(InTextureResourceCreateInformation.TextureInformation.Dimension)
 					);
-					_RenderTargetDepthStencilView = CreateRenderTargetView(TextureRenderTargetViewCreateInformation);
+					_RenderTargetDepthView = CreateRenderTargetView(TextureRenderTargetViewCreateInformation);
 				}
 			}
 
@@ -180,8 +180,8 @@ namespace Eternal
 
 		RenderTargetTexture::~RenderTargetTexture()
 		{
-			if (_RenderTargetDepthStencilView)
-				DestroyView(_RenderTargetDepthStencilView);
+			if (_RenderTargetDepthView)
+				DestroyView(_RenderTargetDepthView);
 			if (_UnorderedAccessView)
 				DestroyView(_UnorderedAccessView);
 		}
