@@ -10,6 +10,67 @@ namespace Eternal
 
 		struct Vector3;
 
+		struct Float2 : XMFLOAT2
+		{
+			using XMFLOAT2::XMFLOAT2;
+
+			Float2()
+				: Float2(0.0f)
+			{
+			}
+			Float2(_In_ float InScalar)
+				: XMFLOAT2(InScalar, InScalar)
+			{
+			}
+		};
+
+		struct Float3 : XMFLOAT3
+		{
+			using XMFLOAT3::XMFLOAT3;
+
+			Float3()
+				: Float3(0.0f)
+			{
+			}
+			Float3(_In_ float InScalar)
+				: XMFLOAT3(InScalar, InScalar, InScalar)
+			{
+			}
+		};
+
+		struct Float4 : XMFLOAT4A
+		{
+			using XMFLOAT4A::XMFLOAT4A;
+
+			Float4()
+				: Float4(0.0f)
+			{
+			}
+			Float4(_In_ float Scalar)
+				: XMFLOAT4A(Scalar, Scalar, Scalar, Scalar)
+			{
+			}
+			Float4(_In_ const Float3& InPosition, float InW)
+				: XMFLOAT4A(InPosition.x, InPosition.y, InPosition.z, InW)
+			{
+			}
+		};
+
+		struct Uint4 : XMUINT4
+		{
+			using XMUINT4::XMUINT4;
+
+			Uint4()
+				: Uint4(0u)
+			{
+			}
+
+			Uint4(_In_ uint32_t InScalar)
+				: XMUINT4(InScalar, InScalar, InScalar, InScalar)
+			{
+			}
+		};
+
 		struct Matrix4x4 : public XMFLOAT4X4A
 		{
 			static Matrix4x4 Identity;
@@ -62,24 +123,15 @@ namespace Eternal
 			LookToLHMatrix(_In_ const Vector3& InPosition, _In_ const Vector3& InForward, _In_ const Vector3& InUp);
 		};
 
-		struct Vector2 : public XMFLOAT2
+		struct Vector2 : public Float2
 		{
 			static Vector2 One;
 			static Vector2 Zero;
 
-			using XMFLOAT2::XMFLOAT2;
-
-			Vector2()
-				: Vector2(0.0f)
-			{
-			}
-			Vector2(_In_ float Scalar)
-				: XMFLOAT2(Scalar, Scalar)
-			{
-			}
+			using Float2::Float2;
 		};
 
-		struct Vector3 : public XMFLOAT3
+		struct Vector3 : public Float3
 		{
 			static Vector3 One;
 			static Vector3 Zero;
@@ -90,19 +142,10 @@ namespace Eternal
 			static Vector3 Down;
 			static Vector3 Backward;
 
-			using XMFLOAT3::XMFLOAT3;
-
-			Vector3()
-				: Vector3(0.0f)
-			{
-			}
-			Vector3(_In_ float Scalar)
-				: XMFLOAT3(Scalar, Scalar, Scalar)
-			{
-			}
+			using Float3::Float3;
 		};
 		
-		struct Vector4 : public XMFLOAT4A
+		struct Vector4 : public Float4
 		{
 			static Vector4 One;
 			static Vector4 Zero;
@@ -114,20 +157,7 @@ namespace Eternal
 			static Vector4 DownPosition;
 			static Vector4 BackwardPosition;
 
-			using XMFLOAT4A::XMFLOAT4A;
-
-			Vector4()
-				: Vector4(0.0f)
-			{
-			}
-			Vector4(_In_ float Scalar)
-				: XMFLOAT4A(Scalar, Scalar, Scalar, Scalar)
-			{
-			}
-			Vector4(_In_ const Vector3& InPosition, float InW)
-				: XMFLOAT4A(InPosition.x, InPosition.y, InPosition.z, InW)
-			{
-			}
+			using Float4::Float4;
 		};
 
 		struct Quaternion : public Vector4
