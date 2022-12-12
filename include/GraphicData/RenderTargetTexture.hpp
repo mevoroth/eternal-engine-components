@@ -36,12 +36,12 @@ namespace Eternal
 			RenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
 			~RenderTargetTexture();
 
-			View*		GetRenderTargetDepthView() { return _RenderTargetDepthView; }
+			View*		GetRenderTargetDepthStencilView() { return _RenderTargetDepthView; }
 			View*		GetUnorderedAccessView() { return _UnorderedAccessView; }
 
 		private:
-			View*		_RenderTargetDepthView	= nullptr;
-			View*		_UnorderedAccessView			= nullptr;
+			View*		_RenderTargetDepthView		= nullptr;
+			View*		_UnorderedAccessView		= nullptr;
 		};
 
 		class DepthStencilRenderTargetTexture : public RenderTargetTexture
@@ -50,10 +50,10 @@ namespace Eternal
 			DepthStencilRenderTargetTexture(_In_ GraphicsContext& InContext, _In_ const TextureResourceCreateInformation& InTextureResourceCreateInformation, _In_ const RenderTargetTextureFlags& InFlags);
 			~DepthStencilRenderTargetTexture();
 
-			View*		GetStencilView() { return _StencilView; }
+			View*		GetStencilShaderResourceView() { return _StencilShaderResourceView; }
 
 		private:
-			View*		_StencilView					= nullptr;
+			View*		_StencilShaderResourceView	= nullptr;
 		};
 	}
 }
