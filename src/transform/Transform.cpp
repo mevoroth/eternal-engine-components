@@ -17,37 +17,37 @@ namespace Eternal
 		{
 		}
 
-		void Transform::SetTranslation(_In_ const Vector3& InT)
+		void Transform::SetTranslation(_In_ const Vector3& InTranslation)
 		{
-			Translation = InT;
+			Translation = InTranslation;
 		}
-		void Transform::SetRotation(_In_ const Quaternion& InR)
+		void Transform::SetRotation(_In_ const Quaternion& InRotationQuaternion)
 		{
-			Rotation = InR;
+			Rotation = InRotationQuaternion;
 		}
-		void Transform::SetScaling(_In_ const Vector3& InS)
+		void Transform::SetScaling(_In_ const Vector3& InScaling)
 		{
-			Scaling = InS;
+			Scaling = InScaling;
 		}
-		void Transform::Translate(_In_ const Vector3& InD)
+		void Transform::Translate(_In_ const Vector3& InDeltaTranslation)
 		{
-			Translation += InD;
+			Translation += InDeltaTranslation;
 		}
-		void Transform::Rotate(_In_ const Vector4& InR)
+		void Transform::Rotate(_In_ const Vector4& InDeltaRotationQuaternion)
 		{
-			Rotation *= InR;
+			Rotation *= InDeltaRotationQuaternion;
 		}
-		void Transform::Rotate(_In_ const Vector3& R)
+		void Transform::Rotate(_In_ const Vector3& InDeltaRotationEuler)
 		{
 			XMVECTOR NewRotation = XMQuaternionMultiply(
 				XMLoadFloat4(&Rotation),
-				XMQuaternionRotationRollPitchYaw(R.x, R.y, R.z)
+				XMQuaternionRotationRollPitchYaw(InDeltaRotationEuler.x, InDeltaRotationEuler.y, InDeltaRotationEuler.z)
 			);
 			XMStoreFloat4(&Rotation, NewRotation);
 		}
-		void Transform::Scale(_In_ const Vector3& InS)
+		void Transform::Scale(_In_ const Vector3& InDeltaScaling)
 		{
-			Scaling *= InS;
+			Scaling *= InDeltaScaling;
 		}
 
 		Matrix4x4 Transform::GetViewToWorld() const
