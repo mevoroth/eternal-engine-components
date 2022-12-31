@@ -131,6 +131,27 @@ namespace Eternal
 				),
 				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
 			);
+
+			_ShadowMap = new RenderTargetTexture(
+				InContext,
+				TextureResourceCreateInformation(
+					InContext.GetDevice(),
+					"ShadowMap",
+					TextureCreateInformation(
+						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
+						Format::FORMAT_D32,
+						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_DEPTH_STENCIL,
+						4096,
+						4096,
+						1,
+						1,
+						TextureCreateInformation::DefaultClearValueDepth
+					),
+					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
+					TransitionState::TRANSITION_DEPTH_STENCIL_WRITE
+				),
+				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
+			);
 		}
 
 		GlobalResources::~GlobalResources()

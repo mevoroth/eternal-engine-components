@@ -55,6 +55,12 @@ namespace Eternal
 				return *_GBufferDepthStencil;
 			}
 
+			RenderTargetTexture& GetShadowMap()
+			{
+				ETERNAL_ASSERT(_ShadowMap);
+				return *_ShadowMap;
+			}
+
 			View* GetViewConstantBufferView()
 			{
 				ETERNAL_ASSERT(_ViewConstantBufferView);
@@ -70,6 +76,8 @@ namespace Eternal
 			RenderTargetTexture*		_GBufferNormals						= nullptr;
 			RenderTargetTexture*		_GBufferRoughnessMetallicSpecular	= nullptr;
 			RenderTargetTexture*		_GBufferDepthStencil				= nullptr;
+
+			RenderTargetTexture*		_ShadowMap							= nullptr;
 		};
 	}
 }
