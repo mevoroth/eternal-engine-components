@@ -6,7 +6,7 @@ namespace Eternal
 {
 	namespace Components
 	{
-		class PerspectiveCamera : public Camera
+		class PerspectiveCamera final : public Camera
 		{
 		public:
 			PerspectiveCamera(_In_ float InNear, _In_ float InFar, _In_ float InYFOV, _In_ float InScreenRatio);
