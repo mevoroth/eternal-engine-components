@@ -88,6 +88,9 @@
     <ClInclude Include="include\Types\HLSLReflection.hpp">
       <Filter>Types</Filter>
     </ClInclude>
+    <ClInclude Include="include\GraphicData\ViewGraphicData.hpp">
+      <Filter>GraphicData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Transform\Transform.cpp">
@@ -130,6 +133,9 @@
       <Filter>Material</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\Texture.cpp">
+      <Filter>GraphicData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicData\ViewGraphicData.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
   </ItemGroup>

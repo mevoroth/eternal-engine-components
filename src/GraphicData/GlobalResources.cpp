@@ -1,5 +1,6 @@
 #include "GraphicData/GlobalResources.hpp"
 #include "GraphicData/RenderTargetTexture.hpp"
+#include "GraphicData/ViewGraphicData.hpp"
 #include "Camera/Camera.hpp"
 #include "Core/System.hpp"
 #include "Types/Types.hpp"
@@ -177,30 +178,16 @@ namespace Eternal
 
 		bool GlobalResources::BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem)
 		{
-			Components::Camera* CurrentCamera = InSystem.GetRenderFrame().View;
+			Components::Camera* CurrentCamera = InSystem.GetRenderFrame().ViewCamera;
 			bool CanRender = CurrentCamera != nullptr;
 			if (CanRender)
 			{
-				MapRange ViewBufferRange(sizeof(PerViewConstants));
-				MapScope<PerViewConstants> ViewBufferMapScope(**_ViewConstantBuffer, ViewBufferRange);
-				PerViewConstants* ViewConstantsPointer = ViewBufferMapScope.GetDataPointer();
-
-				CurrentCamera->GetWorldToClip(ViewConstantsPointer->WorldToClip);
-				CurrentCamera->GetClipToWorld(ViewConstantsPointer->ClipToWorld);
-				CurrentCamera->GetWorldToView(ViewConstantsPointer->WorldToView);
-				CurrentCamera->GetViewToWorld(ViewConstantsPointer->ViewToWorld);
-				CurrentCamera->GetViewToClip(ViewConstantsPointer->ViewToClip);
-				CurrentCamera->GetClipToView(ViewConstantsPointer->ClipToView);
-				ViewConstantsPointer->ViewPosition				= Vector4(CurrentCamera->GetPosition(), 1.0f);
-				ViewConstantsPointer->ViewForward				= Vector4(CurrentCamera->GetForward(), 0.0f);
-				ViewConstantsPointer->ScreenSizeAndInverseSize	= Vector4(
+				UploadViewCameraToBuffer(
+					**_ViewConstantBuffer,
+					CurrentCamera,
 					static_cast<float>(InContext.GetWindow().GetWidth()),
-					static_cast<float>(InContext.GetWindow().GetHeight()),
-					1.0f / static_cast<float>(InContext.GetWindow().GetWidth()),
-					1.0f / static_cast<float>(InContext.GetWindow().GetHeight())
+					static_cast<float>(InContext.GetWindow().GetHeight())
 				);
-				ViewConstantsPointer->RenderNearPlane	= CurrentCamera->GetRenderNear();
-				ViewConstantsPointer->RenderFarPlane	= CurrentCamera->GetRenderFar();
 			}
 			return CanRender;
 		}

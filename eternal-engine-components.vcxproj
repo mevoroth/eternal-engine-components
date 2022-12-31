@@ -19,6 +19,7 @@
     <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp" />
     <ClInclude Include="include\GraphicData\GlobalResources.hpp" />
     <ClInclude Include="include\GraphicData\Texture.hpp" />
+    <ClInclude Include="include\GraphicData\ViewGraphicData.hpp" />
     <ClInclude Include="include\Light\DirectionalLight.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
     <ClInclude Include="include\Light\PointLight.hpp" />
@@ -41,6 +42,7 @@
     <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp" />
     <ClCompile Include="src\GraphicData\GlobalResources.cpp" />
     <ClCompile Include="src\GraphicData\Texture.cpp" />
+    <ClCompile Include="src\GraphicData\ViewGraphicData.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
     <ClCompile Include="src\Light\SpotLight.cpp" />
     <ClCompile Include="src\Material\Material.cpp" />
