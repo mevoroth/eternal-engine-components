@@ -124,7 +124,7 @@ namespace Eternal
 						InContext.GetWindow().GetHeight(),
 						1,
 						1,
-						ETERNAL_USE_REVERSED_Z ? TextureCreateInformation::DefaultClearValue : TextureCreateInformation::DefaultClearValueOne
+						TextureCreateInformation::DefaultClearValueDepth
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_DEPTH_STENCIL_WRITE
