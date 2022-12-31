@@ -2,6 +2,7 @@
 
 #include "ComponentsSettings.hpp"
 #include "Types/Types.hpp"
+#include "Light/Shadow.hpp"
 
 namespace Eternal
 {
@@ -14,8 +15,7 @@ namespace Eternal
 		class Light
 		{
 		public:
-			//Light(_In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity);
-			
+
 			virtual void UpdateWorldToView(_In_ const Transform& InTransform);
 			void SetDistance(_In_ float InDistance);
 			void SetIntensity(_In_ float InIntensity);
@@ -28,11 +28,12 @@ namespace Eternal
 			float GetIntensity() const;
 
 		private:
+			Shadow _Shadow;
 			Vector3 _Position	= Vector3::Zero;
-			Vector3 _Direction	= Vector3::Down;
-			Vector3 _Color		= Vector3(1.f, 1.f, 1.f);
 			float _Distance		= 10.f;
+			Vector3 _Direction	= Vector3::Down;
 			float _Intensity	= 1.f;
+			Vector3 _Color		= Vector3(1.f, 1.f, 1.f);
 		};
 	}
 }

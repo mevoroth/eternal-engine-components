@@ -6,6 +6,9 @@ namespace Eternal
 {
 	namespace Components
 	{
-		typedef PerspectiveCamera Shadow;
+		struct Shadow
+		{
+			//Camera*
+		};
 	}
 }
