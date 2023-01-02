@@ -14,32 +14,9 @@ namespace Eternal
 		using namespace Eternal::HLSL;
 
 		GlobalResources::GlobalResources(_In_ GraphicsContext& InContext)
+			: _ViewConstantBuffer(InContext, "ViewConstantBuffer")
+			, _ShadowMapViewConstantBuffer(InContext, "ShadowMapViewConstantBuffer")
 		{
-			_ViewConstantBuffer = CreateMultiBufferedBuffer(
-				InContext,
-				BufferResourceCreateInformation(
-					InContext.GetDevice(),
-					"ViewConstantBuffer",
-					BufferCreateInformation(
-						Format::FORMAT_UNKNOWN,
-						BufferResourceUsage::BUFFER_RESOURCE_USAGE_CONSTANT_BUFFER,
-						sizeof(PerViewConstants)
-					),
-					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_UPLOAD
-				)
-			);
-
-			ViewMetaData MetaData;
-			MetaData.ConstantBufferView.BufferSize = sizeof(PerViewConstants);
-			_ViewConstantBufferView = CreateMultiBufferedConstantBufferView(
-				*_ViewConstantBuffer,
-				ConstantBufferViewCreateInformation(
-					InContext,
-					*_ViewConstantBuffer,
-					MetaData
-				)
-			);
-
 			_GBufferLuminance = new RenderTargetTexture(
 				InContext,
 				TextureResourceCreateInformation(
@@ -153,10 +130,17 @@ namespace Eternal
 				),
 				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
 			);
+
+			_ShadowMapViewport = CreateViewport(InContext, 4096, 4096);
 		}
 
 		GlobalResources::~GlobalResources()
 		{
+			DestroyViewport(_ShadowMapViewport);
+
+			delete _ShadowMap;
+			_ShadowMap = nullptr;
+
 			delete _GBufferDepthStencil;
 			_GBufferDepthStencil = nullptr;
 
@@ -171,9 +155,6 @@ namespace Eternal
 
 			delete _GBufferRoughnessMetallicSpecular;
 			_GBufferRoughnessMetallicSpecular = nullptr;
-
-			DestroyMultiBufferedView(_ViewConstantBufferView);
-			DestroyMultiBufferedResource(_ViewConstantBuffer);
 		}
 
 		bool GlobalResources::BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem)
@@ -183,7 +164,7 @@ namespace Eternal
 			if (CanRender)
 			{
 				UploadViewCameraToBuffer(
-					**_ViewConstantBuffer,
+					**_ViewConstantBuffer.ResourceBuffer,
 					CurrentCamera,
 					static_cast<float>(InContext.GetWindow().GetWidth()),
 					static_cast<float>(InContext.GetWindow().GetHeight())

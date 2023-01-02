@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Graphics/GraphicsInclude.hpp"
+#include "HLSLPerViewConstants.hpp"
 
 namespace Eternal
 {
@@ -13,6 +14,7 @@ namespace Eternal
 	{
 		using namespace Eternal::Graphics;
 		using namespace Eternal::Core;
+		using namespace Eternal::HLSL;
 
 		class RenderTargetTexture;
 
@@ -63,21 +65,32 @@ namespace Eternal
 
 			View* GetViewConstantBufferView()
 			{
-				ETERNAL_ASSERT(_ViewConstantBufferView);
-				return *_ViewConstantBufferView;
+				return *_ViewConstantBuffer.ResourceView;
+			}
+
+			View* GetShadowMapViewConstantBufferView()
+			{
+				return *_ShadowMapViewConstantBuffer.ResourceView;
+			}
+
+			const Viewport& GetShadowMapViewport() const
+			{
+				ETERNAL_ASSERT(_ShadowMapViewport);
+				return *_ShadowMapViewport;
 			}
 
 		private:
 
-			MultiBuffered<Resource>*	_ViewConstantBuffer					= nullptr;
-			MultiBuffered<View>*		_ViewConstantBufferView				= nullptr;
-			RenderTargetTexture*		_GBufferLuminance					= nullptr;
-			RenderTargetTexture*		_GBufferAlbedo						= nullptr;
-			RenderTargetTexture*		_GBufferNormals						= nullptr;
-			RenderTargetTexture*		_GBufferRoughnessMetallicSpecular	= nullptr;
-			RenderTargetTexture*		_GBufferDepthStencil				= nullptr;
-
-			RenderTargetTexture*		_ShadowMap							= nullptr;
+			ConstantBuffer<PerViewConstants>	_ViewConstantBuffer;
+			RenderTargetTexture*				_GBufferLuminance					= nullptr;
+			RenderTargetTexture*				_GBufferAlbedo						= nullptr;
+			RenderTargetTexture*				_GBufferNormals						= nullptr;
+			RenderTargetTexture*				_GBufferRoughnessMetallicSpecular	= nullptr;
+			RenderTargetTexture*				_GBufferDepthStencil				= nullptr;
+			
+			ConstantBuffer<PerViewConstants>	_ShadowMapViewConstantBuffer;
+			RenderTargetTexture*				_ShadowMap							= nullptr;
+			Viewport*							_ShadowMapViewport					= nullptr;
 		};
 	}
 }
