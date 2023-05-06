@@ -3,7 +3,6 @@
 #include "Transform/Transform.hpp"
 #include <vector>
 #include <string>
-#include <array>
 
 namespace Eternal
 {
@@ -11,6 +10,11 @@ namespace Eternal
 	{
 		class Resource;
 		class View;
+	}
+	
+	namespace FileSystem
+	{
+		class File;
 	}
 
 	namespace Components

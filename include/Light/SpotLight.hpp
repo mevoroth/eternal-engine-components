@@ -10,7 +10,7 @@ namespace Eternal
 		class SpotLight : public Light
 		{
 		public:
-			//SpotLight(_In_ float FOV, _In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity);
+			SpotLight();
 
 			void SetFOV(_In_ float FOV);
 

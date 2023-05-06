@@ -4,11 +4,10 @@ namespace Eternal
 {
 	namespace Components
 	{
-		//SpotLight::SpotLight(_In_ float FOV, _In_ const Vector3& Color, _In_ float Distance, _In_ float Intensity)
-		//	: Light(Color, Distance, Intensity)
-		//	, _FOV(FOV)
-		//{
-		//}
+		SpotLight::SpotLight()
+		{
+			_LightType = LightType::LIGHT_TYPE_SPOTLIGHT;
+		}
 
 		void SpotLight::SetFOV(_In_ float FOV)
 		{

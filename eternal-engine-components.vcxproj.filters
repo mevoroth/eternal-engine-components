@@ -138,5 +138,11 @@
     <ClCompile Include="src\GraphicData\ViewGraphicData.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light\DirectionalLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\PointLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

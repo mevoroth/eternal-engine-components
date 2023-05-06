@@ -12,6 +12,15 @@ namespace Eternal
 		
 		class Transform;
 
+		enum class LightType : uint32_t
+		{
+			LIGHT_TYPE_DIRECTIONAL = 0,
+			LIGHT_TYPE_POINT,
+			LIGHT_TYPE_SPOTLIGHT,
+			LIGHT_TYPE_AREA,
+			LIGHT_TYPE_INVALID = ~0u
+		};
+
 		class Light
 		{
 		public:
@@ -27,13 +36,17 @@ namespace Eternal
 			float GetDistance() const;
 			float GetIntensity() const;
 
-		private:
+			inline const Shadow& GetShadow() const { return _Shadow; }
+			inline const LightType& GetLightType() const { return _LightType; }
+
+		protected:
 			Shadow _Shadow;
-			Vector3 _Position	= Vector3::Zero;
-			float _Distance		= 10.f;
-			Vector3 _Direction	= Vector3::Down;
-			float _Intensity	= 1.f;
-			Vector3 _Color		= Vector3(1.f, 1.f, 1.f);
+			Vector3 _Position		= Vector3::Zero;
+			float _Distance			= 10.f;
+			Vector3 _Direction		= Vector3::Down;
+			float _Intensity		= 1.f;
+			Vector3 _Color			= Vector3(1.f, 1.f, 1.f);
+			LightType _LightType	= LightType::LIGHT_TYPE_INVALID;
 		};
 	}
 }

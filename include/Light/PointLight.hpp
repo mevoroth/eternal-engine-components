@@ -9,7 +9,7 @@ namespace Eternal
 		class PointLight : public Light
 		{
 		public:
-
+			PointLight();
 		};
 	}
 }

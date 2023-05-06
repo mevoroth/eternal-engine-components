@@ -11,16 +11,15 @@ namespace Eternal
 		{
 		}
 
-		void OrthographicCamera::SetSize(_In_ float InSize)
-		{
-			_Width = InSize;
-			_Dirty = true;
-		}
-
 		void OrthographicCamera::_UpdateViewToClip()
 		{
+#if ETERNAL_USE_REVERSED_Z
 			_ViewToClip = ReverseZOrthographicLHMatrix(_Near, _Far, _Width, _Height);
 			_ClipToView = ReverseZInverseOrthographicLHMatrix(_Near, _Far, _Width, _Height);
+#else
+			_ViewToClip = OrthographicLHMatrix(_Near, _Far, _Width, _Height);
+			_ClipToView = InverseOrthographicLHMatrix(_Near, _Far, _Width, _Height);
+#endif
 		}
 	}
 }

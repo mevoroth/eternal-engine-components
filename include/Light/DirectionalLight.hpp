@@ -9,7 +9,7 @@ namespace Eternal
 		class DirectionalLight : public Light
 		{
 		public:
-
+			DirectionalLight();
 		};
 	}
 }

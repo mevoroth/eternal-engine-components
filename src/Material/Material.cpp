@@ -11,16 +11,18 @@ namespace Eternal
 			_Textures.resize(static_cast<size_t>(TextureType::TEXTURE_TYPE_COUNT));
 		}
 
-		void Material::SetTexture(_In_ uint32_t InSlotIndex, _In_ Texture* InTexture)
+		void Material::SetTexture(_In_ TextureType InSlotIndex, _In_ Texture* InTexture)
 		{
-			ETERNAL_ASSERT(InSlotIndex < _Textures.size());
-			_Textures[InSlotIndex] = InTexture;
+			uint32_t SlotIndexInt = static_cast<uint32_t>(InSlotIndex);
+			ETERNAL_ASSERT(SlotIndexInt < _Textures.size());
+			ETERNAL_ASSERT(InTexture);
+			_Textures[SlotIndexInt] = InTexture;
 		}
 
 		void Material::CommitMaterial(_Inout_ DescriptorTable& InOutDescriptorTable)
 		{
 			for (uint32_t TextureIndex = 0; TextureIndex < static_cast<uint32_t>(TextureType::TEXTURE_TYPE_COUNT); ++TextureIndex)
-				InOutDescriptorTable.SetDescriptor(2 + TextureIndex, _Textures[TextureIndex]->GetShaderResourceView());
+				InOutDescriptorTable.SetDescriptor(4 + TextureIndex, _Textures[TextureIndex]->GetShaderResourceView());
 		}
 	}
 }

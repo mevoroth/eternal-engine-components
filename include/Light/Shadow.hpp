@@ -8,7 +8,7 @@ namespace Eternal
 	{
 		struct Shadow
 		{
-			//Camera*
+			Camera* ShadowCamera = nullptr;
 		};
 	}
 }

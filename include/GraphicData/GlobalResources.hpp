@@ -73,6 +73,11 @@ namespace Eternal
 				return *_ShadowMapViewConstantBuffer.ResourceView;
 			}
 
+			Resource& GetShadowMapViewConstantBuffer()
+			{
+				return **_ShadowMapViewConstantBuffer.ResourceBuffer;
+			}
+
 			const Viewport& GetShadowMapViewport() const
 			{
 				ETERNAL_ASSERT(_ShadowMapViewport);

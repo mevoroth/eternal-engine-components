@@ -51,8 +51,7 @@ namespace Eternal
 				_PerDrawConstants.push_back({
 					InModelMatrix,
 					VerticesCount,
-					IndicesCount / 3,
-					0, 0 // Dummy
+					IndicesCount / 3
 				});
 			}
 
@@ -67,8 +66,13 @@ namespace Eternal
 					_Indices[TotalIndexCount + Index] += TotalVertexCount;
 			}
 
+			const vector<PerDrawConstants>& GetPerDrawConstants() const { return _PerDrawConstants; }
 			const vector<IndexT>& GetIndices() const { return _Indices; }
 			const vector<VertexT>& GetVertices() const { return _Vertices; }
+
+			vector<PerDrawConstants>& GetPerDrawConstants() { return _PerDrawConstants; }
+			vector<IndexT>& GetIndices() { return _Indices; }
+			vector<VertexT>& GetVertices() { return _Vertices; }
 
 		private:
 

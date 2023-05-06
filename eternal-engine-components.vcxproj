@@ -43,7 +43,9 @@
     <ClCompile Include="src\GraphicData\GlobalResources.cpp" />
     <ClCompile Include="src\GraphicData\Texture.cpp" />
     <ClCompile Include="src\GraphicData\ViewGraphicData.cpp" />
+    <ClCompile Include="src\Light\DirectionalLight.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
+    <ClCompile Include="src\Light\PointLight.cpp" />
     <ClCompile Include="src\Light\SpotLight.cpp" />
     <ClCompile Include="src\Material\Material.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
@@ -66,13 +68,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
