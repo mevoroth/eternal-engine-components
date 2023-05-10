@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Transform/Transform.hpp"
+#include "Mesh/AxisAlignedBoundingBox.hpp"
 #include <vector>
 #include <string>
 
@@ -36,6 +37,7 @@ namespace Eternal
 			};
 
 			vector<PerDrawInformation> PerDrawInformations;
+			vector<AxisAlignedBoundingBox> BoundingBoxes;
 			Resource* MeshVertexBuffer				= nullptr;
 			Resource* MeshIndexBuffer				= nullptr;
 			Resource* MeshConstantBuffer			= nullptr;

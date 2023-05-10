@@ -34,9 +34,10 @@ namespace Eternal
 			virtual const void* GetIndicesData() const override final { return reinterpret_cast<const void*>(_Indices.data()); }
 			virtual const void* GetConstantBufferData() const override final { return reinterpret_cast<const void*>(_PerDrawConstants.data()); }
 
-			void AddMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
+			void AddMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial, _In_ const AxisAlignedBoundingBox& InBoundingBox)
 			{
 				_GPUMesh.PerDrawInformations.push_back(GPUMesh::PerDrawInformation());
+				_GPUMesh.BoundingBoxes.push_back(InBoundingBox);
 
 				uint32_t IndicesCount	= static_cast<uint32_t>(_Indices.size());
 				uint32_t VerticesCount	= static_cast<uint32_t>(_Vertices.size());
@@ -55,12 +56,12 @@ namespace Eternal
 				});
 			}
 
-			void AddMergeMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial)
+			void AddMergeMesh(_In_ const vector<IndexT>& InIndices, _In_ const vector<VertexT>& InVertices, _In_ const Matrix4x4& InModelMatrix, _In_ Material* InMaterial, _In_ const AxisAlignedBoundingBox& InBoundingBox)
 			{
 				IndexT TotalVertexCount = static_cast<IndexT>(_Vertices.size());
 				uint32_t TotalIndexCount = static_cast<uint32_t>(_Indices.size());
 
-				AddMesh(InIndices, InVertices, InModelMatrix, InMaterial);
+				AddMesh(InIndices, InVertices, InModelMatrix, InMaterial, InBoundingBox);
 
 				for (uint32_t Index = 0; Index < InIndices.size(); ++Index)
 					_Indices[TotalIndexCount + Index] += TotalVertexCount;
