@@ -16,7 +16,7 @@ namespace Eternal
 
 		struct PositionNormalTangentBinormalUVVertex
 		{
-			Vector4 Position	= Vector4::ZeroPosition;
+			Vector3 Position	= Vector3::Zero;
 			Vector3 Normal		= Vector3::Up;		// Up
 			Vector3 Tangent		= Vector3::Forward;	// Fw
 			Vector3 Binormal	= Vector3::Right;	// R
