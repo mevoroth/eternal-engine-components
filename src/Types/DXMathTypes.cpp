@@ -18,13 +18,14 @@ namespace Eternal
 
 		Quaternion Quaternion::QuaternionIdentity(0.0f, 0.0f, 0.0f, 1.0f);
 
-		Vector3 Vector3::Right(		 1.0f,  0.0f,  0.0f);
-		Vector3 Vector3::Up(		 0.0f,  1.0f,  0.0f);
-		Vector3 Vector3::Forward(	 0.0f,  0.0f,  1.0f);
-		Vector3 Vector3::Left(		-1.0f,  0.0f,  0.0f);
-		Vector3 Vector3::Down(		 0.0f, -1.0f,  0.0f);
-		Vector3 Vector3::Backward(	 0.0f,  0.0f, -1.0f);
-
+		Vector3 Vector3::Right(				 1.0f,  0.0f,  0.0f);
+		Vector3 Vector3::Up(				 0.0f,  1.0f,  0.0f);
+		Vector3 Vector3::Forward(			 0.0f,  0.0f,  1.0f);
+		Vector3 Vector3::Left(				-1.0f,  0.0f,  0.0f);
+		Vector3 Vector3::Down(				 0.0f, -1.0f,  0.0f);
+		Vector3 Vector3::Backward(			 0.0f,  0.0f, -1.0f);
+		Vector3	Vector3::NegativeInfinity(	-std::numeric_limits<float>::infinity());
+		Vector3 Vector3::PositiveInfinity(	 std::numeric_limits<float>::infinity());
 
 		Vector4 Vector4::RightPosition(		 1.0f,  0.0f,  0.0f, 1.0f);
 		Vector4 Vector4::UpPosition(		 0.0f,  1.0f,  0.0f, 1.0f);

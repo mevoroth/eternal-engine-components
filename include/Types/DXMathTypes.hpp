@@ -141,6 +141,8 @@ namespace Eternal
 			static Vector3 Left;
 			static Vector3 Down;
 			static Vector3 Backward;
+			static Vector3 NegativeInfinity;
+			static Vector3 PositiveInfinity;
 
 			using Float3::Float3;
 		};
