@@ -52,7 +52,7 @@
     <ClInclude Include="include\Mesh\Bone.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh\BoundingBox.hpp">
+    <ClInclude Include="include\Mesh\AxisAlignedBoundingBox.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp">
@@ -117,7 +117,7 @@
     <ClCompile Include="src\Mesh\Mesh.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\BoundingBox.cpp">
+    <ClCompile Include="src\Mesh\AxisAlignedBoundingBox.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Light\SpotLight.cpp">

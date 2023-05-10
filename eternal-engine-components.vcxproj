@@ -27,7 +27,7 @@
     <ClInclude Include="include\Light\SpotLight.hpp" />
     <ClInclude Include="include\Material\Material.hpp" />
     <ClInclude Include="include\Mesh\Bone.hpp" />
-    <ClInclude Include="include\Mesh\BoundingBox.hpp" />
+    <ClInclude Include="include\Mesh\AxisAlignedBoundingBox.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
@@ -49,7 +49,7 @@
     <ClCompile Include="src\Light\SpotLight.cpp" />
     <ClCompile Include="src\Material\Material.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
-    <ClCompile Include="src\Mesh\BoundingBox.cpp" />
+    <ClCompile Include="src\Mesh\AxisAlignedBoundingBox.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\Types\DXMathTypes.cpp">
