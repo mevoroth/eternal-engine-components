@@ -27,13 +27,10 @@
     <ClInclude Include="include\Light\SpotLight.hpp" />
     <ClInclude Include="include\Material\Material.hpp" />
     <ClInclude Include="include\Mesh\Bone.hpp" />
-    <ClInclude Include="include\Mesh\AxisAlignedBoundingBox.hpp" />
     <ClInclude Include="include\Mesh\GenericMesh.hpp" />
     <ClInclude Include="include\Mesh\Mesh.hpp" />
     <ClInclude Include="include\Transform\Transform.hpp" />
-    <ClInclude Include="include\Types\DXMathTypes.hpp" />
     <ClInclude Include="include\Types\HLSLReflection.hpp" />
-    <ClInclude Include="include\Types\Types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp" />
@@ -49,15 +46,8 @@
     <ClCompile Include="src\Light\SpotLight.cpp" />
     <ClCompile Include="src\Material\Material.cpp" />
     <ClCompile Include="src\Mesh\Bone.cpp" />
-    <ClCompile Include="src\Mesh\AxisAlignedBoundingBox.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
-    <ClCompile Include="src\Types\DXMathTypes.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
-      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Cdecl</CallingConvention>
-    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8A5A5437-7E81-42BC-9DA7-1693D20B73BA}</ProjectGuid>

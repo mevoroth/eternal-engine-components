@@ -27,12 +27,6 @@
     <ClInclude Include="include\Transform\Transform.hpp">
       <Filter>Transform</Filter>
     </ClInclude>
-    <ClInclude Include="include\Types\DXMathTypes.hpp">
-      <Filter>Types</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Types\Types.hpp">
-      <Filter>Types</Filter>
-    </ClInclude>
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\Camera\Camera.hpp">
       <Filter>Camera</Filter>
@@ -50,9 +44,6 @@
       <Filter>Mesh</Filter>
     </ClInclude>
     <ClInclude Include="include\Mesh\Bone.hpp">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Mesh\AxisAlignedBoundingBox.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp">
@@ -96,9 +87,6 @@
     <ClCompile Include="src\Transform\Transform.cpp">
       <Filter>Transform</Filter>
     </ClCompile>
-    <ClCompile Include="src\Types\DXMathTypes.cpp">
-      <Filter>Types</Filter>
-    </ClCompile>
     <ClCompile Include="src\Camera\Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -115,9 +103,6 @@
       <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh\Mesh.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh\AxisAlignedBoundingBox.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Light\SpotLight.cpp">

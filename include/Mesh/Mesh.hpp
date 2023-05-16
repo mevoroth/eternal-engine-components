@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Transform/Transform.hpp"
-#include "Mesh/AxisAlignedBoundingBox.hpp"
+#include "Types/AxisAlignedBoundingBox.hpp"
 #include <vector>
 #include <string>
 
@@ -22,6 +22,7 @@ namespace Eternal
 	{
 		using namespace std;
 		using namespace Eternal::Graphics;
+		using namespace Eternal::Types;
 
 		class Material;
 
