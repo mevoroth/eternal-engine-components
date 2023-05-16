@@ -14,6 +14,7 @@ namespace Eternal
 		class Camera
 		{
 		public:
+
 			Camera(_In_ float Near, _In_ float Far);
 			void GetWorldToView(_Out_ Matrix4x4& OutWorldToView);
 			void GetViewToWorld(_Out_ Matrix4x4& OutViewToWorld);
@@ -36,6 +37,8 @@ namespace Eternal
 			float GetRenderFar() const;
 
 			void UpdateWorldToView(_In_ const Transform& InTransform);
+
+			void ComputeFrustum(_Out_ Frustum& OutFrustum);
 
 		protected:
 			virtual void _UpdateViewToClip() = 0;
