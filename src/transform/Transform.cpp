@@ -50,7 +50,7 @@ namespace Eternal
 			Scaling *= InDeltaScaling;
 		}
 
-		Matrix4x4 Transform::GetViewToWorld() const
+		Matrix4x4 Transform::GetLocalToWorld() const
 		{
 			//XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
 			//	* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))

@@ -42,7 +42,7 @@ namespace Eternal
 			Transform TransformNoTranslation = InTransform;
 			TransformNoTranslation.SetTranslation(Vector3::Zero);
 
-			Vector4 Direction = TransformNoTranslation.GetViewToWorld() * Vector4::ForwardPosition;
+			Vector4 Direction = TransformNoTranslation.GetLocalToWorld() * Vector4::ForwardPosition;
 
 			_Position = InTransform.GetTranslation();
 			_Direction = Vector3(

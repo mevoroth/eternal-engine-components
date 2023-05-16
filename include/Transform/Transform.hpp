@@ -30,7 +30,7 @@ namespace Eternal
 			 */
 			void Rotate(_In_ const Vector3& R);
 			void Scale(_In_ const Vector3& S);
-			Matrix4x4 GetViewToWorld() const;
+			Matrix4x4 GetLocalToWorld() const;
 
 		private:
 			Vector3 Translation	= Vector3::Zero;

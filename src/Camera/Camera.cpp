@@ -143,8 +143,8 @@ namespace Eternal
 			Vector3 TempUp3			= Vector3::Up;
 
 			// Compute rotation
-			Vector4 Forward			= TransformNoTranslation.GetViewToWorld() * Vector4::ForwardPosition;
-			Vector4 Up				= TransformNoTranslation.GetViewToWorld() * Vector4::UpPosition;
+			Vector4 Forward			= TransformNoTranslation.GetLocalToWorld() * Vector4::ForwardPosition;
+			Vector4 Up				= TransformNoTranslation.GetLocalToWorld() * Vector4::UpPosition;
 
 			TempForward3.x = Forward.x;
 			TempForward3.y = Forward.y;
@@ -154,7 +154,7 @@ namespace Eternal
 			TempUp3.y = Up.y;
 			TempUp3.z = Up.z;
 			
-			_ViewToWorld = InTransform.GetViewToWorld();
+			_ViewToWorld = InTransform.GetLocalToWorld();
 			_UpdateWorldToView(Position, TempForward3, TempUp3);
 		}
 	}
