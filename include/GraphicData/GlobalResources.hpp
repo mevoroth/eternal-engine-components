@@ -16,8 +16,6 @@ namespace Eternal
 		using namespace Eternal::Core;
 		using namespace Eternal::HLSL;
 
-		class RenderTargetTexture;
-
 		class GlobalResources
 		{
 		public:

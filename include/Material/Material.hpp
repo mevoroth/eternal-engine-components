@@ -7,17 +7,12 @@ namespace Eternal
 	namespace Graphics
 	{
 		class DescriptorTable;
-	}
-
-	namespace GraphicData
-	{
 		class Texture;
 	}
 
 	namespace Components
 	{
 		using namespace std;
-		using namespace Eternal::GraphicData;
 		using namespace Eternal::Graphics;
 
 		enum class TextureType

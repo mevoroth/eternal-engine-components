@@ -58,9 +58,6 @@
     <ClInclude Include="include\Light\Shadow.hpp">
       <Filter>Light</Filter>
     </ClInclude>
-    <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp">
-      <Filter>GraphicData</Filter>
-    </ClInclude>
     <ClInclude Include="include\GraphicData\GlobalResources.hpp">
       <Filter>GraphicData</Filter>
     </ClInclude>
@@ -72,9 +69,6 @@
     </ClInclude>
     <ClInclude Include="include\Material\Material.hpp">
       <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GraphicData\Texture.hpp">
-      <Filter>GraphicData</Filter>
     </ClInclude>
     <ClInclude Include="include\Types\HLSLReflection.hpp">
       <Filter>Types</Filter>
@@ -108,17 +102,11 @@
     <ClCompile Include="src\Light\SpotLight.cpp">
       <Filter>Light</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp">
-      <Filter>GraphicData</Filter>
-    </ClCompile>
     <ClCompile Include="src\GraphicData\GlobalResources.cpp">
       <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\Material\Material.cpp">
       <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GraphicData\Texture.cpp">
-      <Filter>GraphicData</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicData\ViewGraphicData.cpp">
       <Filter>GraphicData</Filter>

@@ -1,6 +1,5 @@
 #include "Material/Material.hpp"
 #include "Graphics/GraphicsInclude.hpp"
-#include "GraphicData/Texture.hpp"
 
 namespace Eternal
 {

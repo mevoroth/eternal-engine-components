@@ -1,5 +1,4 @@
 #include "GraphicData/GlobalResources.hpp"
-#include "GraphicData/RenderTargetTexture.hpp"
 #include "GraphicData/ViewGraphicData.hpp"
 #include "Camera/Camera.hpp"
 #include "Core/System.hpp"

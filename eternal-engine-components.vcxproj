@@ -16,9 +16,7 @@
     <ClInclude Include="include\Camera\PerspectiveCamera.hpp" />
     <ClInclude Include="include\ComponentsSettings.hpp" />
     <ClInclude Include="include\GraphicData\MeshVertexFormat.hpp" />
-    <ClInclude Include="include\GraphicData\RenderTargetTexture.hpp" />
     <ClInclude Include="include\GraphicData\GlobalResources.hpp" />
-    <ClInclude Include="include\GraphicData\Texture.hpp" />
     <ClInclude Include="include\GraphicData\ViewGraphicData.hpp" />
     <ClInclude Include="include\Light\DirectionalLight.hpp" />
     <ClInclude Include="include\Light\Light.hpp" />
@@ -36,9 +34,7 @@
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\Camera\PerspectiveCamera.cpp" />
-    <ClCompile Include="src\GraphicData\RenderTargetTexture.cpp" />
     <ClCompile Include="src\GraphicData\GlobalResources.cpp" />
-    <ClCompile Include="src\GraphicData\Texture.cpp" />
     <ClCompile Include="src\GraphicData\ViewGraphicData.cpp" />
     <ClCompile Include="src\Light\DirectionalLight.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
