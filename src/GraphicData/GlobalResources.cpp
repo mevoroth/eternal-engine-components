@@ -1,8 +1,10 @@
 #include "GraphicData/GlobalResources.hpp"
 #include "GraphicData/ViewGraphicData.hpp"
 #include "Camera/Camera.hpp"
+#include "Camera/PerspectiveCamera.hpp"
 #include "Core/System.hpp"
 #include "Types/Types.hpp"
+#include "Math/Math.hpp"
 #include "HLSLPerViewConstants.hpp"
 
 namespace Eternal
@@ -14,7 +16,9 @@ namespace Eternal
 
 		GlobalResources::GlobalResources(_In_ GraphicsContext& InContext)
 			: _ViewConstantBuffer(InContext, "ViewConstantBuffer")
-			, _ShadowMapViewConstantBuffer(InContext, "ShadowMapViewConstantBuffer")
+			, _ShadowMapViewConstantBuffer(InContext, "ShadowMapViewBuffer")
+			, _AtmosphereConstantBuffer(InContext, "AtmosphereBuffer")
+			, _SkyViewCubeMapConstantBuffer(InContext, "SkyViewCubeMapBuffer")
 		{
 			_GBufferLuminance = new RenderTargetTexture(
 				InContext,
@@ -109,32 +113,63 @@ namespace Eternal
 				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
 			);
 
-			_ShadowMap = new RenderTargetTexture(
-				InContext,
-				TextureResourceCreateInformation(
-					InContext.GetDevice(),
-					"ShadowMap",
-					TextureCreateInformation(
-						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
-						Format::FORMAT_D32,
-						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_DEPTH_STENCIL,
-						4096,
-						4096,
-						1,
-						1,
-						TextureCreateInformation::DefaultClearValueDepth
+			{
+				_ShadowMap = new RenderTargetTexture(
+					InContext,
+					TextureResourceCreateInformation(
+						InContext.GetDevice(),
+						"ShadowMap",
+						TextureCreateInformation(
+							ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
+							Format::FORMAT_D32,
+							TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_DEPTH_STENCIL,
+							4096,
+							4096,
+							1,
+							1,
+							TextureCreateInformation::DefaultClearValueDepth
+						),
+						ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
+						TransitionState::TRANSITION_DEPTH_STENCIL_WRITE
 					),
-					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
-					TransitionState::TRANSITION_DEPTH_STENCIL_WRITE
-				),
-				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
-			);
+					RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
+				);
 
-			_ShadowMapViewport = CreateViewport(InContext, 4096, 4096);
+				_ShadowMapViewport = CreateViewport(InContext, 4096, 4096);
+			}
+
+			{
+				_Sky = new RenderTargetTexture(
+					InContext,
+					TextureResourceCreateInformation(
+						InContext.GetDevice(),
+						"Sky",
+						TextureCreateInformation(
+							ResourceDimension::RESOURCE_DIMENSION_TEXTURE_CUBE,
+							Format::FORMAT_RGB111110_FLOAT,
+							TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET,
+							SkyCubeMapSize,
+							SkyCubeMapSize,
+							6,
+							Math::Log2(SkyCubeMapSize) + 1
+						),
+						ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
+						TransitionState::TRANSITION_RENDER_TARGET
+					),
+					RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
+				);
+
+				_SkyViewport = CreateViewport(InContext, SkyCubeMapSize, SkyCubeMapSize);
+			}
 		}
 
 		GlobalResources::~GlobalResources()
 		{
+			DestroyViewport(_SkyViewport);
+
+			delete _Sky;
+			_Sky = nullptr;
+
 			DestroyViewport(_ShadowMapViewport);
 
 			delete _ShadowMap;
@@ -158,6 +193,8 @@ namespace Eternal
 
 		bool GlobalResources::BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem)
 		{
+			using namespace Eternal::Math;
+
 			Components::Camera* CurrentCamera = InSystem.GetRenderFrame().ViewCamera;
 			bool CanRender = CurrentCamera != nullptr;
 			if (CanRender)
@@ -168,6 +205,42 @@ namespace Eternal
 					static_cast<float>(InContext.GetWindow().GetWidth()),
 					static_cast<float>(InContext.GetWindow().GetHeight())
 				);
+
+				{
+					MapRange SkyViewCubeMapBufferRange(sizeof(PerViewCubeMapConstants));
+					MapScope<PerViewCubeMapConstants> SkyViewCubeMapBufferMapScope(*_SkyViewCubeMapConstantBuffer.ResourceBuffer, SkyViewCubeMapBufferRange);
+
+					Vector3 FacesForward[] =
+					{
+						Vector3::Right,
+						Vector3::Left,
+						Vector3::Up,
+						Vector3::Down,
+						Vector3::Forward,
+						Vector3::Backward
+					};
+					ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(FacesForward) == VIEW_CUBE_MAP_FACE_COUNT, "Incorrect entries count for FacesForward");
+
+					Vector3 FacesUp[] =
+					{
+						Vector3::Up,
+						Vector3::Up,
+						Vector3::Backward,
+						Vector3::Forward,
+						Vector3::Up,
+						Vector3::Up
+					};
+					ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(FacesUp) == VIEW_CUBE_MAP_FACE_COUNT, "Incorrect entries count for FacesUp");
+
+					for (int FaceIndex = 0; FaceIndex < VIEW_CUBE_MAP_FACE_COUNT; ++FaceIndex)
+					{
+						PerspectiveCamera FaceCamera(CurrentCamera->GetRenderNear(), CurrentCamera->GetRenderFar(), PI * 0.25f, 1.0f);
+						FaceCamera.SetPosition(CurrentCamera->GetPosition());
+						FaceCamera.SetForward(FacesForward[FaceIndex]);
+						FaceCamera.SetUp(FacesUp[FaceIndex]);
+						UploadViewCameraToBuffer(&SkyViewCubeMapBufferMapScope->PerViewFace[FaceIndex], &FaceCamera, SkyCubeMapSize, SkyCubeMapSize);
+					}
+				}
 			}
 			return CanRender;
 		}

@@ -2,6 +2,7 @@
 
 #include "Graphics/GraphicsInclude.hpp"
 #include "HLSLPerViewConstants.hpp"
+#include "HLSLAtmosphereConstants.hpp"
 
 namespace Eternal
 {
@@ -19,6 +20,8 @@ namespace Eternal
 		class GlobalResources
 		{
 		public:
+
+			static constexpr int32_t SkyCubeMapSize = 256;
 
 			GlobalResources(_In_ GraphicsContext& InContext);
 			~GlobalResources();
@@ -61,14 +64,20 @@ namespace Eternal
 				return *_ShadowMap;
 			}
 
+			RenderTargetTexture& GetSky()
+			{
+				ETERNAL_ASSERT(_Sky);
+				return *_Sky;
+			}
+
 			View* GetViewConstantBufferView()
 			{
-				return *_ViewConstantBuffer.ResourceView;
+				return _ViewConstantBuffer.GetView();
 			}
 
 			View* GetShadowMapViewConstantBufferView()
 			{
-				return *_ShadowMapViewConstantBuffer.ResourceView;
+				return _ShadowMapViewConstantBuffer.GetView();
 			}
 
 			Resource& GetShadowMapViewConstantBuffer()
@@ -82,18 +91,49 @@ namespace Eternal
 				return *_ShadowMapViewport;
 			}
 
+			View* GetAtmosphereConstantBufferView()
+			{
+				return _AtmosphereConstantBuffer.GetView();
+			}
+
+			Resource& GetAtmosphereConstantBuffer()
+			{
+				return **_AtmosphereConstantBuffer.ResourceBuffer;
+			}
+
+			View* GetSkyViewCubeMapConstantBufferView()
+			{
+				return _SkyViewCubeMapConstantBuffer.GetView();
+			}
+
+			Resource& GetSkyViewCubeMapConstantBuffer()
+			{
+				return **_SkyViewCubeMapConstantBuffer.ResourceBuffer;
+			}
+
+			const Viewport& GetSkyViewport() const
+			{
+				ETERNAL_ASSERT(_SkyViewport);
+				return *_SkyViewport;
+			}
+
 		private:
 
-			ConstantBuffer<PerViewConstants>	_ViewConstantBuffer;
-			RenderTargetTexture*				_GBufferLuminance					= nullptr;
-			RenderTargetTexture*				_GBufferAlbedo						= nullptr;
-			RenderTargetTexture*				_GBufferNormals						= nullptr;
-			RenderTargetTexture*				_GBufferRoughnessMetallicSpecular	= nullptr;
-			RenderTargetTexture*				_GBufferDepthStencil				= nullptr;
+			ConstantBuffer<PerViewConstants>		_ViewConstantBuffer;
+			RenderTargetTexture*					_GBufferLuminance					= nullptr;
+			RenderTargetTexture*					_GBufferAlbedo						= nullptr;
+			RenderTargetTexture*					_GBufferNormals						= nullptr;
+			RenderTargetTexture*					_GBufferRoughnessMetallicSpecular	= nullptr;
+			RenderTargetTexture*					_GBufferDepthStencil				= nullptr;
 			
-			ConstantBuffer<PerViewConstants>	_ShadowMapViewConstantBuffer;
-			RenderTargetTexture*				_ShadowMap							= nullptr;
-			Viewport*							_ShadowMapViewport					= nullptr;
+			ConstantBuffer<PerViewConstants>		_ShadowMapViewConstantBuffer;
+			RenderTargetTexture*					_ShadowMap							= nullptr;
+			Viewport*								_ShadowMapViewport					= nullptr;
+
+			ConstantBuffer<AtmosphereConstants>		_AtmosphereConstantBuffer;
+			ConstantBuffer<PerViewCubeMapConstants>	_SkyViewCubeMapConstantBuffer;
+			RenderTargetTexture*					_Sky								= nullptr;
+			Viewport*								_SkyViewport						= nullptr;
 		};
 	}
 }
