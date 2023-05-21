@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Camera.hpp"
+#include "Math/Math.hpp"
 
 namespace Eternal
 {
 	namespace Components
 	{
+		using namespace Eternal::Math;
+
 		class PerspectiveCamera final : public Camera
 		{
 		public:
@@ -18,7 +21,7 @@ namespace Eternal
 			virtual void _UpdateViewToClip() override final;
 
 		private:
-			float _YFOV			= 0.78539816339f; // 90° / 2
+			float _YFOV			= PI * 0.25f; // 90° / 2
 			float _ScreenRatio	= 16.f / 9.f;
 		};
 	}
