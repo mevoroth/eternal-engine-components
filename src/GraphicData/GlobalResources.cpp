@@ -234,8 +234,8 @@ namespace Eternal
 
 					for (int FaceIndex = 0; FaceIndex < VIEW_CUBE_MAP_FACE_COUNT; ++FaceIndex)
 					{
-						PerspectiveCamera FaceCamera(CurrentCamera->GetRenderNear(), CurrentCamera->GetRenderFar(), PI * 0.25f, 1.0f);
-						FaceCamera.SetPosition(CurrentCamera->GetPosition());
+						PerspectiveCamera FaceCamera(CurrentCamera->GetNear(), /*CurrentCamera->GetFar()*/6431.0f, PI * 0.5f, 1.0f);
+						FaceCamera.SetPosition(CurrentCamera->GetPosition() * M_TO_KM);
 						FaceCamera.SetForward(FacesForward[FaceIndex]);
 						FaceCamera.SetUp(FacesUp[FaceIndex]);
 						UploadViewCameraToBuffer(&SkyViewCubeMapBufferMapScope->PerViewFace[FaceIndex], &FaceCamera, SkyCubeMapSize, SkyCubeMapSize);
