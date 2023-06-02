@@ -92,6 +92,16 @@ namespace Eternal
 			return ETERNAL_USE_REVERSED_Z ? _Near : _Far;
 		}
 
+		float Camera::GetNear() const
+		{
+			return _Near;
+		}
+
+		float Camera::GetFar() const
+		{
+			return _Far;
+		}
+
 		void Camera::SetPosition(_In_ const Vector3& Position)
 		{
 			_Position = Position;
