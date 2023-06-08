@@ -151,7 +151,7 @@ namespace Eternal
 							SkyCubeMapSize,
 							SkyCubeMapSize,
 							6,
-							Math::Log2(SkyCubeMapSize) + 1
+							static_cast<uint32_t>(Math::Log2<float>(SkyCubeMapSize)) + 1
 						),
 						ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 						TransitionState::TRANSITION_RENDER_TARGET
