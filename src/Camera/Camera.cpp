@@ -173,70 +173,79 @@ namespace Eternal
 		{
 			using namespace Eternal::Math;
 
-			_UpdateCache();
+			Matrix4x4 WorldToClip;
+			GetWorldToClip(WorldToClip);
 
 			// Left clipping plane
 			OutFrustum.FrustumPlanes[0] = Plane(
-				_ViewToClip._14 + _ViewToClip._11,
-				_ViewToClip._24 + _ViewToClip._21,
-				_ViewToClip._34 + _ViewToClip._31,
-				_ViewToClip._44 + _ViewToClip._41
+				WorldToClip._14 + WorldToClip._11,
+				WorldToClip._24 + WorldToClip._21,
+				WorldToClip._34 + WorldToClip._31,
+				WorldToClip._44 + WorldToClip._41
 			);
 
 			// Right clipping plane
 			OutFrustum.FrustumPlanes[1] = Plane(
-				_ViewToClip._14 - _ViewToClip._11,
-				_ViewToClip._24 - _ViewToClip._21,
-				_ViewToClip._34 - _ViewToClip._31,
-				_ViewToClip._44 - _ViewToClip._41
+				WorldToClip._14 - WorldToClip._11,
+				WorldToClip._24 - WorldToClip._21,
+				WorldToClip._34 - WorldToClip._31,
+				WorldToClip._44 - WorldToClip._41
 			);
 
 			// Top clipping plane
 			OutFrustum.FrustumPlanes[2] = Plane(
-				_ViewToClip._14 - _ViewToClip._12,
-				_ViewToClip._24 - _ViewToClip._22,
-				_ViewToClip._34 - _ViewToClip._32,
-				_ViewToClip._44 - _ViewToClip._42
+				WorldToClip._14 - WorldToClip._12,
+				WorldToClip._24 - WorldToClip._22,
+				WorldToClip._34 - WorldToClip._32,
+				WorldToClip._44 - WorldToClip._42
 			);
 
 			// Bottom clipping plane
 			OutFrustum.FrustumPlanes[3] = Plane(
-				_ViewToClip._14 + _ViewToClip._12,
-				_ViewToClip._24 + _ViewToClip._22,
-				_ViewToClip._34 + _ViewToClip._32,
-				_ViewToClip._44 + _ViewToClip._42
+				WorldToClip._14 + WorldToClip._12,
+				WorldToClip._24 + WorldToClip._22,
+				WorldToClip._34 + WorldToClip._32,
+				WorldToClip._44 + WorldToClip._42
 			);
 
 			// Near clipping plane
 			OutFrustum.FrustumPlanes[4] = Plane(
-				_ViewToClip._13,
-				_ViewToClip._23,
-				_ViewToClip._33,
-				_ViewToClip._43
+				WorldToClip._13,
+				WorldToClip._23,
+				WorldToClip._33,
+				WorldToClip._43
 			);
 
 			// Far clipping plane
 			OutFrustum.FrustumPlanes[5] = Plane(
-				_ViewToClip._14 - _ViewToClip._13,
-				_ViewToClip._24 - _ViewToClip._23,
-				_ViewToClip._34 - _ViewToClip._33,
-				_ViewToClip._44 - _ViewToClip._43
+				WorldToClip._14 - WorldToClip._13,
+				WorldToClip._24 - WorldToClip._23,
+				WorldToClip._34 - WorldToClip._33,
+				WorldToClip._44 - WorldToClip._43
 			);
 
 			for (uint32_t PlaneIndex = 0; PlaneIndex < Frustum::FrustumPlanesCount; ++PlaneIndex)
-				OutFrustum.FrustumPlanes[PlaneIndex] /= OutFrustum.FrustumPlanes[PlaneIndex].w;
+			{
+				Vector3 PlaneVector(
+					OutFrustum.FrustumPlanes[PlaneIndex].x,
+					OutFrustum.FrustumPlanes[PlaneIndex].y,
+					OutFrustum.FrustumPlanes[PlaneIndex].z
+				);
+				float PlaneVectorLengthRcp = Length(PlaneVector);
+				OutFrustum.FrustumPlanes[PlaneIndex] /= PlaneVectorLengthRcp;
+			}
 
 			Matrix4x4 ClipToWorld;
 			GetClipToWorld(ClipToWorld);
 			
-			OutFrustum.FrustumVertices[0] = Vector4(-Vector3::One,		 1.0f);
+			OutFrustum.FrustumVertices[0] = Vector4(-1.0f, -1.0f, -1.0f, 1.0f);
 			OutFrustum.FrustumVertices[1] = Vector4( 1.0f, -1.0f, -1.0f, 1.0f);
 			OutFrustum.FrustumVertices[2] = Vector4(-1.0f,  1.0f, -1.0f, 1.0f);
 			OutFrustum.FrustumVertices[3] = Vector4( 1.0f,  1.0f, -1.0f, 1.0f);
 			OutFrustum.FrustumVertices[4] = Vector4(-1.0f, -1.0f,  1.0f, 1.0f);
 			OutFrustum.FrustumVertices[5] = Vector4( 1.0f, -1.0f,  1.0f, 1.0f);
 			OutFrustum.FrustumVertices[6] = Vector4(-1.0f,  1.0f,  1.0f, 1.0f);
-			OutFrustum.FrustumVertices[7] = Vector4::One;
+			OutFrustum.FrustumVertices[7] = Vector4( 1.0f,  1.0f,  1.0f, 1.0f);
 
 			for (uint32_t VertexIndex = 0; VertexIndex < Frustum::FrustumVerticesCount; ++VertexIndex)
 			{
