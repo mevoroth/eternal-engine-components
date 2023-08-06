@@ -1,4 +1,5 @@
 #include "Mesh/Mesh.hpp"
+#include "Graphics/GraphicsInclude.hpp"
 
 namespace Eternal
 {
@@ -17,6 +18,8 @@ namespace Eternal
 				delete Meshes[MeshIndex];
 				Meshes[MeshIndex] = nullptr;
 			}
+			DestroyAccelerationStructure(MeshCollectionAccelerationStructure);
+			ETERNAL_BREAK(); // Mesh cleaning not implemented yet
 		}
 	}
 }

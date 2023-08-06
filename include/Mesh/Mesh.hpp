@@ -11,6 +11,7 @@ namespace Eternal
 	{
 		class Resource;
 		class View;
+		class AccelerationStructure;
 	}
 	
 	namespace FileSystem
@@ -39,11 +40,12 @@ namespace Eternal
 
 			vector<PerDrawInformation> PerDrawInformations;
 			vector<AxisAlignedBoundingBox> BoundingBoxes;
-			Resource* MeshVertexBuffer				= nullptr;
-			Resource* MeshIndexBuffer				= nullptr;
-			Resource* MeshConstantBuffer			= nullptr;
-			View* MeshVertexStructuredBufferView	= nullptr;
-			View* MeshIndexStructuredBufferView		= nullptr;
+			Resource* MeshVertexBuffer								= nullptr;
+			Resource* MeshIndexBuffer								= nullptr;
+			Resource* MeshConstantBuffer							= nullptr;
+			Resource* MeshBottomLevelAccelerationStructureBuffer	= nullptr;
+			View* MeshVertexStructuredBufferView					= nullptr;
+			View* MeshIndexStructuredBufferView						= nullptr;
 		};
 
 		class Mesh
@@ -85,6 +87,7 @@ namespace Eternal
 			~MeshCollection();
 
 			vector<Mesh*> Meshes;
+			AccelerationStructure* MeshCollectionAccelerationStructure = nullptr;
 		};
 	}
 }
