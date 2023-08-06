@@ -5,6 +5,8 @@ namespace Eternal
 {
 	namespace Components
 	{
+		Material* Material::DefaultMaterial = new Material();
+
 		Material::Material()
 		{
 			_Textures.resize(static_cast<size_t>(TextureType::TEXTURE_TYPE_COUNT));
@@ -21,7 +23,7 @@ namespace Eternal
 		void Material::CommitMaterial(_Inout_ DescriptorTable& InOutDescriptorTable)
 		{
 			for (uint32_t TextureIndex = 0; TextureIndex < static_cast<uint32_t>(TextureType::TEXTURE_TYPE_COUNT); ++TextureIndex)
-				InOutDescriptorTable.SetDescriptor(4 + TextureIndex, _Textures[TextureIndex]->GetShaderResourceView());
+				InOutDescriptorTable.SetDescriptor(4 + TextureIndex, _Textures[TextureIndex] ? _Textures[TextureIndex]->GetShaderResourceView() : DefaultMaterial->_Textures[TextureIndex]->GetShaderResourceView());
 		}
 	}
 }

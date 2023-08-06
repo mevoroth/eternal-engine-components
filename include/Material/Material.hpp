@@ -28,6 +28,8 @@ namespace Eternal
 		{
 		public:
 
+			static Material* DefaultMaterial;
+
 			Material();
 
 			void SetTexture(_In_ TextureType InSlotIndex, _In_ Texture* InTexture);
