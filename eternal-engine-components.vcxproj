@@ -75,7 +75,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;D:\Code\VulkanSDK\1.3.231.1\Include;D:\Software\FBXSDK\2020.2\include;$(SolutionDir)eternal-engine-extern\optick\src;$(SolutionDir)eternal-engine-extern\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)eternal-engine-utils\include;$(SolutionDir)eternal-engine-graphics\include;$(ProjectDir)\include;$(SolutionDir)eternal-engine-core\include;E:\Code\VulkanSDK\1.3.250.1\Include;E:\Code\FBXSDK\2020.3.4\include;$(SolutionDir)eternal-engine-extern\optick\src;$(SolutionDir)eternal-engine-extern\imgui;$(IncludePath)</IncludePath>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
