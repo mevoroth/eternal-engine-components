@@ -49,8 +49,10 @@ namespace Eternal
 				PerDraw.PerDrawMaterial	= InMaterial;
 				_Vertices.insert(_Vertices.end(), InVertices.begin(), InVertices.end());
 				_Indices.insert(_Indices.end(), InIndices.begin(), InIndices.end());
+				Matrix4x4 ModelMatrixTransposed = InModelMatrix;
+				Transpose(ModelMatrixTransposed);
 				_PerDrawConstants.push_back({
-					InModelMatrix,
+					ModelMatrixTransposed,
 					VerticesCount,
 					IndicesCount / 3
 				});
