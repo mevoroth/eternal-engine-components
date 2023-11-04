@@ -28,6 +28,8 @@ namespace Eternal
 			);
 			InOutViewConstants->ViewRenderNearPlane		= InCamera->GetRenderNear();
 			InOutViewConstants->ViewRenderFarPlane		= InCamera->GetRenderFar();
+			InOutViewConstants->ViewNearPlane			= InCamera->GetNear();
+			InOutViewConstants->ViewFarPlane			= InCamera->GetFar();
 		}
 
 		void UploadViewCameraToBuffer(_In_ Graphics::Resource& InResource, _In_ Components::Camera* InCamera, _In_ float InViewWidth, _In_ float InViewHeight)
