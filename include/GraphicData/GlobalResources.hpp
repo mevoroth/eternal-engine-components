@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Graphics/GraphicsInclude.hpp"
-#include "HLSLPerViewConstants.hpp"
-#include "HLSLAtmosphereConstants.hpp"
+#include "ShadersReflection/HLSLPerViewConstants.hpp"
+#include "ShadersReflection/HLSLAtmosphereConstants.hpp"
 
 namespace Eternal
 {

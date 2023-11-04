@@ -2,7 +2,7 @@
 
 #include "Graphics/GraphicsInclude.hpp"
 #include "Camera/Camera.hpp"
-#include "HLSLPerViewConstants.hpp"
+#include "ShadersReflection/HLSLPerViewConstants.hpp"
 
 namespace Eternal
 {

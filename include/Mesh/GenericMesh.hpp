@@ -2,7 +2,7 @@
 
 #include "Mesh/Mesh.hpp"
 #include "GraphicData/MeshVertexFormat.hpp"
-#include "HLSLPerDrawConstants.hpp"
+#include "ShadersReflection/HLSLPerDrawConstants.hpp"
 
 namespace Eternal
 {

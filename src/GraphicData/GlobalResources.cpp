@@ -5,7 +5,7 @@
 #include "Core/System.hpp"
 #include "Types/Types.hpp"
 #include "Math/Math.hpp"
-#include "HLSLPerViewConstants.hpp"
+#include "ShadersReflection/HLSLPerViewConstants.hpp"
 
 namespace Eternal
 {
