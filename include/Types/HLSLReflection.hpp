@@ -15,14 +15,13 @@ namespace Eternal
 		template<typename HLSLType, typename PaddingType, int Count>
 		class HLSLArray
 		{
-			template<typename HLSLType>
 			class HLSLArrayEntry
 			{
 			public:
 
-				HLSLType& operator=(const HLSLType& NewValue)
+				HLSLType& operator=(_In_ const HLSLType& InNewValue)
 				{
-					Value = NewValue;
+					Value = InNewValue;
 					return Value;
 				}
 
@@ -32,14 +31,14 @@ namespace Eternal
 			};
 		public:
 
-			HLSLArrayEntry<HLSLType>& operator[](int Index)
+			HLSLArrayEntry& operator[](int Index)
 			{
 				ETERNAL_ASSERT(Index < Count);
 				return Entries[Index];
 			}
 
 		private:
-			HLSLArrayEntry<HLSLType> Entries[Count];
+			HLSLArrayEntry Entries[Count];
 		};
 	}
 }

@@ -1,6 +1,6 @@
 #include "Transform/Transform.hpp"
 
-#include <DirectXMath.h>
+//#include <DirectXMath.h>
 
 namespace Eternal
 {
@@ -39,11 +39,12 @@ namespace Eternal
 		}
 		void Transform::Rotate(_In_ const Vector3& InDeltaRotationEuler)
 		{
-			XMVECTOR NewRotation = XMQuaternionMultiply(
-				XMLoadFloat4(&Rotation),
-				XMQuaternionRotationRollPitchYaw(InDeltaRotationEuler.x, InDeltaRotationEuler.y, InDeltaRotationEuler.z)
-			);
-			XMStoreFloat4(&Rotation, NewRotation);
+			ETERNAL_BREAK();
+			//XMVECTOR NewRotation = XMQuaternionMultiply(
+			//	XMLoadFloat4(&Rotation),
+			//	XMQuaternionRotationRollPitchYaw(InDeltaRotationEuler.x, InDeltaRotationEuler.y, InDeltaRotationEuler.z)
+			//);
+			//XMStoreFloat4(&Rotation, NewRotation);
 		}
 		void Transform::Scale(_In_ const Vector3& InDeltaScaling)
 		{
@@ -52,14 +53,18 @@ namespace Eternal
 
 		Matrix4x4 Transform::GetLocalToWorld() const
 		{
+			ETERNAL_BREAK();
 			//XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
 			//	* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))
 			//	* XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
-			XMMATRIX ScalingMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling));
-			XMMATRIX RotationMatrix = XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation));
-			XMMATRIX TranslationMatrix = XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
-			Matrix4x4 ReturnMatrix;
-			XMStoreFloat4x4(&ReturnMatrix, ScalingMatrix * RotationMatrix * TranslationMatrix);
+			
+			//XMMATRIX ScalingMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling));
+			//XMMATRIX RotationMatrix = XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation));
+			//XMMATRIX TranslationMatrix = XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
+			Matrix4x4 ReturnMatrix = Matrix4x4::Identity;
+			
+			//XMStoreFloat4x4(&ReturnMatrix, ScalingMatrix * RotationMatrix * TranslationMatrix);
+			
 			return ReturnMatrix;
 		}
 	}

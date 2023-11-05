@@ -29,8 +29,8 @@ namespace Eternal
 						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
 						Format::FORMAT_RGB111110_FLOAT,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_UNORDERED_ACCESS,
-						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight()
+						InContext.GetOutputDevice().GetWidth(),
+						InContext.GetOutputDevice().GetHeight()
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_RENDER_TARGET
@@ -47,8 +47,8 @@ namespace Eternal
 						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
 						Format::FORMAT_RGBA8888_UNORM,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET,
-						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight()
+						InContext.GetOutputDevice().GetWidth(),
+						InContext.GetOutputDevice().GetHeight()
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_RENDER_TARGET
@@ -65,8 +65,8 @@ namespace Eternal
 						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
 						Format::FORMAT_RGBA8888_SNORM,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET,
-						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight()
+						InContext.GetOutputDevice().GetWidth(),
+						InContext.GetOutputDevice().GetHeight()
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_RENDER_TARGET
@@ -83,8 +83,8 @@ namespace Eternal
 						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
 						Format::FORMAT_RGBA8888_UNORM,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET,
-						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight()
+						InContext.GetOutputDevice().GetWidth(),
+						InContext.GetOutputDevice().GetHeight()
 					),
 					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 					TransitionState::TRANSITION_RENDER_TARGET
@@ -101,8 +101,8 @@ namespace Eternal
 						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
 						Format::FORMAT_DS328,
 						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_DEPTH_STENCIL,
-						InContext.GetWindow().GetWidth(),
-						InContext.GetWindow().GetHeight(),
+						InContext.GetOutputDevice().GetWidth(),
+						InContext.GetOutputDevice().GetHeight(),
 						1,
 						1,
 						TextureCreateInformation::DefaultClearValueDepth
@@ -202,8 +202,8 @@ namespace Eternal
 				UploadViewCameraToBuffer(
 					**_ViewConstantBuffer.ResourceBuffer,
 					CurrentCamera,
-					static_cast<float>(InContext.GetWindow().GetWidth()),
-					static_cast<float>(InContext.GetWindow().GetHeight())
+					static_cast<float>(InContext.GetOutputDevice().GetWidth()),
+					static_cast<float>(InContext.GetOutputDevice().GetHeight())
 				);
 
 				{
