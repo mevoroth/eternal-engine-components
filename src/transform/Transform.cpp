@@ -53,19 +53,7 @@ namespace Eternal
 
 		Matrix4x4 Transform::GetLocalToWorld() const
 		{
-			ETERNAL_BREAK();
-			//XMMATRIX ModelMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling))
-			//	* XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation))
-			//	* XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
-			
-			//XMMATRIX ScalingMatrix = XMMatrixScalingFromVector(XMLoadFloat3(&Scaling));
-			//XMMATRIX RotationMatrix = XMMatrixRotationQuaternion(XMLoadFloat4(&Rotation));
-			//XMMATRIX TranslationMatrix = XMMatrixTranslationFromVector(XMLoadFloat3(&Translation));
-			Matrix4x4 ReturnMatrix = Matrix4x4::Identity;
-			
-			//XMStoreFloat4x4(&ReturnMatrix, ScalingMatrix * RotationMatrix * TranslationMatrix);
-			
-			return ReturnMatrix;
+			return ScaleMatrix(Scaling) * RotationMatrix(Rotation) * TranslationMatrix(Translation);
 		}
 	}
 }
