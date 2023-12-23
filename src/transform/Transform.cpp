@@ -33,18 +33,13 @@ namespace Eternal
 		{
 			Translation += InDeltaTranslation;
 		}
-		void Transform::Rotate(_In_ const Vector4& InDeltaRotationQuaternion)
+		void Transform::Rotate(_In_ const Quaternion& InDeltaRotationQuaternion)
 		{
 			Rotation *= InDeltaRotationQuaternion;
 		}
-		void Transform::Rotate(_In_ const Vector3& InDeltaRotationEuler)
+		void Transform::Rotate(_In_ const Euler& InDeltaRotationEuler)
 		{
-			ETERNAL_BREAK();
-			//XMVECTOR NewRotation = XMQuaternionMultiply(
-			//	XMLoadFloat4(&Rotation),
-			//	XMQuaternionRotationRollPitchYaw(InDeltaRotationEuler.x, InDeltaRotationEuler.y, InDeltaRotationEuler.z)
-			//);
-			//XMStoreFloat4(&Rotation, NewRotation);
+			Rotation *= InDeltaRotationEuler;
 		}
 		void Transform::Scale(_In_ const Vector3& InDeltaScaling)
 		{

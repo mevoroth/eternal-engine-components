@@ -24,11 +24,11 @@ namespace Eternal
 			/**
 			 * Quaternions
 			 */
-			void Rotate(_In_ const Vector4& Q);
+			void Rotate(_In_ const Quaternion& Q);
 			/**
 			 * Euler angles
 			 */
-			void Rotate(_In_ const Vector3& R);
+			void Rotate(_In_ const Euler& R);
 			void Scale(_In_ const Vector3& S);
 			Matrix4x4 GetLocalToWorld() const;
 
