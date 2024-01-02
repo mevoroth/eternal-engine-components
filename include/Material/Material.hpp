@@ -32,6 +32,7 @@ namespace Eternal
 
 			Material();
 
+			bool IsValid(_In_ TextureType InSlotIndex) const;
 			void SetTexture(_In_ TextureType InSlotIndex, _In_ Texture* InTexture);
 			void CommitMaterial(_Inout_ DescriptorTable& InOutDescriptorTable);
 
