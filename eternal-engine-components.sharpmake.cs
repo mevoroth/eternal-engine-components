@@ -32,6 +32,14 @@ namespace EternalEngine
 				EternalEngineSettings.FBXSDKPath + @"\include",
 			});
 
+			if (InConfiguration.Platform != Platform.win64 && InConfiguration.Platform != Platform.win32)
+			{
+				InConfiguration.IncludePaths.AddRange(new string[] {
+					@"$(SolutionDir)eternal-engine-core\CorePrivate\include",
+					@"$(SolutionDir)eternal-engine-graphics\GraphicsPrivate\include",
+				});
+			}
+
 			InConfiguration.AddPublicDependency<EternalEngineGraphicsProject>(InTarget);
 		}
 	}
