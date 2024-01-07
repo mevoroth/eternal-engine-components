@@ -2,8 +2,10 @@
 
 #include "Transform/Transform.hpp"
 #include "Types/AxisAlignedBoundingBox.hpp"
+#include "Material/MaterialType.hpp"
 #include <vector>
 #include <string>
+#include <array>
 
 namespace Eternal
 {
@@ -86,8 +88,9 @@ namespace Eternal
 
 			~MeshCollection();
 
-			vector<Mesh*> Meshes;
-			AccelerationStructure* MeshCollectionAccelerationStructure = nullptr;
+			Mesh*																				Meshes;
+			array<vector<uint16_t>, static_cast<uint32_t>(MaterialType::MATERIAL_TYPE_COUNT)>	RenderBuckets;
+			AccelerationStructure*																MeshCollectionAccelerationStructure = nullptr;
 		};
 	}
 }

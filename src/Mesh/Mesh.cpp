@@ -13,11 +13,9 @@ namespace Eternal
 
 		MeshCollection::~MeshCollection()
 		{
-			for (uint32_t MeshIndex = 0; MeshIndex < Meshes.size(); ++MeshIndex)
-			{
-				delete Meshes[MeshIndex];
-				Meshes[MeshIndex] = nullptr;
-			}
+			delete Meshes;
+			Meshes = nullptr;
+
 			DestroyAccelerationStructure(MeshCollectionAccelerationStructure);
 			ETERNAL_BREAK(); // Mesh cleaning not implemented yet
 		}
