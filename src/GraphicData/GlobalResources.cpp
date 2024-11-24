@@ -2,6 +2,7 @@
 #include "GraphicData/ViewGraphicData.hpp"
 #include "Camera/Camera.hpp"
 #include "Camera/PerspectiveCamera.hpp"
+#include "Graphics/GraphicsContext.hpp"
 #include "Core/System.hpp"
 #include "Types/Types.hpp"
 #include "Math/Math.hpp"
@@ -139,6 +140,8 @@ namespace Eternal
 			}
 
 			{
+				uint32_t SkyCubeMapMipCount = static_cast<uint32_t>(Math::Log2<float>(SkyCubeMapSize)) + 1;
+
 				_Sky = new RenderTargetTexture(
 					InContext,
 					TextureResourceCreateInformation(
@@ -147,17 +150,59 @@ namespace Eternal
 						TextureCreateInformation(
 							ResourceDimension::RESOURCE_DIMENSION_TEXTURE_CUBE,
 							Format::FORMAT_RGB111110_FLOAT,
-							TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET,
+							TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_UNORDERED_ACCESS,
 							SkyCubeMapSize,
 							SkyCubeMapSize,
 							6,
-							static_cast<uint32_t>(Math::Log2<float>(SkyCubeMapSize)) + 1
+							SkyCubeMapMipCount
 						),
 						ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
 						TransitionState::TRANSITION_RENDER_TARGET
 					),
-					RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_GRAPHICS
+					RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
 				);
+
+				_SkyMipShaderResourceViews.resize(SkyCubeMapMipCount);
+				_SkyMipUnorderedAccessViews.resize(SkyCubeMapMipCount);
+
+				auto CreateMipView = [this, &InContext](_In_ uint32_t InSkyMipIndex) -> void
+				{
+					ViewMetaData MetaData;
+					MetaData.ShaderResourceViewTexture2DArray.MostDetailedMip	= InSkyMipIndex;
+					MetaData.ShaderResourceViewTexture2DArray.MipLevels			= 1;
+					MetaData.ShaderResourceViewTexture2DArray.FirstArraySlice	= 0;
+					MetaData.ShaderResourceViewTexture2DArray.ArraySize			= 6;
+
+					ShaderResourceViewCreateInformation SkyMipShaderResourceViewInformation(
+						InContext,
+						&_Sky->GetTexture(),
+						MetaData,
+						Format::FORMAT_RGB111110_FLOAT,
+						ViewShaderResourceType::VIEW_SHADER_RESOURCE_TEXTURE_2D_ARRAY
+					);
+					_SkyMipShaderResourceViews[InSkyMipIndex] = CreateShaderResourceView(SkyMipShaderResourceViewInformation);
+				};
+
+				CreateMipView(0);
+				_SkyMipUnorderedAccessViews[0] = _Sky->GetUnorderedAccessView();
+				for (uint32_t SkyMipIndex = 1; SkyMipIndex < _SkyMipUnorderedAccessViews.size(); ++SkyMipIndex)
+				{
+					CreateMipView(SkyMipIndex);
+					{
+						ViewMetaData MetaData;
+						MetaData.UnorderedAccessViewTexture2DArray.MipSlice			= SkyMipIndex;
+						MetaData.UnorderedAccessViewTexture2DArray.ArraySize		= 6;
+
+						UnorderedAccessViewCreateInformation SkyMipUnorderedAccessViewInformation(
+							InContext,
+							&_Sky->GetTexture(),
+							MetaData,
+							Format::FORMAT_RGB111110_FLOAT,
+							ViewUnorderedAccessType::VIEW_UNORDERED_ACCESS_TEXTURE_2D_ARRAY
+						);
+						_SkyMipUnorderedAccessViews[SkyMipIndex] = CreateUnorderedAccessView(SkyMipUnorderedAccessViewInformation);
+					}
+				}
 
 				_SkyViewport = CreateViewport(InContext, SkyCubeMapSize, SkyCubeMapSize);
 			}

@@ -117,6 +117,16 @@ namespace Eternal
 				return *_SkyViewport;
 			}
 
+			const vector<View*>& GetSkyMipShaderResourceViews() const
+			{
+				return _SkyMipShaderResourceViews;
+			}
+
+			const vector<View*>& GetSkyMipUnorderedAccessViews() const
+			{
+				return _SkyMipUnorderedAccessViews;
+			}
+
 		private:
 
 			ConstantBuffer<PerViewConstants>		_ViewConstantBuffer;
@@ -134,6 +144,8 @@ namespace Eternal
 			ConstantBuffer<PerViewCubeMapConstants>	_SkyViewCubeMapConstantBuffer;
 			RenderTargetTexture*					_Sky								= nullptr;
 			Viewport*								_SkyViewport						= nullptr;
+			vector<View*>							_SkyMipShaderResourceViews;
+			vector<View*>							_SkyMipUnorderedAccessViews;
 		};
 	}
 }
