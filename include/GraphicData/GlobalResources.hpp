@@ -21,12 +21,9 @@ namespace Eternal
 		{
 		public:
 
-			static constexpr int32_t SkyCubeMapSize = 256;
+			virtual ~GlobalResources();
 
-			GlobalResources(_In_ GraphicsContext& InContext);
-			~GlobalResources();
-
-			bool BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem);
+			virtual bool BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem);
 
 			RenderTargetTexture& GetGBufferLuminance()
 			{
@@ -77,12 +74,14 @@ namespace Eternal
 
 			View* GetShadowMapViewConstantBufferView()
 			{
-				return _ShadowMapViewConstantBuffer.GetView();
+				ETERNAL_ASSERT(_ShadowMapViewConstantBuffer);
+				return _ShadowMapViewConstantBuffer->GetView();
 			}
 
 			Resource& GetShadowMapViewConstantBuffer()
 			{
-				return **_ShadowMapViewConstantBuffer.ResourceBuffer;
+				ETERNAL_ASSERT(_ShadowMapViewConstantBuffer);
+				return *_ShadowMapViewConstantBuffer->GetResource();
 			}
 
 			const Viewport& GetShadowMapViewport() const
@@ -93,22 +92,26 @@ namespace Eternal
 
 			View* GetAtmosphereConstantBufferView()
 			{
-				return _AtmosphereConstantBuffer.GetView();
+				ETERNAL_ASSERT(_AtmosphereConstantBuffer);
+				return _AtmosphereConstantBuffer->GetView();
 			}
 
 			Resource& GetAtmosphereConstantBuffer()
 			{
-				return **_AtmosphereConstantBuffer.ResourceBuffer;
+				ETERNAL_ASSERT(_AtmosphereConstantBuffer);
+				return *_AtmosphereConstantBuffer->GetResource();
 			}
 
 			View* GetSkyViewCubeMapConstantBufferView()
 			{
-				return _SkyViewCubeMapConstantBuffer.GetView();
+				ETERNAL_ASSERT(_SkyViewCubeMapConstantBuffer);
+				return _SkyViewCubeMapConstantBuffer->GetView();
 			}
 
 			Resource& GetSkyViewCubeMapConstantBuffer()
 			{
-				return **_SkyViewCubeMapConstantBuffer.ResourceBuffer;
+				ETERNAL_ASSERT(_SkyViewCubeMapConstantBuffer);
+				return *_SkyViewCubeMapConstantBuffer->GetResource();
 			}
 
 			const Viewport& GetSkyViewport() const
@@ -127,25 +130,27 @@ namespace Eternal
 				return _SkyMipUnorderedAccessViews;
 			}
 
-		private:
+		protected:
 
-			ConstantBuffer<PerViewConstants>		_ViewConstantBuffer;
-			RenderTargetTexture*					_GBufferLuminance					= nullptr;
-			RenderTargetTexture*					_GBufferAlbedo						= nullptr;
-			RenderTargetTexture*					_GBufferNormals						= nullptr;
-			RenderTargetTexture*					_GBufferRoughnessMetallicSpecular	= nullptr;
-			RenderTargetTexture*					_GBufferDepthStencil				= nullptr;
+			GlobalResources(_In_ GraphicsContext& InContext);
+
+			ConstantBuffer<PerViewConstants>			_ViewConstantBuffer;
+			RenderTargetTexture*						_GBufferLuminance					= nullptr;
+			RenderTargetTexture*						_GBufferDepthStencil				= nullptr;
+			RenderTargetTexture*						_GBufferAlbedo						= nullptr;
+			RenderTargetTexture*						_GBufferNormals						= nullptr;
+			RenderTargetTexture*						_GBufferRoughnessMetallicSpecular	= nullptr;
 			
-			ConstantBuffer<PerViewConstants>		_ShadowMapViewConstantBuffer;
-			RenderTargetTexture*					_ShadowMap							= nullptr;
-			Viewport*								_ShadowMapViewport					= nullptr;
+			ConstantBuffer<PerViewConstants>*			_ShadowMapViewConstantBuffer		= nullptr;
+			RenderTargetTexture*						_ShadowMap							= nullptr;
+			Viewport*									_ShadowMapViewport					= nullptr;
 
-			ConstantBuffer<AtmosphereConstants>		_AtmosphereConstantBuffer;
-			ConstantBuffer<PerViewCubeMapConstants>	_SkyViewCubeMapConstantBuffer;
-			RenderTargetTexture*					_Sky								= nullptr;
-			Viewport*								_SkyViewport						= nullptr;
-			vector<View*>							_SkyMipShaderResourceViews;
-			vector<View*>							_SkyMipUnorderedAccessViews;
+			ConstantBuffer<AtmosphereConstants>*		_AtmosphereConstantBuffer			= nullptr;
+			ConstantBuffer<PerViewCubeMapConstants>*	_SkyViewCubeMapConstantBuffer		= nullptr;
+			RenderTargetTexture*						_Sky								= nullptr;
+			Viewport*									_SkyViewport						= nullptr;
+			vector<View*>								_SkyMipShaderResourceViews;
+			vector<View*>								_SkyMipUnorderedAccessViews;
 		};
 	}
 }
