@@ -11,6 +11,18 @@ namespace Eternal
 		{
 		}
 
+		void OrthographicCamera::SetWidth(_In_ float InWidth)
+		{
+			_Width = InWidth;
+			_Dirty = true;
+		}
+
+		void OrthographicCamera::SetHeight(_In_ float InHeight)
+		{
+			_Height = InHeight;
+			_Dirty = true;
+		}
+
 		void OrthographicCamera::_UpdateViewToClip()
 		{
 #if ETERNAL_USE_REVERSED_Z

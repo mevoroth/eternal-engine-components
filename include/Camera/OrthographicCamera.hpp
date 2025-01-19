@@ -11,6 +11,10 @@ namespace Eternal
 		public:
 			OrthographicCamera(_In_ float InNear, _In_ float InFar, _In_ float InWidth, _In_ float InHeight);
 
+			void SetWidth(_In_ float InWidth);
+			void SetHeight(_In_ float InHeight);
+
+
 		protected:
 			virtual void _UpdateViewToClip() override final;
 
