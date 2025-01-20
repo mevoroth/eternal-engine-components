@@ -196,8 +196,8 @@ namespace Eternal
 		bool GlobalResourcesPBR::BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem)
 		{
 			Components::Camera* CurrentCamera = InSystem.GetRenderFrame().ViewCamera;
-			bool CanRender = CurrentCamera != nullptr;
-			if (GlobalResources::BeginRender(InContext, InSystem))
+			bool CanRender = CurrentCamera != nullptr && GlobalResources::BeginRender(InContext, InSystem);
+			if (CanRender)
 			{
 				MapRange SkyViewCubeMapBufferRange(sizeof(PerViewCubeMapConstants));
 				MapScope<PerViewCubeMapConstants> SkyViewCubeMapBufferMapScope(*_SkyViewCubeMapConstantBuffer->GetResource(), SkyViewCubeMapBufferRange);
@@ -234,7 +234,7 @@ namespace Eternal
 				}
 			}
 
-			return false;
+			return CanRender;
 		}
 	}
 }
