@@ -2,6 +2,7 @@
 
 #include "Types/Types.hpp"
 #include "Partition/PartitionMapping2D.hpp"
+#include "Math/Math.hpp"
 #include <array>
 
 namespace Eternal
