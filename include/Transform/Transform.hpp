@@ -32,6 +32,8 @@ namespace Eternal
 			void Scale(_In_ const Vector3& S);
 			Matrix4x4 GetLocalToWorld() const;
 
+			Vector3 RotateVector(_In_ const Vector3& InVector) const;
+
 		private:
 			Vector3 Translation	= Vector3::Zero;
 			Quaternion Rotation	= Quaternion::QuaternionIdentity;
