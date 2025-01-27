@@ -52,6 +52,35 @@ namespace Eternal
 				return GetPartition(Position2D);
 			}
 
+			void GetPartitionsInRadius(_In_ const Vector2& InPosition, _In_ float InRadius, _Out_ vector<PartitionType*>& OutPartitions)
+			{
+				if (InPosition.x <= _WorldMinBounds.x || InPosition.y <= _WorldMinBounds.y ||
+					InPosition.x >= _WorldMaxBounds.x || InPosition.y >= _WorldMaxBounds.y)
+					return;
+
+				Vector2 BoundsMin = InPosition - Vector2(InRadius);
+				Vector2 BoundsMax = InPosition + Vector2(InRadius);
+				BoundsMin = BoundsMin * _WorldToPartitionMul + _WorldToPartitionAdd;
+				BoundsMax = BoundsMax * _WorldToPartitionMul + _WorldToPartitionAdd;
+
+				BoundsMin.x = Math::Clamp(BoundsMin.x, 0.0f, PartitionGridSizeFloat - 1.0f);
+				BoundsMin.y = Math::Clamp(BoundsMin.y, 0.0f, PartitionGridSizeFloat - 1.0f);
+				BoundsMax.x = Math::Clamp(BoundsMax.x, 0.0f, PartitionGridSizeFloat - 1.0f);
+				BoundsMax.y = Math::Clamp(BoundsMax.y, 0.0f, PartitionGridSizeFloat - 1.0f);
+
+				uint32_t YMin = static_cast<uint32_t>(BoundsMin.y);
+				uint32_t YMax = static_cast<uint32_t>(BoundsMax.y);
+				uint32_t XMin = static_cast<uint32_t>(BoundsMin.x);
+				uint32_t XMax = static_cast<uint32_t>(BoundsMax.x);
+
+				OutPartitions.reserve((YMax - YMin + 1) * (XMax - XMin + 1));
+				for (uint32_t Y = YMin; Y <= YMax; ++Y)
+				{
+					for (uint32_t X = XMin; X <= XMax; ++X)
+						OutPartitions.push_back(&_Grid[PartitionMapping2DFunction(X, Y, PartitionGridSize)]);
+				}
+			}
+
 		private:
 
 			void _GetPartitionPosition(_In_ const Vector2& InPosition2D, _Out_ uint32_t& OutX, _Out_ uint32_t& OutY)
@@ -65,8 +94,10 @@ namespace Eternal
 			}
 
 			array<PartitionType, PartitionsCount> _Grid;
-			Vector2 _WorldToPartitionMul = Vector2::Zero;
-			Vector2 _WorldToPartitionAdd = Vector2::Zero;
+			Vector2 _WorldToPartitionMul	= Vector2::Zero;
+			Vector2 _WorldToPartitionAdd	= Vector2::Zero;
+			Vector2 _WorldMinBounds			= Vector2::Zero;
+			Vector2 _WorldMaxBounds			= Vector2::Zero;
 
 		};
 	}
