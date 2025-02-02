@@ -16,6 +16,7 @@ namespace Eternal
 			const Vector3& GetTranslation() const { return Translation; }
 			Vector3& GetTranslation() { return Translation; }
 			const Quaternion& GetRotation() const { return Rotation; }
+			Quaternion& GetRotation() { return Rotation; }
 			const Vector3& GetScaling() const { return Scaling; }
 			Vector3& GetScaling() { return Scaling; }
 			void SetTranslation(_In_ const Vector3& T);
