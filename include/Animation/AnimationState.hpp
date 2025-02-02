@@ -1,9 +1,16 @@
 #pragma once
 
+#include "Animation/AnimationDefines.hpp"
+#include <functional>
+
 namespace Eternal
 {
 	namespace Components
 	{
+		using namespace std;
+
+		using AnimationOnCompleteFunctor = function<void()>;
+
 		enum class AnimationPlaybackState
 		{
 			ANIMATIONPLAYBACKSTATE_STOP = 0,
@@ -14,9 +21,10 @@ namespace Eternal
 		template<typename AnimationStatePropertyType>
 		struct AnimationState
 		{
-			AnimationPlaybackState		AnimationPlayback		= AnimationPlaybackState::ANIMATIONPLAYBACKSTATE_STOP;
-			float						AnimationCurrentTime	= 0.0f;
-			AnimationStatePropertyType*	AnimationProperty		= nullptr;
+			AnimationPlaybackState				AnimationPlayback				= AnimationPlaybackState::ANIMATIONPLAYBACKSTATE_STOP;
+			float								AnimationCurrentTime			= AnimationDefines::TimelineBegin;
+			AnimationStatePropertyType*			AnimationProperty				= nullptr;
+			vector<AnimationOnCompleteFunctor>	AnimationOnCompleteFunctions;
 		};
 	}
 }
