@@ -4,15 +4,11 @@ namespace Eternal
 {
 	namespace Components
 	{
-		struct AnimationKeyFrameBase
-		{
-			float AnimationKeyTime = 0.0f;
-		};
-
 		template<typename AnimationKeyFrameValueType>
-		struct AnimationKeyFrame : public AnimationKeyFrameBase
+		struct AnimationKeyFrame
 		{
-			AnimationKeyFrameValueType AnimationKeyValue = AnimationKeyFrameValueType(0);
+			float AnimationKeyTime							= 0.0f;
+			AnimationKeyFrameValueType AnimationKeyValue	= AnimationKeyFrameValueType(0);
 		};
 	}
 }

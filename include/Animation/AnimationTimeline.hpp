@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Animation/AnimationKeyFrame.hpp"
+#include "Math/Math.hpp"
 #include <string>
 
 namespace Eternal
@@ -9,16 +10,8 @@ namespace Eternal
 	{
 		using namespace std;
 
-		class AnimationTimelineBase
-		{
-		public:
-
-			virtual void ReserveKeys(_In_ uint32_t InKeysCount) = 0;
-
-		};
-
 		template<typename AnimationKeyFrameValueType>
-		class AnimationTimeline : public AnimationTimelineBase
+		class AnimationTimeline
 		{
 		public:
 
@@ -33,7 +26,7 @@ namespace Eternal
 			{
 			}
 
-			virtual void ReserveKeys(_In_ uint32_t InKeysCount) override
+			void ReserveKeys(_In_ uint32_t InKeysCount)
 			{
 				_Timeline.reserve(InKeysCount);
 			}
@@ -43,9 +36,48 @@ namespace Eternal
 				_Timeline.insert(_FindNearest(InKeyFrame.AnimationKeyTime), InKeyFrame);
 			}
 
+			void BindProperty(_In_ AnimationKeyFrameValueType& InProperty)
+			{
+				_BoundProperty = &InProperty;
+			}
+
+			void UnbindProperty()
+			{
+				_BoundProperty = nullptr;
+			}
+
 			AnimationKeyFrameValueType& AddKey(_In_ float InKeyTime)
 			{
 				return _Timeline.insert(_FindNearest(InKeyTime), { InKeyTime, AnimationKeyFrameValueType() })->AnimationKeyValue;
+			}
+
+			AnimationKeyFrameValueType EvaluateTimelineValue(_In_ float InKeyTime)
+			{
+				auto KeyFrameNext = upper_bound(
+					_Timeline.begin(),
+					_Timeline.end(),
+					InKeyTime,
+					[](_In_ float InKeyTime, _In_ const AnimationKeyFrame<AnimationKeyFrameValueType>& InKeyFrame)
+					{
+						return InKeyTime < InKeyFrame.AnimationKeyTime;
+					}
+				);
+
+				if (KeyFrameNext == _Timeline.begin())
+					return _Timeline.front().AnimationKeyValue;
+
+				if (KeyFrameNext == _Timeline.end())
+					return _Timeline.back().AnimationKeyValue;
+
+				auto KeyFramePrevious = KeyFrameNext - 1;
+				float Alpha = (InKeyTime - KeyFramePrevious->AnimationKeyTime) / (KeyFrameNext->AnimationKeyTime - KeyFramePrevious->AnimationKeyTime);
+				return Eternal::Math::Lerp<AnimationKeyFrameValueType>(KeyFramePrevious->AnimationKeyValue, KeyFrameNext->AnimationKeyValue, Alpha);
+			}
+
+			void EvaluateTimeline(_In_ float InKeyTime)
+			{
+				ETERNAL_ASSERT(_BoundProperty);
+				*_BoundProperty = EvaluateTimelineValue(InKeyTime);
 			}
 
 		private:
@@ -63,9 +95,10 @@ namespace Eternal
 			}
 
 #if ETERNAL_DEBUG
-			string			_Name;
+			string						_Name;
 #endif
-			TimelineVector	_Timeline;
+			TimelineVector				_Timeline;
+			AnimationKeyFrameValueType*	_BoundProperty = nullptr;
 
 		};
 	}
