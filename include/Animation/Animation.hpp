@@ -39,6 +39,8 @@ namespace Eternal
 				BindProperty(InProperty);
 			}
 
+			void SetAnimationLength(_In_ float InAnimationLengthSeconds);
+			float GetAnimationLength() const;
 			void ReserveTimelines(_In_ uint32_t InTimelinesCount);
 
 			template<typename AnimationKeyFrameValueType>
@@ -102,6 +104,7 @@ namespace Eternal
 			string								_Name;
 #endif
 			vector<AnimationTimelineVariants>	_AnimationTimelines;
+			float								_AnimationLengthSeconds = 0.0f;
 
 		};
 

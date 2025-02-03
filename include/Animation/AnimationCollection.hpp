@@ -46,10 +46,8 @@ namespace Eternal
 						AnimationData->BindProperty(*CurrentProperty.AnimationProperty);
 						AnimationData->EvaluateAnimation(CurrentProperty.AnimationCurrentTime);
 
-						if (CurrentProperty.AnimationCurrentTime >= AnimationDefines::TimelineEnd)
-						{
+						if (CurrentProperty.AnimationCurrentTime >= AnimationData->GetAnimationLength())
 							AnimationCompleted.push_back(AnimationPropertyIterator.GetIndex());
-						}
 					}
 				}
 				AnimationData->UnbindProperty<AnimationStatePropertyType>();
