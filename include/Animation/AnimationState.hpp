@@ -9,8 +9,6 @@ namespace Eternal
 	{
 		using namespace std;
 
-		using AnimationOnCompleteFunctor = function<void()>;
-
 		enum class AnimationPlaybackState
 		{
 			ANIMATIONPLAYBACKSTATE_STOP = 0,
