@@ -12,26 +12,26 @@ namespace Eternal
 		{
 		public:
 			Transform();
-			Transform(_In_ const Vector3& Translation, _In_ const Quaternion& Rotation, _In_ const Vector3& Scaling);
+			Transform(_In_ const Vector3& InTranslation, _In_ const Quaternion& InRotation, _In_ const Vector3& InScaling);
 			const Vector3& GetTranslation() const { return Translation; }
 			Vector3& GetTranslation() { return Translation; }
 			const Quaternion& GetRotation() const { return Rotation; }
 			Quaternion& GetRotation() { return Rotation; }
 			const Vector3& GetScaling() const { return Scaling; }
 			Vector3& GetScaling() { return Scaling; }
-			void SetTranslation(_In_ const Vector3& T);
-			void SetRotation(_In_ const Quaternion& R);
-			void SetScaling(_In_ const Vector3& S);
-			void Translate(_In_ const Vector3& D);
+			void SetTranslation(_In_ const Vector3& InTranslation);
+			void SetRotation(_In_ const Quaternion& InRotationQuaternion);
+			void SetScaling(_In_ const Vector3& InScaling);
+			void Translate(_In_ const Vector3& InDeltaTranslation);
 			/**
 			 * Quaternions
 			 */
-			void Rotate(_In_ const Quaternion& Q);
+			void Rotate(_In_ const Quaternion& InDeltaRotationQuaternion);
 			/**
 			 * Euler angles
 			 */
-			void Rotate(_In_ const Euler& R);
-			void Scale(_In_ const Vector3& S);
+			void Rotate(_In_ const Euler& InDeltaRotationEuler);
+			void Scale(_In_ const Vector3& InDeltaScaling);
 			Matrix4x4 GetLocalToWorld() const;
 
 			Vector3 RotateVector(_In_ const Vector3& InVector) const;
