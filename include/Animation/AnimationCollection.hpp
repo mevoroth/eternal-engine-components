@@ -43,7 +43,10 @@ namespace Eternal
 						}();
 
 						CurrentProperty.AnimationCurrentTime += InDeltaSeconds * AnimationTimeDilation;
-						AnimationData->BindProperty(*CurrentProperty.AnimationProperty);
+						if constexpr (is_same_v<AnimationStatePropertyType, AnimationCompositeType>)
+							AnimationData->BindProperty(CurrentProperty.AnimationProperty);
+						else
+							AnimationData->BindProperty(*CurrentProperty.AnimationProperty);
 						AnimationData->EvaluateAnimation(CurrentProperty.AnimationCurrentTime);
 
 						if (CurrentProperty.AnimationCurrentTime >= AnimationData->GetAnimationLength())

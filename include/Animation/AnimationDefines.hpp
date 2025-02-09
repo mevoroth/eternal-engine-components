@@ -18,6 +18,6 @@ namespace Eternal
 
 		using AnimationBindFunctor			= void (*)(_In_ void* InProperty, _Inout_ Animation& InOutAnimation);
 		using AnimationOnCompleteFunctor	= std::function<void()>;
-		using AnimationCompositeType		= void*;
+		using AnimationCompositeType		= void;
 	}
 }

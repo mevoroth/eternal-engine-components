@@ -88,7 +88,7 @@ namespace Eternal
 				{
 					if (AnimationBindFunctor BindFunction = GetBindFunction())
 					{
-						BindFunction(&InProperty, *this);
+						BindFunction(InProperty, *this);
 						return;
 					}
 				}
