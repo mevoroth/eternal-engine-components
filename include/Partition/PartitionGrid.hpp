@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types/Types.hpp"
+#include "Types/AxisAlignedRectangle.hpp"
 #include "Partition/PartitionMapping2D.hpp"
 #include "Math/Math.hpp"
 #include <array>
@@ -17,11 +18,14 @@ namespace Eternal
 		public:
 
 			static constexpr int PartitionsCount = PartitionGridSize * PartitionGridSize;
+			static constexpr int GridSize = PartitionGridSize;
 			static constexpr float PartitionGridSizeFloat = static_cast<float>(PartitionGridSize);
 
 			ETERNAL_STATIC_ASSERT(PartitionGridSize > 0, "Grid size needs to be bigger than 0");
 
 			PartitionGrid(_In_ const Vector2& InBoundsMin, _In_ const Vector2& InBoundsMax)
+				: _WorldMinBounds(InBoundsMin)
+				, _WorldMaxBounds(InBoundsMax)
 			{
 				Vector2 BoundsSize = InBoundsMax - InBoundsMin;
 
@@ -36,6 +40,11 @@ namespace Eternal
 				);
 			}
 
+			PartitionType& GetPartition(_In_ uint32_t InGridX, _In_ uint32_t InGridY)
+			{
+				return _Grid[PartitionMapping2DFunction(InGridX, InGridY, PartitionGridSize)];
+			}
+
 			PartitionType& GetPartition(_In_ const Vector2& InPosition)
 			{
 				uint32_t GridX = 0u;
@@ -43,7 +52,7 @@ namespace Eternal
 
 				_GetPartitionPosition(InPosition, GridX, GridY);
 
-				return _Grid[PartitionMapping2DFunction(GridX, GridY, PartitionGridSize)];
+				return GetPartition(GridX, GridY);
 			}
 
 			PartitionType& GetPartition(_In_ const Vector3& InPosition)
@@ -52,14 +61,14 @@ namespace Eternal
 				return GetPartition(Position2D);
 			}
 
-			void GetPartitionsInRadius(_In_ const Vector2& InPosition, _In_ float InRadius, _Out_ vector<PartitionType*>& OutPartitions)
+			void GetPartitionsInBounds(_In_ const AxisAlignedRectangle& InBounds, _Out_ vector<PartitionType*>& OutPartitions)
 			{
-				if (InPosition.x <= _WorldMinBounds.x || InPosition.y <= _WorldMinBounds.y ||
-					InPosition.x >= _WorldMaxBounds.x || InPosition.y >= _WorldMaxBounds.y)
+				if (InBounds.GetMaxBounds().x <= _WorldMinBounds.x || InBounds.GetMaxBounds().y <= _WorldMinBounds.y ||
+					InBounds.GetMinBounds().x >= _WorldMaxBounds.x || InBounds.GetMinBounds().y >= _WorldMaxBounds.y)
 					return;
 
-				Vector2 BoundsMin = InPosition - Vector2(InRadius);
-				Vector2 BoundsMax = InPosition + Vector2(InRadius);
+				Vector2 BoundsMin = InBounds.GetMinBounds();
+				Vector2 BoundsMax = InBounds.GetMaxBounds();
 				BoundsMin = BoundsMin * _WorldToPartitionMul + _WorldToPartitionAdd;
 				BoundsMax = BoundsMax * _WorldToPartitionMul + _WorldToPartitionAdd;
 
@@ -80,6 +89,19 @@ namespace Eternal
 						OutPartitions.push_back(&_Grid[PartitionMapping2DFunction(X, Y, PartitionGridSize)]);
 				}
 			}
+
+			void GetPartitionsInRadius(_In_ const Vector2& InPosition, _In_ float InRadius, _Out_ vector<PartitionType*>& OutPartitions)
+			{
+				GetPartitionsInBounds(
+					AxisAlignedRectangle(AxisAlignedRectangle::OriginAndExtent {
+						InPosition, Vector2(InRadius)
+					}),
+					OutPartitions
+				);
+			}
+
+			const Vector2& GetWorldMinBounds() const { return _WorldMinBounds; };
+			const Vector2& GetWorldMaxBounds() const { return _WorldMaxBounds; }
 
 		private:
 
