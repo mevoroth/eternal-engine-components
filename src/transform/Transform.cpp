@@ -48,7 +48,7 @@ namespace Eternal
 
 		Matrix4x4 Transform::GetLocalToWorld() const
 		{
-			return ScaleMatrix(Scaling) * RotationMatrix(Rotation) * TranslationMatrix(Translation);
+			return ScaleMatrix4x4(Scaling) * RotationMatrix4x4(Rotation) * TranslationMatrix4x4(Translation);
 		}
 
 		Vector3 Transform::RotateVector(_In_ const Vector3& InVector) const
