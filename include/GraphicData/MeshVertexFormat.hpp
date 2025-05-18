@@ -8,6 +8,11 @@ namespace Eternal
 	{
 		using namespace Eternal::Types;
 
+		struct PositionVertex
+		{
+			Vector4 Position	= Vector4::ZeroPosition;
+		};
+
 		struct PositionColorVertex
 		{
 			Vector4 Position	= Vector4::ZeroPosition;
