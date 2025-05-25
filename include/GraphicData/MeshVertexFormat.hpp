@@ -10,7 +10,7 @@ namespace Eternal
 
 		struct PositionVertex
 		{
-			Vector4 Position	= Vector4::ZeroPosition;
+			Vector3 Position	= Vector3::Zero;
 		};
 
 		struct PositionColorVertex
