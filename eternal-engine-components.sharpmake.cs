@@ -4,24 +4,10 @@
 
 namespace EternalEngine
 {
-	[Sharpmake.Generate]
-	public class EternalEngineComponentsProject : EternalEngineBaseProject
+	public class EternalEngineComponentsProjectUtils
 	{
-		public EternalEngineComponentsProject()
-			: base(
-				"components",
-				new EternalEngineProjectSettings(
-					EternalEngineProjectSettingsFlags.EEPSF_IncludeSettingsHeader |
-					EternalEngineProjectSettingsFlags.EEPSF_IncludeHLSLReflection
-				)
-			)
+		public static void ConfigureAll(Project.Configuration InConfiguration, ITarget InTarget, System.Type InTargetType)
 		{
-		}
-
-		public override void ConfigureAll(Configuration InConfiguration, Target InTarget)
-		{
-			base.ConfigureAll(InConfiguration, InTarget);
-
 			// Include paths
 			InConfiguration.IncludePaths.Add(new string[] {
 				@"$(SolutionDir)eternal-engine-core\include",
@@ -34,8 +20,59 @@ namespace EternalEngine
 				EternalEngineSettings.FBXSDKPath + @"\include",
 			});
 
+			if (InTargetType == typeof(Target))
+			{
+				InConfiguration.AddPublicDependency<EternalEngineGraphicsProject>(InTarget);
+			}
 
-			InConfiguration.AddPublicDependency<EternalEngineGraphicsProject>(InTarget);
+			if (InTargetType == typeof(AndroidTarget))
+			{
+				InConfiguration.AddPublicDependency<EternalEngineGraphicsAndroidProject>(InTarget);
+			}
+		}
+	}
+
+	[Sharpmake.Generate]
+	public class EternalEngineComponentsProject : EternalEngineBaseProject
+	{
+		public EternalEngineComponentsProject()
+			: base(
+				typeof(Target),
+				"components",
+				new EternalEngineProjectSettings(
+					EternalEngineProjectSettingsFlags.EEPSF_IncludeSettingsHeader |
+					EternalEngineProjectSettingsFlags.EEPSF_IncludeHLSLReflection
+				)
+			)
+		{
+		}
+
+		public override void ConfigureAll(Configuration InConfiguration, ITarget InTarget)
+		{
+			base.ConfigureAll(InConfiguration, InTarget);
+			EternalEngineComponentsProjectUtils.ConfigureAll(InConfiguration, InTarget, Targets.TargetType);
+		}
+	}
+
+	[Sharpmake.Generate]
+	public class EternalEngineComponentsAndroidProject : EternalEngineBaseAndroidProject
+	{
+		public EternalEngineComponentsAndroidProject()
+			: base(
+				typeof(AndroidTarget),
+				"components",
+				new EternalEngineProjectSettings(
+					EternalEngineProjectSettingsFlags.EEPSF_IncludeSettingsHeader |
+					EternalEngineProjectSettingsFlags.EEPSF_IncludeHLSLReflection
+				)
+			)
+		{
+		}
+
+		public override void ConfigureAll(Configuration InConfiguration, ITarget InTarget)
+		{
+			base.ConfigureAll(InConfiguration, InTarget);
+			EternalEngineComponentsProjectUtils.ConfigureAll(InConfiguration, InTarget, Targets.TargetType);
 		}
 	}
 }
