@@ -16,7 +16,6 @@ namespace EternalEngine
 				@"$(SolutionDir)eternal-engine-graphics\GraphicsPrivate\include",
 				@"$(SolutionDir)eternal-engine-extern\imgui",
 				@"$(SolutionDir)eternal-engine-shaders",
-				EternalEngineSettings.VulkanPath + @"\Include",
 				EternalEngineSettings.FBXSDKPath + @"\include",
 			});
 
