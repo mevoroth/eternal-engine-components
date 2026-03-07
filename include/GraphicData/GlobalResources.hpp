@@ -21,14 +21,24 @@ namespace Eternal
 		{
 		public:
 
+			static constexpr uint32_t TemporaryLuminanceTexturesCount = 2;
+
 			virtual ~GlobalResources();
 
 			virtual bool BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem);
 
-			RenderTargetTexture& GetGBufferLuminance()
+			RenderTargetTexture& GetGBufferLuminance(_In_ uint32_t InFrameIndex = 0)
 			{
-				ETERNAL_ASSERT(_GBufferLuminance);
-				return *_GBufferLuminance;
+				uint32_t LuminanceIndex = (_CurrentLuminanceIndex + InFrameIndex) % TemporaryLuminanceTexturesCount;
+				ETERNAL_ASSERT(_GBufferLuminance[LuminanceIndex]);
+				return *_GBufferLuminance[LuminanceIndex];
+			}
+
+			RenderTargetTexture& GetGBufferLuminanceIntermediate()
+			{
+				uint32_t NextLuminanceIndex = (_CurrentLuminanceIndex + 1) % TemporaryLuminanceTexturesCount;
+				ETERNAL_ASSERT(_GBufferLuminance[NextLuminanceIndex]);
+				return *_GBufferLuminance[NextLuminanceIndex];
 			}
 
 			RenderTargetTexture& GetGBufferAlbedo()
@@ -130,27 +140,32 @@ namespace Eternal
 				return _SkyMipUnorderedAccessViews;
 			}
 
+			void SwapIntermediateLuminanceTexture();
+			uint32_t GetCurrentLuminanceIndex() const { return _CurrentLuminanceIndex; }
+
 		protected:
 
 			GlobalResources(_In_ GraphicsContext& InContext);
 
 			ConstantBuffer<PerViewConstants>			_ViewConstantBuffer;
-			RenderTargetTexture*						_GBufferLuminance					= nullptr;
-			RenderTargetTexture*						_GBufferDepthStencil				= nullptr;
-			RenderTargetTexture*						_GBufferAlbedo						= nullptr;
-			RenderTargetTexture*						_GBufferNormals						= nullptr;
-			RenderTargetTexture*						_GBufferRoughnessMetallicSpecular	= nullptr;
+			RenderTargetTexture*						_GBufferLuminance[TemporaryLuminanceTexturesCount]	= {};
+			RenderTargetTexture*						_GBufferDepthStencil								= nullptr;
+			RenderTargetTexture*						_GBufferAlbedo										= nullptr;
+			RenderTargetTexture*						_GBufferNormals										= nullptr;
+			RenderTargetTexture*						_GBufferRoughnessMetallicSpecular					= nullptr;
 			
-			ConstantBuffer<PerViewConstants>*			_ShadowMapViewConstantBuffer		= nullptr;
-			RenderTargetTexture*						_ShadowMap							= nullptr;
-			Viewport*									_ShadowMapViewport					= nullptr;
+			ConstantBuffer<PerViewConstants>*			_ShadowMapViewConstantBuffer						= nullptr;
+			RenderTargetTexture*						_ShadowMap											= nullptr;
+			Viewport*									_ShadowMapViewport									= nullptr;
 
-			ConstantBuffer<AtmosphereConstants>*		_AtmosphereConstantBuffer			= nullptr;
-			ConstantBuffer<PerViewCubeMapConstants>*	_SkyViewCubeMapConstantBuffer		= nullptr;
-			RenderTargetTexture*						_Sky								= nullptr;
-			Viewport*									_SkyViewport						= nullptr;
+			ConstantBuffer<AtmosphereConstants>*		_AtmosphereConstantBuffer							= nullptr;
+			ConstantBuffer<PerViewCubeMapConstants>*	_SkyViewCubeMapConstantBuffer						= nullptr;
+			RenderTargetTexture*						_Sky												= nullptr;
+			Viewport*									_SkyViewport										= nullptr;
 			vector<View*>								_SkyMipShaderResourceViews;
 			vector<View*>								_SkyMipUnorderedAccessViews;
+
+			uint32_t									_CurrentLuminanceIndex								= 0u;
 		};
 	}
 }

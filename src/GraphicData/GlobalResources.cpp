@@ -14,26 +14,34 @@ namespace Eternal
 		using namespace Eternal::Types;
 		using namespace Eternal::HLSL;
 
+		constexpr uint32_t GlobalResources::TemporaryLuminanceTexturesCount;
+
 		GlobalResources::GlobalResources(_In_ GraphicsContext& InContext)
 			: _ViewConstantBuffer(InContext, "ViewConstantBuffer")
 		{
-			_GBufferLuminance = new RenderTargetTexture(
-				InContext,
-				TextureResourceCreateInformation(
-					InContext.GetDevice(),
-					"GBufferEmissive",
-					TextureCreateInformation(
-						ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
-						Format::FORMAT_RGB111110_FLOAT,
-						TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_UNORDERED_ACCESS,
-						InContext.GetOutputDevice().GetWidth(),
-						InContext.GetOutputDevice().GetHeight()
+			for (uint32_t TemporaryLuminanceTextureIndex = 0; TemporaryLuminanceTextureIndex < TemporaryLuminanceTexturesCount; ++TemporaryLuminanceTextureIndex)
+			{
+				char GBufferLuminanceName[256];
+				sprintf_s(GBufferLuminanceName, "GBufferLuminance%d", TemporaryLuminanceTextureIndex);
+
+				_GBufferLuminance[TemporaryLuminanceTextureIndex] = new RenderTargetTexture(
+					InContext,
+					TextureResourceCreateInformation(
+						InContext.GetDevice(),
+						GBufferLuminanceName,
+						TextureCreateInformation(
+							ResourceDimension::RESOURCE_DIMENSION_TEXTURE_2D,
+							Format::FORMAT_RGB111110_FLOAT,
+							TextureResourceUsage::TEXTURE_RESOURCE_USAGE_SHADER_RESOURCE | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_RENDER_TARGET | TextureResourceUsage::TEXTURE_RESOURCE_USAGE_UNORDERED_ACCESS,
+							InContext.GetOutputDevice().GetWidth(),
+							InContext.GetOutputDevice().GetHeight()
+						),
+						ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
+						TransitionState::TRANSITION_RENDER_TARGET
 					),
-					ResourceMemoryType::RESOURCE_MEMORY_TYPE_GPU_MEMORY,
-					TransitionState::TRANSITION_RENDER_TARGET
-				),
-				RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
-			);
+					RenderTargetTextureFlags::RENDER_TARGET_TEXTURE_FLAGS_ALL
+				);
+			}
 
 			_GBufferDepthStencil = new RenderTargetTexture(
 				InContext,
@@ -63,8 +71,11 @@ namespace Eternal
 			delete _GBufferDepthStencil;
 			_GBufferDepthStencil = nullptr;
 
-			delete _GBufferLuminance;
-			_GBufferLuminance = nullptr;
+			for (uint32_t TemporaryLuminanceTextureIndex = 0; TemporaryLuminanceTextureIndex < TemporaryLuminanceTexturesCount; ++TemporaryLuminanceTextureIndex)
+			{
+				delete _GBufferLuminance[TemporaryLuminanceTextureIndex];
+				_GBufferLuminance[TemporaryLuminanceTextureIndex] = nullptr;
+			}
 		}
 
 		bool GlobalResources::BeginRender(_In_ GraphicsContext& InContext, _In_ System& InSystem)
@@ -82,7 +93,15 @@ namespace Eternal
 					static_cast<float>(InContext.GetOutputDevice().GetHeight())
 				);
 			}
+
+			_CurrentLuminanceIndex = 0;
+
 			return CanRender;
+		}
+
+		void GlobalResources::SwapIntermediateLuminanceTexture()
+		{
+			_CurrentLuminanceIndex = (_CurrentLuminanceIndex + 1) % TemporaryLuminanceTexturesCount;
 		}
 	}
 }
