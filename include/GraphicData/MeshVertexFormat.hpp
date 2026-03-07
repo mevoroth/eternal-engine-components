@@ -10,22 +10,22 @@ namespace Eternal
 
 		struct PositionVertex
 		{
-			Vector3 Position	= Vector3::Zero;
+			Vector3 Position	= Vector3::Zero();
 		};
 
 		struct PositionColorVertex
 		{
-			Vector4 Position	= Vector4::ZeroPosition;
+			Vector4 Position	= Vector4::ZeroPosition();
 			PackedColor Color;
 		};
 
 		struct PositionNormalTangentBinormalUVVertex
 		{
-			Vector3 Position	= Vector3::Zero;
-			Vector3 Normal		= Vector3::Up;		// Up
-			Vector3 Tangent		= Vector3::Forward;	// Fw
-			Vector3 Binormal	= Vector3::Right;	// R
-			Vector2 UV			= Vector2::Zero;
+			Vector3 Position	= Vector3::Zero();
+			Vector3 Normal		= Vector3::Up();		// Up
+			Vector3 Tangent		= Vector3::Forward();	// Fw
+			Vector3 Binormal	= Vector3::Right();		// R
+			Vector2 UV			= Vector2::Zero();
 		};
 
 		struct PositionUVVertex

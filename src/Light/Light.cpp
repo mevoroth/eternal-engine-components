@@ -40,9 +40,9 @@ namespace Eternal
 		void Light::UpdateWorldToView(_In_ const Transform& InTransform)
 		{
 			Transform TransformNoTranslation = InTransform;
-			TransformNoTranslation.SetTranslation(Vector3::Zero);
+			TransformNoTranslation.SetTranslation(Vector3::Zero());
 
-			Vector4 Direction = TransformNoTranslation.GetLocalToWorld() * Vector4::ForwardPosition;
+			Vector4 Direction = TransformNoTranslation.GetLocalToWorld() * Vector4::ForwardPosition();
 
 			_Position = InTransform.GetTranslation();
 			_Direction = Vector3(

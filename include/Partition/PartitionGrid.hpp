@@ -116,10 +116,10 @@ namespace Eternal
 			}
 
 			array<PartitionType, PartitionsCount> _Grid;
-			Vector2 _WorldToPartitionMul	= Vector2::Zero;
-			Vector2 _WorldToPartitionAdd	= Vector2::Zero;
-			Vector2 _WorldMinBounds			= Vector2::Zero;
-			Vector2 _WorldMaxBounds			= Vector2::Zero;
+			Vector2 _WorldToPartitionMul	= Vector2::Zero();
+			Vector2 _WorldToPartitionAdd	= Vector2::Zero();
+			Vector2 _WorldMinBounds			= Vector2::Zero();
+			Vector2 _WorldMaxBounds			= Vector2::Zero();
 
 		};
 	}

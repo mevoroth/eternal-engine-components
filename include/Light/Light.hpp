@@ -41,9 +41,9 @@ namespace Eternal
 
 		protected:
 			Shadow _Shadow;
-			Vector3 _Position		= Vector3::Zero;
+			Vector3 _Position		= Vector3::Zero();
 			float _Distance			= 10.f;
-			Vector3 _Direction		= Vector3::Down;
+			Vector3 _Direction		= Vector3::Down();
 			float _Intensity		= 1.f;
 			Vector3 _Color			= Vector3(1.f, 1.f, 1.f);
 			LightType _LightType	= LightType::LIGHT_TYPE_INVALID;

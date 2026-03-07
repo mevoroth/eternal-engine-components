@@ -37,9 +37,9 @@ namespace Eternal
 			Vector3 RotateVector(_In_ const Vector3& InVector) const;
 
 		private:
-			Vector3 Translation	= Vector3::Zero;
-			Quaternion Rotation	= Quaternion::QuaternionIdentity;
-			Vector3 Scaling		= Vector3::One;
+			Vector3 Translation	= Vector3::Zero();
+			Quaternion Rotation	= Quaternion::QuaternionIdentity();
+			Vector3 Scaling		= Vector3::One();
 		};
 	}
 }

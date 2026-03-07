@@ -54,8 +54,8 @@ namespace Eternal
 		Vector3 Transform::RotateVector(_In_ const Vector3& InVector) const
 		{
 			Transform RotationMatrix = *this;
-			RotationMatrix.SetScaling(Vector3::One);
-			RotationMatrix.SetTranslation(Vector3::Zero);
+			RotationMatrix.SetScaling(Vector3::One());
+			RotationMatrix.SetTranslation(Vector3::Zero());
 			Vector4 VectorPoint(InVector, 1.0f);
 			Matrix4x4 LocalToWorld = RotationMatrix.GetLocalToWorld();
 			Vector4 RotateVectorPoint = LocalToWorld * VectorPoint;

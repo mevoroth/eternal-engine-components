@@ -48,19 +48,19 @@ namespace Eternal
 			void _UpdateWorldToView(_In_ const Vector3& Position, _In_ const Vector3& Forward, _In_ const Vector3& Up);
 			void _UpdateWorldToView();
 
-			Matrix4x4 _WorldToView	= Matrix4x4::Identity;
-			Matrix4x4 _ViewToWorld	= Matrix4x4::Identity;
-			Matrix4x4 _ViewToClip	= Matrix4x4::Identity;
-			Matrix4x4 _ClipToView	= Matrix4x4::Identity;
+			Matrix4x4 _WorldToView	= Matrix4x4::Identity();
+			Matrix4x4 _ViewToWorld	= Matrix4x4::Identity();
+			Matrix4x4 _ViewToClip	= Matrix4x4::Identity();
+			Matrix4x4 _ClipToView	= Matrix4x4::Identity();
 
-			Vector3 _Position		= Vector3::Zero;
-			Vector3 _Forward		= Vector3::Forward;
-			Vector3 _Up				= Vector3::Up;
+			Vector3 _Position		= Vector3::Zero();
+			Vector3 _Forward		= Vector3::Forward();
+			Vector3 _Up				= Vector3::Up();
 
 			/**
 			 * Cache Value
 			 */
-			Vector3 _Right			= Vector3::Right;
+			Vector3 _Right			= Vector3::Right();
 
 			bool _Dirty				= true;
 			float _Near				= 0.f;

@@ -204,23 +204,23 @@ namespace Eternal
 
 				Vector3 FacesForward[] =
 				{
-					Vector3::Right,
-					Vector3::Left,
-					Vector3::Up,
-					Vector3::Down,
-					Vector3::Forward,
-					Vector3::Backward
+					Vector3::Right(),
+					Vector3::Left(),
+					Vector3::Up(),
+					Vector3::Down(),
+					Vector3::Forward(),
+					Vector3::Backward()
 				};
 				ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(FacesForward) == VIEW_CUBE_MAP_FACE_COUNT, "Incorrect entries count for FacesForward");
 
 				Vector3 FacesUp[] =
 				{
-					Vector3::Up,
-					Vector3::Up,
-					Vector3::Backward,
-					Vector3::Forward,
-					Vector3::Up,
-					Vector3::Up
+					Vector3::Up(),
+					Vector3::Up(),
+					Vector3::Backward(),
+					Vector3::Forward(),
+					Vector3::Up(),
+					Vector3::Up()
 				};
 				ETERNAL_STATIC_ASSERT(ETERNAL_ARRAYSIZE(FacesUp) == VIEW_CUBE_MAP_FACE_COUNT, "Incorrect entries count for FacesUp");
 
